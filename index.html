@@ -12,27 +12,65 @@
     background-color: #D6CBA2;
   }
   
+  /* Centers the logo*/
   .center{
 
     margin: auto;
     width: 50%;
   }
 
+  #header-one{
+
+    float: left;
+    margin-left: 450px;
+  }
+
+  #header-two{
+
+    float: right;
+    margin-right: 500px;
+  }
+
+  /* Box of basic info*/
   #basic-info{
 
+    float: left;
     background-color: ghostwhite;
     width: 400px;
     height: 500px;
     margin-left: 300px;
     border: 10px #ED2939 solid;
-    float: left;
+    padding: 10px;
   }
 
+  /* Information text*/
   #information{
 
     font-size: 16pt;
   }
 
+  /* Box of login*/
+  #login{
+
+    float: right;
+    background-color: #ED2939;
+    width: 400px;
+    height: 500px;
+    margin-right: 300px;
+    border: 10px black solid;
+    padding: 10px;
+  }
+
+  /* Re-styling the links*/
+  a{
+
+    text-decoration: none;
+  }
+
+  a:hover{
+
+    text-decoration: underline;
+  }
   
   </style>
 
@@ -41,6 +79,9 @@
   <body>
  
     <div id="logo" class="center"><img src="/ImageFiles/MyUniMarket.png" width="800px"></div>
+
+    <h1 id="header-one">Information</h1>
+    <h1 id="header-two">Login</h1>
 
     <div id="basic-info">
 
@@ -51,7 +92,9 @@
 
     <div id="login">
 
-
+      <p>Email:<input id="login-email" type="text" placeholder="example@mymail.com"></p>
+      <p>Password:<input id="login-password" type="password" placeholder="Password"></p>
+      <p><a href="">Forgot Password?</a></p>
 
     </div>
 
