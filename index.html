@@ -181,12 +181,32 @@
     <br>
 
     <div class="button_container">
-        <a href="">
-          <button class="btn"><span>Log In</span></button>
-        </a>
-      </div>
+          <button class="btn" id="login-btn"><span>Log In</span></button>
+    </div>
+
+    <h1 id="emptyField" style="text-transform:uppercase; color: yellow;"></h1>
 
   </div>
+
+  <!--! Script for checking if the information entered was sufficient-->
+<script type="text/javascript">
+
+  document.getElementById("login-btn").onclick = function(){
+
+    var email = document.getElementById("login-email").value;
+    var password = document.getElementById("login-password").value;
+    
+    if(email == "" || password == ""){
+
+      document.getElementById("emptyField").innerHTML = "Required fields incomplete!"
+    }
+    else{
+
+      document.getElementById("emptyField").style.display = "none";
+    }
+  }
+  
+</script>
 
 </body>
 
