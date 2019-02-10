@@ -7,5 +7,6 @@
 1. http://php.net/manual/en/function.mail.php -> Requires additional headers to ensure email is received by user without being marked as spam.
 
 1.  XAMPP provides 3 ways to send email using PHP
-	1. Testing MD
-	1. Testing MD 
+	1. PEAR Mail `pear install Net_SMTP Mail`
+	1. msmtp `brew install msmtp` (For OSX)
+	1. PHPMailer https://github.com/PHPMailer/PHPMailer
