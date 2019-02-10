@@ -1,6 +1,6 @@
-#We'll be using a PHP email API to send emails for login verification.
+# We'll be using a PHP email API to send emails for login verification.
 
-##There are several available APIs which support our functional requirements.
+## There are several available APIs which support our functional requirements.
 
 *Here's a list of them:*
 
