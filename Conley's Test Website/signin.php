@@ -115,7 +115,7 @@
                 <div class="medium-5 small-12 columns form-container">
 
                         <h2>Sign In to start browing</h2>
-                        <form>
+                        <form method="post">
     
                             <label>
                                 Your Email address
