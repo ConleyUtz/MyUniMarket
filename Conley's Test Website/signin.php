@@ -114,12 +114,12 @@
     
                             <label>
                                 Your Email address
-                                <input type="text" value="" placeholder="Your Email Address ..." />
+                                <input type="text" value="" placeholder="Your Email Address ..." name="email"/>
                             </label>
                             
                             <label>
                                 Your Password
-                                <input type="password" value="" placeholder="Enter password ..." />
+                                <input type="password" value="" placeholder="Enter password ..." name="password"/>
                             </label>
                             <input type="submit" value="Sign In" class="button primary" />                         	<a href="login.html">Forgot password?</a>
     
