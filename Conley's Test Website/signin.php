@@ -1,6 +1,11 @@
 <?php
 
+  if($_POST){
 
+    $email = $_POST["email"];
+    $password = $_POST["passowrd"];
+    echo $email."<br>".$password;
+  }
 
 ?>
 
