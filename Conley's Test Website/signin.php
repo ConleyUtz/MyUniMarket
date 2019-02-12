@@ -1,12 +1,31 @@
 <?php
 
-  if($_POST){
+  $error = "";
 
-    $email = $_POST["email"];
-    $password = $_POST["passowrd"];
-    echo $email."<br>".$password;
+  if ($_POST){
+
+    if(!$_POST['email']){
+
+      $error .= "An email address is required.<br>";
+    
+    }
+
+    if(!$_POST['password']){
+
+      $error .= "The password is required.<br>";
+    }
+
+    if($_POST['email'] && filter_var($_POST['email'],FILTER_VALIDATE_EMAIL) == false){
+
+      $error .= "The email address is invalid.<br>";
+    }
+
+    if($error != ""){
+
+      $error = '<div class="signin-error"><p><strong>Error:</strong></p>'.$error.'</div>';
+    }
+
   }
-
 ?>
 
 
@@ -115,6 +134,8 @@
                 <div class="medium-5 small-12 columns form-container">
 
                         <h2>Sign In to start browing</h2>
+
+                        <div class="err"><?php echo $error; ?></div>
                         <form method="post">
     
                             <label>
