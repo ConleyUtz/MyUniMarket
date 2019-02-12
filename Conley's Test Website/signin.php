@@ -1,6 +1,8 @@
 <?php
 
   $error = "";
+  $password = "";
+  $email = "";
 
   if ($_POST){
 
@@ -9,20 +11,25 @@
       $error .= "An email address is required.<br>";
     
     }
+    else
+      $email = $_POST['email'];
 
     if(!$_POST['password']){
 
       $error .= "The password is required.<br>";
     }
+    else
+      $password = $_POST['password'];
 
     if($_POST['email'] && filter_var($_POST['email'],FILTER_VALIDATE_EMAIL) == false){
 
       $error .= "The email address is invalid.<br>";
+      $email = "";
     }
 
     if($error != ""){
 
-      $error = '<div class="signin-error"><p><strong>Error:</strong></p>'.$error.'</div>';
+      $error = '<div class="signin-error" style="color:maroon;"><p><strong>Error:</strong></p>'.$error.'</div>';
     }
 
   }
