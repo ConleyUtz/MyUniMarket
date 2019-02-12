@@ -29,7 +29,7 @@
 
     if($error != ""){
 
-      $error = '<div class="signin-error" style="color:maroon;"><p><strong>Error:</strong></p>'.$error.'</div>';
+      $error = '<div class="signin-error" style="color:red;"><strong>Error:</strong><br>'.$error.'</div>';
     }
 
   }
