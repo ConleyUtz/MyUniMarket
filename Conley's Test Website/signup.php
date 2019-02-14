@@ -1,3 +1,61 @@
+<?php
+
+  $error = "";
+  $password = "";
+  $confirmedPassword = "";
+  $email = "";
+  $username = "";
+
+  if ($_POST){
+
+    if(!$_POST['username']){
+
+        $error .= "A username is required.<br>";
+      
+    }
+    else
+        $username = $_POST['username'];
+
+    if(!$_POST['email']){
+
+      $error .= "An email address is required.<br>";
+    
+    }
+    else
+      $email = $_POST['email'];
+
+    if(!$_POST['password']){
+
+      $error .= "The password is required.<br>";
+    }
+    else
+      $password = $_POST['password'];
+
+    if(!$_POST['confirmPassword']){
+
+        $error .= "Confirmation of your password is required.<br>";
+    }
+    else
+        $confirmedPassword = $_POST['confirmPassword'];
+
+    if(($_POST['confirmPassword'] && $_POST['password']) && $_POST['confirmPassword'] != $_POST['password']){
+
+        $error .= "Passwords do not match.<br>";
+    }
+
+    if($_POST['email'] && filter_var($_POST['email'],FILTER_VALIDATE_EMAIL) == false){
+
+      $error .= "The email address is invalid.<br>";
+      $email = "";
+    }
+
+    if($error != ""){
+
+      $error = '<div class="signin-error" style="color:red;"><strong>Error:</strong><br>'.$error.'</div>';
+    }
+
+  }
+?>
 
 <!doctype html>
 <html lang="en">
@@ -89,7 +147,7 @@
                                 <h2>Sign Up to start browing</h2>
 
                                 <div class="err"><?php echo $error; ?></div>
-                                
+
                                 <form method="post">
                                     <label>
                                             Username
