@@ -51,7 +51,11 @@
 
     if($error != ""){
 
-      $error = '<div class="signin-error" style="color:red;"><strong>Error:</strong><br>'.$error.'</div>';
+      $error = '<div class="signup-error" style="color:red;"><strong>Error:</strong><br>'.$error.'</div>';
+    }
+    else{
+
+        $error = '<div class="signup-success" style="color:green;">'.$error.'</div>';
     }
 
   }
