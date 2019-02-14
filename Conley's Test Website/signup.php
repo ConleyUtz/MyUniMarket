@@ -86,9 +86,10 @@
            <div class="row">
             	<div class="medium-5 small-12 medium-offset-1 columns form-container">
 
-                    <div class="err"><?php echo $error; ?></div>
-
                                 <h2>Sign Up to start browing</h2>
+
+                                <div class="err"><?php echo $error; ?></div>
+                                
                                 <form method="post">
                                     <label>
                                             Username
