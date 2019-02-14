@@ -55,7 +55,7 @@
     }
     else{
 
-        $error = '<div class="signup-success" style="color:green;">'.$error.'</div>';
+        $error = '<div class="signup-success" style="color:green;"><p>Sign Up Success!</p></div>';
     }
 
   }
