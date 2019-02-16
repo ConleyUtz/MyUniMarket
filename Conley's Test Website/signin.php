@@ -41,7 +41,7 @@
         $link = mysqli_connect("localhost","users","password","users");
 
         //? Generate the query command/code
-        $query = "SELECT password FROM users WHERE `email`= ".$email;
+        $query = "SELECT password FROM users WHERE `email` = ".$email;
 
         //? Query the database
         $result = msqli_query($link, $query);
