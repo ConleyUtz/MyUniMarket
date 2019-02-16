@@ -29,7 +29,7 @@ function badWordsParser(textFieldID, buttonID) {
 
         //Notify user of innapropriate word/phrase with popup box and terminate loop
         alert("Text contains an innpropriate word/phrase\nRemove the word/phrase and try again");
-        break;
+        return false;
       }
 
       i++;
