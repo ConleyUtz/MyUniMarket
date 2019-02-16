@@ -135,6 +135,13 @@ iframe {
 .button.secondary:hover {
 	background-color:#C28E0E; 
 }
+.button.third {
+	background-color:rgb(255, 0, 0); 
+}
+.button.third:hover {
+	background-color:rgb(150, 0, 0); 
+}
+
 /*-------------------------
 General & Basic Styles End
 -------------------------*/
