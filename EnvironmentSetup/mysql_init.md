@@ -1,7 +1,8 @@
-#The following steps will enable every developer to have same MySQL Database structure.
-##(Assumption: You have XAMPP server running Apache-Web-Server and MySQL-Server and you're in EnvironmentSetup Directory)
+# The following steps will enable every developer to have same MySQL Database structure.
 
-###For OSX (CLI Commands):
+## (Assumption: You have XAMPP server running Apache-Web-Server and MySQL-Server and you're in EnvironmentSetup Directory)
+
+### For OSX (CLI Commands):
 
 * `/Applications/XAMPP/bin/mysql -u root --password="" -e "CREATE DATABASE my_uni_market"`
 
