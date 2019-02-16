@@ -63,7 +63,7 @@
     else{
 
         $error = '<div class="signup-success" style="color:green;"><p>Sign Up Success!</p></div>';
-        $passowrd_hash = password_hash($password, {PASSWORD_DEFAULT}); //Hashing the password
+        $passowrd_hash = password_hash($password, {PASSWORD_DEFAULT}); //? Hashing the password
     }
 
   }
