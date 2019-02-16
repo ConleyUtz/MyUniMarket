@@ -6,6 +6,7 @@
 
   if ($_POST){
 
+    //! Checking if the email field is empty
     if(!$_POST['email']){
 
       $error .= "An email address is required.<br>";
@@ -14,6 +15,7 @@
     else
       $email = $_POST['email'];
 
+    //! Checking if the password field is empty
     if(!$_POST['password']){
 
       $error .= "The password is required.<br>";
@@ -21,15 +23,26 @@
     else
       $password = $_POST['password'];
 
+    //! Checking the validity of the email
     if($_POST['email'] && filter_var($_POST['email'],FILTER_VALIDATE_EMAIL) == false){
 
       $error .= "The email address is invalid.<br>";
       $email = "";
     }
 
+    //! Checking if the error message is empty. If not run the main code
     if($error != ""){
 
       $error = '<div class="signin-error" style="color:red;"><strong>Error:</strong><br>'.$error.'</div>';
+    }
+    else{
+
+        $hashed_password = ""; //! This needs to be fetched from the database
+
+        if(password_verify($password, $hashed_password)) {
+            // If the password inputs matched the hashed password in the database
+            // Log them in.
+        } 
     }
 
   }
