@@ -63,12 +63,12 @@
     else{
 
         $error = '<div class="signup-success" style="color:green;"><p>Sign Up Success!</p></div>';
-        $password_hash = password_hash($password, {PASSWORD_DEFAULT}); //? Hashing the password
+        $password_hash = password_hash($password, PASSWORD_DEFAULT); //? Hashing the password
 
-        $link = mysqli_connect("localhost","users","password","users"); //! Subjects to change
+        #$link = mysqli_connect("localhost","users","password","users"); //! Subjects to change
 
         //? Creating a query to insert in the database
-        $query = "INSERT INTO `users` (username,email,password,) VALUES('".$username."','".$email"','".$password_hash."')";
+        #$query = "INSERT INTO `users` (username,email,password,) VALUES('".$username."','".$email"','".$password_hash."')";
 
         //? Executing the query and add the user
         #msqli_query($link, $query);
