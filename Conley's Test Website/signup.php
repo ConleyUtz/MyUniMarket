@@ -71,7 +71,7 @@
         $query = "INSERT INTO `users` (username,email,password,) VALUES('".$username."','".$email"','".$password_hash."')";
 
         //? Executing the query and add the user
-        msqli_query($link, $query);
+        #msqli_query($link, $query);
     }
 
   }
