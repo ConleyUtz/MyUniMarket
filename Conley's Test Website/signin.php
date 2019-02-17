@@ -38,24 +38,24 @@
     else{
 
         //? Link the database (Values subject to change)
-        $link = mysqli_connect("localhost","users","password","users");
+        #$link = mysqli_connect("localhost","users","password","users");
 
         //? Generate the query command/code
-        $query = "SELECT password FROM users WHERE `email` = ".$email;
+        #$query = "SELECT password FROM users WHERE `email` = ".$email;
 
         //? Query the database
-        $result = msqli_query($link, $query);
+        #$result = msqli_query($link, $query);
 
         //? Get the row from database as an array
-        $row = mysqli_fetch_array($result);
+        #$row = mysqli_fetch_array($result);
 
         //? Single out the hashed password from the row array
-        $hashed_password = $row['password'];
+        #$hashed_password = $row['password'];
 
-        if(password_verify($password, $hashed_password)) {
+        #if(password_verify($password, $hashed_password)) {
             // If the password inputs matched the hashed password in the database
             // Log them in.
-        } 
+        #} 
     }
 
   }
