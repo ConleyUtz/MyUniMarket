@@ -5,14 +5,9 @@
  */
 
 function badWordsParser(textFieldID, buttonID) {
-  
-    //Read BadWords.txt
-    var fs = require("fs");
-  
-    var text = fs.readFileSync("./BadWords.txt", "utf-8");
-  
+    
     //Create array from text file
-    var badWordsArr = text.split("\n");
+    var badWordsArr = 
   
     document.getElementById(buttonID).onclick = function(){
         
