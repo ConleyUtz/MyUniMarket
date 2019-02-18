@@ -14,9 +14,9 @@
     $link = mysqli_connect($host, $uname, $pwd, $database);
 
     if(mysqli_connect_error()){
-        echo "There was an error connecting to the database";
+        exit("There was an error connecting to the database");
     }else{
-        echo "Database connection successful!";
+        //echo "Database connection successful!";
     }
 
   if ($_POST){
@@ -77,8 +77,8 @@
 
         $error = '<div class="signup-success" style="color:green;"><p>Sign Up Success!</p></div>';
         $password_hash = password_hash($password, PASSWORD_DEFAULT); //? Hashing the password
-
-        
+        $query = "INSERT INTO `users` (`email`, `password`, `username`) VALUES ('".$email."', '".$password_hash."', '".$username."')";
+        mysqli_query($link, $query);
     }
 
   }
