@@ -20,8 +20,11 @@
 
       $error .= "The password is required.<br>";
     }
-    else
-      $password = $_POST['password'];
+    else{
+        $password = $_POST['password'];
+        //echo "Reaches here!";
+        //echo $password;
+    }
 
     //! Checking the validity of the email
     if($_POST['email'] && filter_var($_POST['email'],FILTER_VALIDATE_EMAIL) == false){
@@ -38,11 +41,11 @@
     else{
 
         $host = "localhost";
-        $username = "root";
-        $password = "";
+        $uname = "root";
+        $pwd = "";
         $database = "my_uni_market";
 
-        $link = mysqli_connect($host, $username, $password, $database);
+        $link = mysqli_connect($host, $uname, $pwd, $database);
 
         if(mysqli_connect_error()){
             exit("There was an error connecting to the database");
@@ -61,6 +64,8 @@
 
         //? Single out the hashed password from the row array
         $hashed_password = $row['password'];
+        //echo "<br/>";
+        //echo $hashed_password;
 
         if(password_verify($password, $hashed_password)) {
             // If the password inputs matched the hashed password in the database
