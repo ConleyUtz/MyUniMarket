@@ -199,7 +199,7 @@
 
                         <label>
                             Price
-                            <input type="number" min="0.00" max="10000.00" step="0.01" name="itemPrice" value="" placeholder="Your Requested Price ..." />
+                            <input type="number" min="0.00" max="9999.99" step="0.01" name="itemPrice" value="" placeholder="Your Requested Price ..." />
                         </label>
                             Location
                             <input type="text" name="location" value="" placeholder="Your Location ..." />
