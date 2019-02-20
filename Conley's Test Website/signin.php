@@ -175,7 +175,6 @@
                         <div class="widget-content">
                         	
                                 <strong>Bold Text Here</strong> 	
-                            </label>
                                 <p>Regular Text Here</p>
 						</div><!-- widget content /-->
                     </div><!-- widget ends -->
@@ -198,7 +197,8 @@
                                 Your Password
                                 <input type="password" value="" placeholder="Enter password ..." name="password"/>
                             </label>
-                            <input type="submit" value="Sign In" class="button primary" />                         	<a href="login.html">Forgot password?</a>
+                            <input type="submit" value="Sign In" class="button primary" />
+                            <a href="login.html">Forgot password?</a>
     
                         </form>
                         <div>
