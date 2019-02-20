@@ -1,5 +1,11 @@
 <?php
 
+    //? Variables that will be used
+    $oldPassword = "";
+    $newPassword = "";
+    $newPasswordConfirm ="";
+    $error = "";
+
     //? Connecting to the mysql server
     $host = "localhost";
     $uname = "root";
@@ -17,15 +23,59 @@
 
     if ($_POST){
 
-        echo "POST is not empty";
-        
-    }
-    else{
+        if($_POST['changePassword']){
 
-        echo "POST is EMPTY";
+            //! Checking if username field is empty
+            if(!$_POST['oldPassword']){
+
+                $error .= "Your current password is required.<br>";
+            }
+            else
+                $oldPassword = $_POST['oldPassword'];
+
+            //! Checking if email field is empty
+            if(!$_POST['newPassword']){
+
+                $error .= "A new password is required.<br>";
+            }
+            else
+                $newPassword = $_POST['newPassword'];
+
+            //! Checking if password field is empty
+            if(!$_POST['newPasswordConfirm']){
+
+                $error .= "Confirmation is required.<br>";
+            }
+            else
+                $newPasswordConfirm = $_POST['newPasswordConfirm'];
+
+            //! Checking if the new passwords match
+            if(($_POST['newPasswordConfirm'] && $_POST['newPassword']) && $_POST['newPasswordConfirm'] != $_POST['newPassword']){
+
+                $error .= "Passwords do not match.<br>";
+            }
+
+            //! Checking if the old and the new password are the same
+            if(($_POST['oldPassword'] && $_POST['newPassword']) && $_POST['oldPassword'] == $_POST['newPassword']){
+
+                $error .= "The new password has to be different from the old one.<br>";
+            }
+
+            //! Displaying the error message if its not empty or executing main code if it is
+            if($error != ""){
+
+            $error = '<div class="signup-error" style="color:red;"><strong>Error:</strong><br>'.$error.'</div>';
+            }
+            else{
+
+                //TODO implement the change query here.
+            }
+        }
+        
     }
 
 ?>
+
 <!doctype html>
 <html lang="en">
 <head>
@@ -159,24 +209,26 @@
                                 </div>
                             </div>
 
+                            <div class="err"><?php echo $error; ?></div>
+
                             <div style="text-align: center; display: block">
                                     
                                 <h2>Change Your Password</h2>
                                 <form method="post">
                                     <label> 
                                         Your Old Password
-                                        <input type="password" id="oldPassword" value="" placeholder="Enter old password ..." />
+                                        <input type="password" name="oldPassword" value="" placeholder="Enter old password ..." />
                                     </label>
     
                                     <label> 
                                         Your New Password
-                                        <input type="password" id="newPassword" value="" placeholder="Enter new password ..." />
+                                        <input type="password" name="newPassword" value="" placeholder="Enter new password ..." />
                                     </label>
                                     <label>
                                             Confirm New Password
-                                            <input type="password" id="newPasswordConfirm" value="" placeholder="Confirm new password ..." />
+                                            <input type="password" name="newPasswordConfirm" value="" placeholder="Confirm new password ..." />
                                     </label>
-                                    <input type="submit" value="Confirm" class="button primary" />
+                                    <input type="submit" name="changePassword" value="Confirm" class="button primary" />
                                 </form>
                         </div>
 
