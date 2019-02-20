@@ -15,6 +15,16 @@
     }
     
 
+    if ($_POST){
+
+        echo "POST is not empty";
+        
+    }
+    else{
+
+        echo "POST is EMPTY";
+    }
+
 ?>
 <!doctype html>
 <html lang="en">
