@@ -46,7 +46,8 @@
         if(password_verify($password, $hashed_password)) {
             header("Location: market.php");
         }else{
-            echo "Login failure!";
+            $error = "Invalid email address or password combination.";
+            $error = '<div class="signin-error" style="color:red;"><strong>Error:</strong><br>'.$error.'</div>';
         } 
     }
   }
