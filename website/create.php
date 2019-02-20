@@ -1,6 +1,26 @@
 <?php
 
-    
+    //? Variables to be used
+    $itemName = "";
+    $itemPrice = "";
+    $itemDescription = "";
+    $location = "";
+
+    //? Connecting to the database
+    $host = "localhost";
+    $uname = "root";
+    $pwd = "";
+    $database = "my_uni_market";
+
+    $link = mysqli_connect($host, $uname, $pwd, $database);
+
+    if(mysqli_connect_error()){
+        exit("There was an error connecting to the database");
+    }else{
+        //echo "Database connection successful!";
+    }
+
+
 
 ?>
 <!doctype html>
@@ -92,18 +112,18 @@
             <!-- Title Section End -->
             <div class = "row">
                 <div class="medium-5 small-12 medium-offset-1 columns form-container">
-                    <form>
+                    <form method="post">
                         <label>
                             Item For Sale
-                            <input type="text" value="" placeholder="Your Item ..." />
+                            <input type="text" name="itemName" value="" placeholder="Your Item ..." />
                         </label>
 
                         <label>
                             Price
-                            <input type="text" value="" placeholder="Your Requested Price ..." />
+                            <input type="number" min="0.00" max="10000.00" step="0.01" name="itemPrice" value="" placeholder="Your Requested Price ..." />
                         </label>
                             Location
-                            <input type="text" value="" placeholder="Your Location ..." />
+                            <input type="text" name="location" value="" placeholder="Your Location ..." />
                         </label>
                         <label> 
                             Select Category
@@ -142,7 +162,7 @@
                         </label>
                         <label>
                             Description
-                            <textarea placeholder="Brief Description" rows="4"></textarea>
+                            <textarea name="itemDescription" placeholder="Brief Description" rows="4"></textarea>
                         </label>        
                         <label>
                             Image Upload: [Upload Button Here]
