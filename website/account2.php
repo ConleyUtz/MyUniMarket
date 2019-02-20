@@ -4,6 +4,10 @@
     $oldPassword = "";
     $newPassword = "";
     $newPasswordConfirm ="";
+    $newUsername = "";
+    $confirmNewUsername = "";
+    $currentUsername = "";
+    $currentPassword = "";
     $error = "";
 
     //? Connecting to the mysql server
@@ -20,12 +24,13 @@
         //echo "Database connection successful!";
     }
     
-
+    //? Main Script
     if ($_POST){
 
-        if($_POST['changePassword']){
+        //? Script for changing password
+        if(isset($_POST['changePassword'])){
 
-            //! Checking if username field is empty
+            //! Checking if old username field is empty
             if(!$_POST['oldPassword']){
 
                 $error .= "Your current password is required.<br>";
@@ -33,7 +38,7 @@
             else
                 $oldPassword = $_POST['oldPassword'];
 
-            //! Checking if email field is empty
+            //! Checking if new password field is empty
             if(!$_POST['newPassword']){
 
                 $error .= "A new password is required.<br>";
@@ -41,7 +46,7 @@
             else
                 $newPassword = $_POST['newPassword'];
 
-            //! Checking if password field is empty
+            //! Checking if confirm password field is empty
             if(!$_POST['newPasswordConfirm']){
 
                 $error .= "Confirmation is required.<br>";
@@ -60,6 +65,73 @@
 
                 $error .= "The new password has to be different from the old one.<br>";
             }
+
+            //TODO Compare the $oldPassword variable with the session variable. If no append the error message.
+
+            //! Displaying the error message if its not empty or executing main code if it is
+            if($error != ""){
+
+            $error = '<div class="signup-error" style="color:red;"><strong>Error:</strong><br>'.$error.'</div>';
+            }
+            else{
+
+                //TODO implement the change query here.
+            }
+        }
+
+        //? Script for changing username
+        if(isset($_POST['changeUsername'])){
+
+            //! Checking if new username field is empty
+            if(!$_POST['newUsername']){
+
+                $error .= "New username field is required.<br>";
+            }
+            else
+                $newUsername = $_POST['newUsername'];
+
+            //! Checking if confirm field is empty
+            if(!$_POST['confirmNewUsername']){
+
+                $error .= "Confirmation for the new username is required.<br>";
+            }
+            else
+                $confirmNewUsername = $_POST['confirmNewUsername'];
+
+
+            //! Displaying the error message if its not empty or executing main code if it is
+            if($error != ""){
+
+            $error = '<div class="signup-error" style="color:red;"><strong>Error:</strong><br>'.$error.'</div>';
+            }
+            else{
+
+                //TODO implement the change query here.
+            }                
+        }
+
+        //? Script for deleting the account
+        if(isset($_POST['deleteAccount'])){
+
+            //! Checking if current username field is empty
+            if(!$_POST['currentUsername']){
+
+                $error .= "Username is required.<br>";
+            }
+            else
+                $currentUsername = $_POST['currentUsername'];
+
+            //! Checking if current password field is empty
+            if(!$_POST['currentPassword']){
+
+                $error .= "Current password is required.<br>";
+            }
+            else
+                $currentPassword = $_POST['currentPassword'];
+
+            //TODO Compare the $currentUsername variable with the session variable. If no append the error message.
+
+            //TODO Compare the $currentPassword variable with the sessuin varuable. If no append the error message.
 
             //! Displaying the error message if its not empty or executing main code if it is
             if($error != ""){
@@ -238,14 +310,14 @@
                             <form method="post">
                                 <label> 
                                     New Username
-                                    <input type="password" value="" placeholder="Enter new username ..." />
+                                    <input type="text" name="newUsername" value="" placeholder="Enter new username ..." />
                                 </label>
 
                                 <label> 
                                     Confirm New Username
-                                    <input type="password" value="" placeholder="Confimr new username ..." />
+                                    <input type="text" name="confirmNewUsername" value="" placeholder="Confimr new username ..." />
                                 </label>
-                                <input type="submit" value="Confirm" class="button primary" />
+                                <input type="submit" name="changeUsername" value="Confirm" class="button primary" />
                             </form>
                     </div>
 
@@ -255,14 +327,14 @@
                         <form method="post">
                             <label> 
                                 Enter Username
-                                <input type="password" value="" placeholder="Enter your username ..." />
+                                <input type="text" name="currentUsername" value="" placeholder="Enter your username ..." />
                             </label>
 
                             <label> 
                                 Enter Password
-                                <input type="password" value="" placeholder="Enter your password ..." />
+                                <input type="password" name="currentPassword" value="" placeholder="Enter your password ..." />
                             </label>
-                            <input type="submit" value="Confirm" class="button third" />
+                            <input type="submit" name="deleteAccount" value="Confirm" class="button third" />
                         </form>
                 </div>
                         
