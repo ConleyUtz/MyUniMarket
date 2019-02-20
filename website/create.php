@@ -5,6 +5,8 @@
     $itemPrice = "";
     $itemDescription = "";
     $location = "";
+    $itemCategory = "";
+    $itemQuality = "";
     $error = "";
 
     //? Connecting to the database
@@ -62,6 +64,26 @@
         else{
   
             $itemDescription = $_POST['itemDescription'];
+        }
+
+        //! Checking if the password field is empty
+        if(!$_POST['itemCategory']){
+    
+            $error .= "A category is required.<br>";
+        }
+        else{
+  
+            $itemCategory = $_POST['itemCategory'];
+        }
+
+        //! Checking if the password field is empty
+        if(!isset($_POST['quality'])){
+    
+            $error .= "Please select the quality of the item.<br>";
+        }
+        else{
+  
+            $itemQuality = $_POST['quality'];
         }
     
     
@@ -167,6 +189,8 @@
             <!-- Title Section End -->
             <div class = "row">
                 <div class="medium-5 small-12 medium-offset-1 columns form-container">
+
+                    <div class="err"><?php echo $error; ?></div>
                     <form method="post">
                         <label>
                             Item For Sale
@@ -182,36 +206,36 @@
                         </label>
                         <label> 
                             Select Category
-                            <select>
-                                <option value="0">Category 1</option>
+                            <select name="itemCategory">
+                            <option disabled value="0"> -- Select an option -- </option>
                                 <option value="1">Category 2</option>
                                 <option value="2">Category 3</option>
-                                <option value="0">Category 4</option>
-                                <option value="0">Category 5</option>
-                                <option value="0">Category 6</option>
+                                <option value="3">Category 4</option>
+                                <option value="4">Category 5</option>
+                                <option selected value="5">Other</option>
                             </select>
                         </label>
                         <label>
                             Quality
                             <div class="row">
                                 <div class="medium-1 small-12 columns">
-                            <input type="radio" name="quality" value="1"> 1<br>
+                            <input type="radio" name="quality" value="0"> 1<br>
                         </div>
                         <div class="medium-1 small-12 columns">
 
-                            <input type="radio" name="quality" value="female"> 2<br>
+                            <input type="radio" name="quality" value="1"> 2<br>
                         </div>
                             <div class="medium-1 small-12 columns">
 
-                            <input type="radio" name="quality" value="other"> 3 <br>
+                            <input type="radio" name="quality" value="2"> 3 <br>
                             </div>
                             <div class="medium-1 small-12 columns">
 
-                            <input type="radio" name="quality" value="male"> 4<br>
+                            <input type="radio" name="quality" value="3"> 4<br>
                             </div>
                             <div class="medium-1 small-12 columns">
 
-                            <input type="radio" name="quality" value="female"> 5<br>
+                            <input type="radio" name="quality" value="4"> 5<br>
                             </div>
                         </div>
                         </label>
