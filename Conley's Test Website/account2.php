@@ -1,5 +1,18 @@
 <?php
 
+    //? Connecting to the mysql server
+    $host = "localhost";
+    $uname = "root";
+    $pwd = "";
+    $database = "my_uni_market";
+
+    $link = mysqli_connect($host, $uname, $pwd, $database);
+
+    if(mysqli_connect_error()){
+        exit("There was an error connecting to the database");
+    }else{
+        //echo "Database connection successful!";
+    }
     
 
 ?>
@@ -134,11 +147,14 @@
                                         <a href="account.html" class="button primary" title="Account">Change Username</a>
                                         <a href="account.html" class="button third" title="Account">Delete Account</a>
                                 </div>
-                            </div> 
+                            </div>
+
+                            <div class="err"><?php echo $error; ?></div>
+
                             <div style="text-align: center; display: block">
                                     
                                 <h2>Change Your Password</h2>
-                                <form>
+                                <form method="post">
                                     <label> 
                                         Your Old Password
                                         <input type="password" value="" placeholder="Enter old password ..." />
@@ -158,7 +174,7 @@
                         <div style="text-align: center; display: block">
                                     
                             <h2>Change Your Username</h2>
-                            <form>
+                            <form method="post">
                                 <label> 
                                     New Username
                                     <input type="password" value="" placeholder="Enter new username ..." />
@@ -175,7 +191,7 @@
                     <div style="text-align: center; display: block">
                                     
                         <h2 style="color: rgb(255, 0, 0)">Delete Account</h2>
-                        <form>
+                        <form method="post">
                             <label> 
                                 Enter Username
                                 <input type="password" value="" placeholder="Enter your username ..." />
