@@ -1,5 +1,7 @@
 <?php
 
+  session_start();
+
   $error = "";
   $password = "";
   $email = "";
@@ -44,6 +46,7 @@
         $row = mysqli_fetch_array($result);
         $hashed_password = $row['password'];
         if(password_verify($password, $hashed_password)) {
+            $_SESSION['email'] = $email;
             header("Location: market.php");
         }else{
             $error = "Invalid email address or password combination.";
