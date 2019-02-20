@@ -73,7 +73,7 @@
         <div class="header">
             <div class="row">
                 <div class="float-right">
-                    <a href="account.html" class="button primary" title="Account">Account</a>
+                    <a href="account.php" class="button primary" title="Account">Account</a>
                     <a href="logout.php" class="button primary" title="SIGN OUT">SIGN OUT</a>
                 </div>
             </div>
