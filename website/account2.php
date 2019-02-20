@@ -159,28 +159,27 @@
                                 </div>
                             </div>
 
-                            <div class="err"><?php echo $error; ?></div>
-
                             <div style="text-align: center; display: block">
                                     
                                 <h2>Change Your Password</h2>
                                 <form method="post">
                                     <label> 
                                         Your Old Password
-                                        <input type="password" value="" placeholder="Enter old password ..." />
+                                        <input type="password" id="oldPassword" value="" placeholder="Enter old password ..." />
                                     </label>
     
                                     <label> 
                                         Your New Password
-                                        <input type="password" value="" placeholder="Enter new password ..." />
+                                        <input type="password" id="newPassword" value="" placeholder="Enter new password ..." />
                                     </label>
                                     <label>
                                             Confirm New Password
-                                            <input type="password" value="" placeholder="Confirm new password ..." />
-                                        </label>
+                                            <input type="password" id="newPasswordConfirm" value="" placeholder="Confirm new password ..." />
+                                    </label>
                                     <input type="submit" value="Confirm" class="button primary" />
                                 </form>
                         </div>
+
                         <div style="text-align: center; display: block">
                                     
                             <h2>Change Your Username</h2>
