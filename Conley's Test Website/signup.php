@@ -197,9 +197,8 @@
                                             <input type="password" name="confirmPassword" value="" placeholder="Confirm password ..." />
                                         </label>
 
-
                                     <input type="submit" value="Sign Up" class="button primary" />
-            
+                                    <a href="signin.html">Already have an account?</a>
                                 </form>
                 
                 </div>
