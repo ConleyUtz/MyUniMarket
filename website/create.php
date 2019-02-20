@@ -5,6 +5,7 @@
     $itemPrice = "";
     $itemDescription = "";
     $location = "";
+    $error = "";
 
     //? Connecting to the database
     $host = "localhost";
@@ -20,7 +21,61 @@
         //echo "Database connection successful!";
     }
 
+    if ($_POST){
 
+        //! Checking if the email field is empty
+        if(!$_POST['itemName']){
+    
+          $error .= "A name for the item is required.<br>";
+        
+        }
+        else{
+
+          $itemName = $_POST['itemName'];
+        }
+    
+        //! Checking if the password field is empty
+        if(!$_POST['itemPrice']){
+    
+          $error .= "A price is required.<br>";
+        }
+        else{
+
+            $itemPrice = $_POST['itemPrice'];
+        }
+
+        //! Checking if the password field is empty
+        if(!$_POST['location']){
+    
+            $error .= "A location is required.<br>";
+        }
+        else{
+  
+              $location = $_POST['location'];
+        }
+
+        //! Checking if the password field is empty
+        if(!$_POST['itemDescription']){
+    
+            $error .= "A description is required.<br>";
+        }
+        else{
+  
+            $itemDescription = $_POST['itemDescription'];
+        }
+    
+    
+        //! Checking if the error message is empty. If not run the main code
+        if($error != ""){
+    
+          $error = '<div class="signin-error" style="color:red;"><strong>Error:</strong><br>'.$error.'</div>';
+        }
+        else{
+    
+            //TODO Implement database query here
+        }
+    
+    }
 
 ?>
 <!doctype html>
