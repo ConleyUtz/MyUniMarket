@@ -6,7 +6,13 @@
 
 function badWordsParser(textFieldID, buttonID) {
   
-  var badWordsArr = ["<<CREATE BAD WORDS ARRAY HERE>>"];
+  //Read BadWords.txt
+  var fs = require("fs");
+
+  var text = fs.readFileSync("./BadWords.txt", "utf-8");
+
+  //Create array from text file
+  var badWordsArr = text.split("\n");
 
   document.getElementById(buttonID).onclick = function(){
       
@@ -21,11 +27,9 @@ function badWordsParser(textFieldID, buttonID) {
 
       if(toCheck.includes(badWordsArr[i])){
 
-        //TODO Notify user that there is a bad word in the text field. Terminate the loop. 
-      }
-      else{
-
-        //TODO Continue to loop unless something is found
+        //Notify user of innapropriate word/phrase with popup box and terminate loop
+        alert("Text contains an innpropriate word/phrase\nRemove the word/phrase and try again");
+        return false;
       }
 
       i++;
