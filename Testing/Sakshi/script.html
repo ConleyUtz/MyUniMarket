@@ -1,0 +1,33 @@
+
+<html>
+
+<head>
+    
+    <title>Javascript</title>
+    
+    
+
+</head>
+
+<body>
+    
+    <p>What is your name?</p>
+    
+    <p><input type="text" id="magicWord"></p>
+
+    <p><button id="checkMagicWord">Enter</button></p>
+    
+    <script type="text/javascript">
+        
+        document.getElementById("checkMagicWord").onclick = function() {
+            
+            var name = document.getElementById("magicWord").value;
+            alert(name);
+            
+        }
+        
+    </script>
+    
+</body>
+
+</html>
