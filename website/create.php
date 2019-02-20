@@ -25,7 +25,7 @@
 
     if ($_POST){
 
-        //! Checking if the email field is empty
+        //! Checking if the item name field is empty
         if(!$_POST['itemName']){
     
           $error .= "A name for the item is required.<br>";
@@ -36,7 +36,7 @@
           $itemName = $_POST['itemName'];
         }
     
-        //! Checking if the password field is empty
+        //! Checking if the item price field is empty
         if(!$_POST['itemPrice']){
     
           $error .= "A price is required.<br>";
@@ -46,7 +46,7 @@
             $itemPrice = $_POST['itemPrice'];
         }
 
-        //! Checking if the password field is empty
+        //! Checking if the location field is empty
         if(!$_POST['location']){
     
             $error .= "A location is required.<br>";
@@ -56,7 +56,7 @@
               $location = $_POST['location'];
         }
 
-        //! Checking if the password field is empty
+        //! Checking if the item description field is empty
         if(!$_POST['itemDescription']){
     
             $error .= "A description is required.<br>";
@@ -66,7 +66,7 @@
             $itemDescription = $_POST['itemDescription'];
         }
 
-        //! Checking if the password field is empty
+        //! Checking if the category is selected
         if(!$_POST['itemCategory']){
     
             $error .= "A category is required.<br>";
@@ -76,7 +76,7 @@
             $itemCategory = $_POST['itemCategory'];
         }
 
-        //! Checking if the password field is empty
+        //! Checking if the quality is selected
         if(!isset($_POST['quality'])){
     
             $error .= "Please select the quality of the item.<br>";
