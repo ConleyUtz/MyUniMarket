@@ -310,7 +310,7 @@
         <div class="header">
             <div class="row">
                 <div class="float-right">
-                    <a href="account.html" class="button primary" title="Account">Account</a>
+                    <a href="account.php" class="button primary" title="Account">Account</a>
                     <input type="submit" value="Sign Out" class="button primary" />
                 </div>
             </div>
