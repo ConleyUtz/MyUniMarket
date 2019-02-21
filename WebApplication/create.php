@@ -1,5 +1,8 @@
 <?php
 
+    session_start();
+    $testerID = $_SESSION['email'];
+
     //? Variables to be used
     $itemName = "";
     $itemPrice = "";
@@ -93,8 +96,15 @@
           $error = '<div class="signin-error" style="color:red;"><strong>Error:</strong><br>'.$error.'</div>';
         }
         else{
+
+            $query = "SELECT userId FROM users WHERE `email` = '".$testerID."'";
+            $result = mysqli_query($link, $query);
+            $row = mysqli_fetch_array($result);
+            $userID = $row['userId'];
     
-            //TODO Implement database query here
+            $query = "INSERT INTO `items` (`name`, `price`, `location`, `category`, `quality`, `description`, `userId`) VALUES ('".$itemName."', '".$itemPrice."', '".$location."', '".$itemCategory."', '".$itemQuality."', '".$itemDescription."', '".$userID."')";
+
+            mysqli_query($link, $query);
         }
     
     }
