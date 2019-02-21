@@ -92,7 +92,7 @@
 
             <div class="row">
                 <div class = "medium-3 small-12 columns">
-            <a href="create.html" class="button primary" title="Create Post">Create Post</a>
+            <a href="create.php" class="button primary" title="Create Post">Create Post</a>
         </div>
 
             <div class="medium-9 small-12 columns search-wrap">
