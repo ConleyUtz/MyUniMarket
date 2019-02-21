@@ -42,7 +42,7 @@
         $arr = explode('@',$email);
         if($arr[1] != "purdue.edu"){
 
-            $error .= "The email must be a purdue email!";
+            $error .= "The email must be a purdue email! <br>";
         }
     }
 
