@@ -36,8 +36,15 @@
       $error .= "An email address is required.<br>";
     
     }
-    else
-      $email = $_POST['email'];
+    else{
+
+        $email = $_POST['email'];
+        $arr = explode('@',$email);
+        if($arr[1] != "purdue.edu"){
+
+            $error .= "The email must be a purdue email!";
+        }
+    }
 
     //! Checking if password field is empty
     if(!$_POST['password']){
@@ -67,6 +74,8 @@
       $error .= "The email address is invalid.<br>";
       $email = "";
     }
+
+
 
     //! Displaying the error message if its not empty or executing main code if it is
     if($error != ""){
