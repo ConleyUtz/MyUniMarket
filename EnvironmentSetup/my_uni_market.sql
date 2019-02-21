@@ -37,7 +37,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (1,'johndoe@example.com','johndoe','password123'),(2,'janedoe@example.com','janedoe','badpassword123');
+INSERT INTO `users` VALUES (1,'johndoe@example.com','johndoe','$2y$10$Yq5tXV0KB4t.NOyNBV/JZe6CkUW0YdeONQ1VjaeHIdFHugYFD7Ob6'),(2,'janedoe@example.com','janedoe','$2y$10$eEoLBhl7jhJGZsZ3CYPbXeB92PcUzvlxD1X3GEnu8awAQ.VeNl9mi');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
