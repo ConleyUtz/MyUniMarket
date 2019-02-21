@@ -10,6 +10,7 @@
     <!-- important for compatibility charset -->
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <script src="./js/logoutSuccess.js" type="text/javascript"></script>
 
     <title>MyUniMarket - Market</title>
 
@@ -74,10 +75,15 @@
             <div class="row">
                 <div class="float-right">
                     <a href="account.php" class="button primary" title="Account">Account</a>
-                    <a href="logout.php" class="button primary" title="SIGN OUT">SIGN OUT</a>
+                    <a href="logout.php" id="logout" class="button primary" title="SIGN OUT">SIGN OUT</a>
                 </div>
             </div>
         </div>
+
+        <script tpye="text/javascript">
+            logoutSuccess('logout');
+        </script>
+
         <!-- Header Ends /-->
         <div class="content-container module">
             <!-- Title Section -->
