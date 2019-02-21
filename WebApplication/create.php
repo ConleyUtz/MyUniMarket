@@ -1,7 +1,15 @@
 <?php
 
     session_start();
-    $testerID = $_SESSION['email'];
+    $testerID = "";
+    if(!$_SESSION['email']){
+
+        header('Location: signin.php'); 
+    }
+    else{
+
+        $testerID = $_SESSION['email'];
+    }
 
     //? Variables to be used
     $itemName = "";

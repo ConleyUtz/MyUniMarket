@@ -1,6 +1,15 @@
 <?php
 
     session_start();
+    $testerID = "";
+    if(!$_SESSION['email']){
+
+        header('Location: signin.php'); 
+    }
+    else{
+
+        $testerID = $_SESSION['email'];
+    }
 
     //? Variables that will be used
     $oldPassword = "";
@@ -11,7 +20,6 @@
     $currentUsername = "";
     $currentPassword = "";
     $error = "";
-    $testerID = $_SESSION['email'];
 
     //? Connecting to the mysql server
     $host = "localhost";
