@@ -106,6 +106,7 @@
 	<!-- important for compatibility charset -->
     <meta charset="utf-8">
 	<meta http-equiv="x-ua-compatible" content="ie=edge">
+    <script src="./js/badWordsMultiple.js" type="text/javascript"></script>
     
     <title>MyUniMarket - New Post</title>
 	
@@ -194,7 +195,7 @@
                     <form method="post">
                         <label>
                             Item For Sale
-                            <input type="text" name="itemName" value="" placeholder="Your Item ..." />
+                            <input type="text" id="nameItem" name="itemName" value="" placeholder="Your Item ..." />
                         </label>
 
                         <label>
@@ -202,7 +203,7 @@
                             <input type="number" min="0.00" max="9999.99" step="0.01" name="itemPrice" value="" placeholder="Your Requested Price ..." />
                         </label>
                             Location
-                            <input type="text" name="location" value="" placeholder="Your Location ..." />
+                            <input type="text" id="locationItem" name="location" value="" placeholder="Your Location ..." />
                         </label>
                         <label> 
                             Select Category
@@ -241,20 +242,26 @@
                         </label>
                         <label>
                             Description
-                            <textarea name="itemDescription" placeholder="Brief Description" rows="4"></textarea>
+                            <textarea name="itemDescription" placeholder="Brief Description" id="descriptionItem" rows="4"></textarea>
                         </label>        
                         <label>
                             Image Upload: [Upload Button Here]
                         </label>
                         <br>
-                        <input type="submit" value="Create Post" class="button primary" />
+                        <input type="submit" id='postCreate' value="Create Post" class="button primary" />
                     </form>
+
+                    <script type='text/javascript'>
+            
+                        badWordsParser('nameItem','locationItem','descriptionItem','postCreate');
+                    
+                    </script>
+
                 </div><!-- main search form /-->
                 <div class="medium-5 small-12 columns form-container">
                         <img alt="" src="../ImageFiles/ProductImages/Image2.jpg"/> preview here
                 </div>
-            </div>
-        	
+            </div>       	
             
                                 
 		</div><!-- content container /-->
