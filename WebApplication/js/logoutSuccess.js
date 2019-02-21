@@ -1,7 +1,7 @@
 function logoutSuccess(logoutButtonID) {
     
     document.getElementById(logoutButtonID).onclick = function(){    
-        window.location.href="signin.php";
+        window.location.href="logout.php";
         alert("You have been successfully logged out!");
 
     }
