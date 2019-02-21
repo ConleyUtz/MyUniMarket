@@ -178,7 +178,7 @@
                             <input type="password" value="" placeholder="Enter password ..." name="password" />
                         </label>
                         <input type="submit" value="Sign In" class="button primary" />
-                        <a href="login.html">Forgot password?</a>
+                        <a href="404.php">Forgot password?</a>
 
                     </form>
                     <div>

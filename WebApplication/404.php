@@ -73,7 +73,7 @@
                 
                 <div class="medium-6 columns error-page-form">
                       <div class="input-group-button">
-                        <a href="market.html" class="button primary" title="Account">Take Me Back!</a>
+                        <a href="market.php" class="button primary" title="Account">Take Me Back!</a>
 
                       </div>
                     </div>
