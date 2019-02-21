@@ -99,8 +99,7 @@
 	<!-- important for compatibility charset -->
     <meta charset="utf-8">
 	<meta http-equiv="x-ua-compatible" content="ie=edge">
-
-    <script src="myscripts.js"></script>
+    <script src="./js/badWords.js" type="text/javascript"></script>
     
     <title>MyUniMarket - Sign Up</title>
 	
@@ -135,15 +134,16 @@
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Lato:400,700%7CMontserrat:400,700" rel="stylesheet" type="text/css" />
     <script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
 
-  ga('create', 'UA-62711679-1', 'auto');
-  ga('send', 'pageview');
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+            m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
 
-</script>
+        ga('create', 'UA-62711679-1', 'auto');
+        ga('send', 'pageview');
+
+    </script>
 </head>
 
 <body class="inner-page">
@@ -189,10 +189,10 @@
                                 <form method="post">
                                     <label>
                                             Username
-                                            <input type="text" name="username" value="" placeholder="Your Username ..." />
-                                            </label>
+                                            <input type="text" name="username" id="userName" value="" placeholder="Your Username ..." />
+                                    </label>
     
-                                        <label> 
+                                    <label> 
 
                                     <label>
                                         Your Email address
@@ -204,14 +204,19 @@
                                     </label>
 
                                     <label>
-                                            Confirm Password
-                                            <input type="password" name="confirmPassword" value="" placeholder="Confirm password ..." />
-                                        </label>
+                                        Confirm Password
+                                        <input type="password" name="confirmPassword" value="" placeholder="Confirm password ..." />
+                                    </label>
 
-                                    <input type="submit" value="Sign Up" class="button primary" />
-                                    <a href="signin.html">Already have an account?</a>
+                                    <input type="submit" value="Sign Up" class="button primary" id="submitButton" />
+                                    <a href="signin.php">Already have an account?</a>
                                 </form>
-                
+
+                                <script type="text/javascript">
+                                
+                                    badWordsParser('userName','submitButton');
+
+                                </script>          
                 </div>
                <!-- sidebar Ends -->
             	
