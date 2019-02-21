@@ -90,11 +90,16 @@
             </div>
             <!-- Title Section End -->
 
-            <div class="medium-5 small-12 columns search-wrap">
-                <div class="main-search-form">
-                    <input type="text" placeholder="What you are shopping for ..." />
+            <div class="row">
+                <div class = "medium-3 small-12 columns">
+            <a href="create.html" class="button primary" title="Create Post">Create Post</a>
+        </div>
+
+            <div class="medium-9 small-12 columns search-wrap">
+            	<div class="main-search-form">
+                	<input type="text" placeholder="What you are shopping for ..." />
                     <select>
-                        <option value="0">All Categories</option>
+                    	<option value="0">All Categories</option>
                         <option value="1">Women's Clothing &amp; Accessories</option>
                         <option value="2">Men's Clothing &amp; Accessories</option>
                         <option value="0">Phones &amp; Telecommunications</option>
@@ -128,6 +133,7 @@
                     <button type="submit" class="primary button"><i class="fa fa-search"></i></button>
                 </div><!-- main search form /-->
             </div><!-- Second Column /-->
+        </div>
 
             <div class="row">
                 <div class="small-12 columns">
