@@ -5,8 +5,6 @@
  */
 
 function badWordsParser(textFieldID, buttonID) {
-
-  alert("rero");
     
     //Create array from text file
     var badWordsArr = ["testphrase","2 girls 1 cup",

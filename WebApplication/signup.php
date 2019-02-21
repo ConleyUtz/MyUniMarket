@@ -99,6 +99,7 @@
 	<!-- important for compatibility charset -->
     <meta charset="utf-8">
 	<meta http-equiv="x-ua-compatible" content="ie=edge">
+    <script src="./js/badWords.js" type="text/javascript"></script>
     
     <title>MyUniMarket - Sign Up</title>
 	
@@ -209,7 +210,13 @@
 
                                     <input type="submit" value="Sign Up" class="button primary" id="submitButton" />
                                     <a href="signin.php">Already have an account?</a>
-                                </form>               
+                                </form>
+
+                                <script type="text/javascript">
+                                
+                                    badWordsParser('userName','submitButton');
+
+                                </script>          
                 </div>
                <!-- sidebar Ends -->
             	
