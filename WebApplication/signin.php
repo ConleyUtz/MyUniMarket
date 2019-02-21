@@ -185,7 +185,9 @@
                         Don't have an account?
                     </div>
                     <div>
-                        <input type="submit" value="Register" class="button primary" />
+                        <a href="./signup.php">
+                            <input type="submit" value="Register" class="button primary"/>
+                        </a>
                     </div>
 
                 </div>
