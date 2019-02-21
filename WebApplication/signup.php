@@ -99,6 +99,8 @@
 	<!-- important for compatibility charset -->
     <meta charset="utf-8">
 	<meta http-equiv="x-ua-compatible" content="ie=edge">
+
+    <script src="myscripts.js"></script>
     
     <title>MyUniMarket - Sign Up</title>
 	
