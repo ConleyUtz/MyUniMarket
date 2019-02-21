@@ -170,7 +170,7 @@
         <div class="top-info-bar">
         	<div class="row">
                     <div class="logo float-left">
-                            <a href="market.html"> <!--NEEDS TO BE INDEX.HTML-->
+                            <a href="market.php"> <!--NEEDS TO BE INDEX.HTML-->
                                 <img alt="" src="../ImageFiles/MyUniMarket.png" />
                             </a> 
                         </div><!-- Logo /-->
@@ -182,7 +182,7 @@
         <div class="header">
             <div class="row">
                     <div class="float-right">
-                        <a href="account.html" class="button primary" title="Account">Account</a>
+                        <a href="account.php" class="button primary" title="Account">Account</a>
                         <input type="submit" value="Sign Out" class="button primary" />
                     </div>
             </div>                
