@@ -1,5 +1,6 @@
 <?php
     session_start();
+    $testerID = $_SESSION['email'];
 ?>
 
 
