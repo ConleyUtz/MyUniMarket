@@ -83,11 +83,24 @@
       $error = '<div class="signup-error" style="color:red;"><strong>Error:</strong><br>'.$error.'</div>';
     }
     else{
-
         $error = '<div class="signup-success" style="color:green;"><p>Sign Up Success!</p></div>';
         $password_hash = password_hash($password, PASSWORD_DEFAULT); //? Hashing the password
         $query = "INSERT INTO `users` (`email`, `password`, `username`) VALUES ('".$email."', '".$password_hash."', '".$username."')";
         mysqli_query($link, $query);
+        
+        $link = "localhost/MyUniMarket/WebApplication/confirm_email.php?user=".$email;
+        $message = '<html><head></head><body><p>Please confirm your email address for MyUniMarket by clicking on this : <a href="'.$link.'">link.</a></p></body></html>';
+        $to = $email;
+        $subject = "Confirm Email";
+        //$message = "Please confirm your email address for MyUniMarket by clicking on this link: ".;
+        $headers = "From: imihirsomani@gmail.com\r\n";
+        $headers .= 'MIME-Version: 1.0' . "\r\n";
+        $headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
+        if (mail($to, $subject, $message, $headers)) {
+            //echo "SUCCESS";
+        } else {
+            //echo "ERROR";
+        }
     }
 
   }
@@ -95,42 +108,43 @@
 
 <!doctype html>
 <html lang="en">
+
 <head>
-	<!-- important for compatibility charset -->
+    <!-- important for compatibility charset -->
     <meta charset="utf-8">
-	<meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
     <script src="./js/badWords.js" type="text/javascript"></script>
-    
+
     <title>MyUniMarket - Sign Up</title>
-	
+
     <meta name="author" content="">
     <meta name="keywords" content="">
     <meta name="description" content="">
-    
+
     <!-- important for responsiveness remove to make your site non responsive. -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    
+
     <!-- FavIcon -->
     <link rel="shortcut icon" type="image/x-icon" href="images/favicon.png">
-    
+
     <!-- Animation CSS -->
     <link rel="stylesheet" type="text/css" href="css/animate.css" media="all" />
-    
+
     <!-- Foundation CSS File -->
     <link rel="stylesheet" type="text/css" href="css/foundation.min.css" media="all" />
-    
+
     <!-- Font Awesome CSS File -->
     <link rel="stylesheet" type="text/css" href="css/font-awesome.min.css" media="all" />
-    
+
     <!-- FlatIcon set -->
     <link rel="stylesheet" type="text/css" href="fonts/flaticon/flaticon.css" media="all" />
-    
+
     <!-- OWL Crousel CSS -->
     <link rel="stylesheet" type="text/css" href="css/owl.carousel.css" media="all" />
-    
+
     <!-- Theme Styles CSS File -->
     <link rel="stylesheet" type="text/css" href="style.css" media="all" />
-    
+
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Lato:400,700%7CMontserrat:400,700" rel="stylesheet" type="text/css" />
     <script>
@@ -147,27 +161,27 @@
 </head>
 
 <body class="inner-page">
-	<!-- MAIN Container Start here. -->
-	<div class="container">
-        
+    <!-- MAIN Container Start here. -->
+    <div class="container">
+
         <!-- Top Bar Starts Here -->
         <div class="top-info-bar">
-        	<div class="row">
-                    <div class="logo float-left">
-                            <img alt="" src="../ImageFiles/MyUniMarket.png" />
-                        </div><!-- Logo /-->
-                
+            <div class="row">
+                <div class="logo float-left">
+                    <img alt="" src="../ImageFiles/MyUniMarket.png" />
+                </div><!-- Logo /-->
+
                 <div class="medium-6 small-12 columns hide-for-small-only">
 
                 </div><!-- Right Ends /-->
-                
+
             </div><!-- row /-->
         </div>
         <!-- top Bar Ends here /-->
-        
+
 
         <div class="content-container module">
-			
+
             <!-- Title Section -->
             <div class="title-section">
                 <div class="row">
@@ -177,103 +191,105 @@
                 </div><!-- row /-->
             </div>
             <!-- Title Section End -->
-            
-           <div class="spacer module"></div>
-           <div class="row">
-            	<div class="medium-5 small-12 medium-offset-1 columns form-container">
 
-                                <h2>Sign Up to start browing</h2>
+            <div class="spacer module"></div>
+            <div class="row">
+                <div class="medium-5 small-12 medium-offset-1 columns form-container">
 
-                                <div class="err"><?php echo $error; ?></div>
+                    <h2>Sign Up to start browing</h2>
 
-                                <form method="post">
-                                    <label>
-                                            Username
-                                            <input type="text" name="username" id="userName" value="" placeholder="Your Username ..." />
-                                    </label>
-    
-                                    <label> 
+                    <div class="err">
+                        <?php echo $error; ?>
+                    </div>
 
-                                    <label>
-                                        Your Email address
-                                        <input type="text" name="email" value="" placeholder="Your Email Address ..." />
-                                    </label>
-                                    
-                                        Your Password
-                                        <input type="password" name="password" value="" placeholder="Enter password ..." />
-                                    </label>
+                    <form method="post">
+                        <label>
+                            Username
+                            <input type="text" name="username" id="userName" value="" placeholder="Your Username ..." />
+                        </label>
 
-                                    <label>
-                                        Confirm Password
-                                        <input type="password" name="confirmPassword" value="" placeholder="Confirm password ..." />
-                                    </label>
+                        <label>
 
-                                    <input type="submit" value="Sign Up" class="button primary" id="submitButton" />
-                                    <a href="signin.php">Already have an account?</a>
-                                </form>
+                            <label>
+                                Your Email address
+                                <input type="text" name="email" value="" placeholder="Your Email Address ..." />
+                            </label>
 
-                                <script type="text/javascript">
-                                
-                                    badWordsParser('userName','submitButton');
+                            Your Password
+                            <input type="password" name="password" value="" placeholder="Enter password ..." />
+                        </label>
 
-                                </script>          
+                        <label>
+                            Confirm Password
+                            <input type="password" name="confirmPassword" value="" placeholder="Confirm password ..." />
+                        </label>
+
+                        <input type="submit" value="Sign Up" class="button primary" id="submitButton" />
+                        <a href="signin.php">Already have an account?</a>
+                    </form>
+
+                    <script type="text/javascript">
+                        badWordsParser('userName', 'submitButton');
+
+                    </script>
                 </div>
-               <!-- sidebar Ends -->
-            	
+                <!-- sidebar Ends -->
+
                 <div class="medium-6 small-12 columns sidebar">
-					
+
                     <div class="widget">
                         <h2>Terms of Service</h2>
-                        
+
                         <div class="widget-content">
-                        	
-                                <strong>Bold Text Here</strong> 	
+
+                            <strong>Bold Text Here</strong>
                             </label>
-                                <p>Regular Text Here</p>
-						</div><!-- widget content /-->
+                            <p>Regular Text Here</p>
+                        </div><!-- widget content /-->
                     </div><!-- widget ends -->
 
                 </div>
                 <!-- left area ends -->
             </div><!-- row ends /-->
-   
-        
-            
+
+
+
         </div> <!-- content-container /-->
-        
+
 
         <!-- Call to Action box -->
         <div class="call-to-action">
-           <div class="row">
+            <div class="row">
                 <div class="medium-5 small-12 columns">
                     <h4> InsertTextHere</h4>
                 </div>
                 <div class="medium-7 small-12 columns signup-form">
                 </div>
-           </div><!-- row -->
-         </div>
+            </div><!-- row -->
+        </div>
         <!-- Call to Action End -->
-        
+
         <!-- Footer -->
-	   <div class="footer">
+        <div class="footer">
 
-        
-        <!-- Footer bottom -->
-        <div class="footerbottom">
-        	<div class="row">
-            	<div class="medium-6 small-12 columns">
-                    <div class="clearfix"></div>
-                    <div class="copyrightinfo">2019 © <a href="#">MyUniMarket</a> All Rights Reserved.</div>
-                </div><!--left side-->
-            </div>
-        </div><!-- footer Bottom -->
-   </div>
-	   <!-- Footer Ends here -->
 
-	</div>
+            <!-- Footer bottom -->
+            <div class="footerbottom">
+                <div class="row">
+                    <div class="medium-6 small-12 columns">
+                        <div class="clearfix"></div>
+                        <div class="copyrightinfo">2019 © <a href="#">MyUniMarket</a> All Rights Reserved.</div>
+                    </div>
+                    <!--left side-->
+                </div>
+            </div><!-- footer Bottom -->
+        </div>
+        <!-- Footer Ends here -->
+
+    </div>
     <!-- MAIN Container Ends here. -->
-	<a href="#top" id="top" class="animated fadeInUp start-anim"><i class="fa fa-angle-up"></i></a>
-	<!-- Page Preloader 
+    <a href="#top" id="top" class="animated fadeInUp start-anim"><i class="fa fa-angle-up"></i></a>
+    <!-- Page Preloader 
     <div class="preloader">
         <div class="cssload-thecube">
             <div class="cssload-cube cssload-c1"></div>
@@ -284,15 +300,16 @@
 	</div>
     	-->
     <!-- Including Jquery so All js Can run -->
-	<script type="text/javascript" src="js/jquery-1.12.3.min.js"></script>
-    
-   	<!-- Including Foundation JS so Foundation function can work. -->
+    <script type="text/javascript" src="js/jquery-1.12.3.min.js"></script>
+
+    <!-- Including Foundation JS so Foundation function can work. -->
     <script type="text/javascript" src="js/foundation.min.js"></script>
-   	<!-- Crousel JS -->
-   <script type="text/javascript" src="js/owl.carousel.min.js"></script>
+    <!-- Crousel JS -->
+    <script type="text/javascript" src="js/owl.carousel.min.js"></script>
     <!-- jQuery Timer plugin delete if not using -->
     <script src="js/jquery.simple.timer.js"></script>
-   <!-- Webful JS -->
-   <script src="js/webful.js"></script>
+    <!-- Webful JS -->
+    <script src="js/webful.js"></script>
 </body>
+
 </html>

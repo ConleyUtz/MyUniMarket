@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Feb 21, 2019 at 04:18 AM
+-- Generation Time: Feb 22, 2019 at 06:22 PM
 -- Server version: 10.1.37-MariaDB
 -- PHP Version: 7.3.1
 
@@ -57,16 +57,17 @@ CREATE TABLE `users` (
   `userId` int(10) UNSIGNED NOT NULL,
   `email` text NOT NULL,
   `username` text NOT NULL,
-  `password` text NOT NULL
+  `password` text NOT NULL,
+  `isConfirmed` tinyint(1) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`userId`, `email`, `username`, `password`) VALUES
-(1, 'user1@purdue.edu', 'user1', '$2y$10$6YDgveHu1FjX5Xek81h6Ue4b1GMGQFTrbHdZCUNAGKBAusJ45x2sq'),
-(2, 'user2@purdue.edu', 'user2', '$2y$10$zwXYhSqEZQqbyfO/3dqFR.KcDoSxdNRMMsV3OP4zWfG.RPLXxROBi');
+INSERT INTO `users` (`userId`, `email`, `username`, `password`, `isConfirmed`) VALUES
+(1, 'user1@purdue.edu', 'user1', '$2y$10$6YDgveHu1FjX5Xek81h6Ue4b1GMGQFTrbHdZCUNAGKBAusJ45x2sq', 0),
+(2, 'user2@purdue.edu', 'user2', '$2y$10$zwXYhSqEZQqbyfO/3dqFR.KcDoSxdNRMMsV3OP4zWfG.RPLXxROBi', 0);
 
 --
 -- Indexes for dumped tables

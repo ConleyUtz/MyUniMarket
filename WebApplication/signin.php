@@ -41,7 +41,7 @@
         }else{
             //echo "Database connection successful!";
         }
-        $query = "SELECT password FROM users WHERE `email` = '".$email."'";
+        $query = "SELECT password FROM users WHERE `email` = '".$email."' AND `isConfirmed` = true";
         $result = mysqli_query($link, $query);
         $row = mysqli_fetch_array($result);
         $hashed_password = $row['password'];
@@ -49,7 +49,7 @@
             $_SESSION['email'] = $email;
             header("Location: market.php");
         }else{
-            $error = "Invalid email address or password combination.";
+            $error = "Invalid email address or password combination OR you haven't verified your email.";
             $error = '<div class="signin-error" style="color:red;"><strong>Error:</strong><br>'.$error.'</div>';
         } 
     }
@@ -186,7 +186,7 @@
                     </div>
                     <div>
                         <a href="./signup.php">
-                            <input type="submit" value="Register" class="button primary"/>
+                            <input type="submit" value="Register" class="button primary" />
                         </a>
                     </div>
 
