@@ -7,7 +7,7 @@
 function badWordsParser(field1,field2,field3, buttonID) {
     
   //Create array from text file
-  var badWordsArr = ["2 girls 1 cup",
+  var badWordsArr = ["testphrase","2 girls 1 cup",
   "2g1c",
   "4r5e",
   "5h1t",
