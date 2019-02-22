@@ -266,7 +266,7 @@
                         </label>
                         <label>
                             Description
-                            <textarea name="itemDescription" placeholder="Brief Description" id="descriptionItem" rows="4"></textarea>
+                            <textarea name="itemDescription" placeholder="Brief Description" id="descriptionItem" rows="4" maxlength="200"></textarea>
                         </label>        
                         <label>
                             Image Upload: [Upload Button Here]
