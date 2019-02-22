@@ -239,6 +239,8 @@
                 $query = 'DELETE FROM users WHERE `email`="'.$testerID.'"';
                                 
                 mysqli_query($link, $query);
+
+                header('Location: logout.php'); 
             }
         }
         
