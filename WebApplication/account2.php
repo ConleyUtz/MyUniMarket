@@ -379,9 +379,9 @@
                         <div class="row">
                             <div style="text-align: center">
 
-                                <a href="account.html" class="button primary" title="Account">Change Password</a>
-                                <a href="account.html" class="button primary" title="Account">Change Username</a>
-                                <a href="account.html" class="button third" title="Account">Delete Account</a>
+                                <a class="button primary" title="Account" id="passButton">Change Password</a>
+                                <a class="button primary" id="useButton" title="Account">Change Username</a>
+                                <a id="deleteButton" class="button third" title="Account">Delete Account</a>
                             </div>
                         </div>
 
@@ -389,7 +389,7 @@
                             <?php echo $error; ?>
                         </div>
 
-                        <div style="text-align: center; display: block">
+                        <div id="passBlock" style="text-align: center; display: none">
 
                             <h2>Change Your Password</h2>
                             <form method="post">
@@ -410,7 +410,7 @@
                             </form>
                         </div>
 
-                        <div style="text-align: center; display: block">
+                        <div id="useBlock" style="text-align: center; display: none">
 
                             <h2>Change Your Username</h2>
                             <form method="post">
@@ -427,7 +427,7 @@
                             </form>
                         </div>
 
-                        <div style="text-align: center; display: block">
+                        <div id="deleteBlock" style="text-align: center; display: none">
 
                             <h2 style="color: rgb(255, 0, 0)">Delete Account</h2>
                             <form method="post">
@@ -443,6 +443,33 @@
                                 <input type="submit" name="deleteAccount" value="Confirm" class="button third" />
                             </form>
                         </div>
+
+                        <script type="text/javascript">
+                    
+                            document.getElementById("passButton").onclick = function(){
+
+                                document.getElementById("useBlock").style.display = "none";
+                                document.getElementById("deleteBlock").style.display = "none";
+                                document.getElementById("passBlock").style.display = "block";
+
+                            }
+
+                            document.getElementById("useButton").onclick = function(){
+
+                                document.getElementById("useBlock").style.display = "block";
+                                document.getElementById("deleteBlock").style.display = "none";
+                                document.getElementById("passBlock").style.display = "none";
+
+                            }
+
+                            document.getElementById("deleteButton").onclick = function(){
+
+                                document.getElementById("useBlock").style.display = "none";
+                                document.getElementById("deleteBlock").style.display = "block";
+                                document.getElementById("passBlock").style.display = "none";
+
+                            }    
+                    </script>
 
                     </div><!-- general info ends /-->
 
