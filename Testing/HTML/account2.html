@@ -126,12 +126,12 @@
                         <div class="row">
                                 <div style="text-align: center">
                                     
-                                        <a href="account.html" class="button primary" title="Account">Change Password</a>
-                                        <a href="account.html" class="button primary" title="Account">Change Username</a>
-                                        <a href="account.html" class="button third" title="Account">Delete Account</a>
+                                        <a href="account.html" class="button primary" title="Account" id = "passButton">Change Password</a>
+                                        <a href="account.html" class="button primary" title="Account" id = "useButton">Change Username</a>
+                                        <a href="account.html" class="button third" title="Account" id = "deleteButton">Delete Account</a>
                                 </div>
                             </div> 
-                            <div style="text-align: center; display: block">
+                            <div id = "passBlock" style="text-align: center; display: block">
                                     
                                 <h2>Change Your Password</h2>
                                 <form>
@@ -151,7 +151,7 @@
                                     <input type="submit" value="Confirm" class="button primary" />
                                 </form>
                         </div>
-                        <div style="text-align: center; display: block">
+                        <div id = "useBlock" style="text-align: center; display: block">
                                     
                             <h2>Change Your Username</h2>
                             <form>
@@ -168,7 +168,7 @@
                             </form>
                     </div>
 
-                    <div style="text-align: center; display: block">
+                    <div id = "deleteBlock" style="text-align: center; display: block">
                                     
                         <h2 style="color: rgb(255, 0, 0)">Delete Account</h2>
                         <form>
