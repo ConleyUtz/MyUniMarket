@@ -125,6 +125,7 @@
     <meta charset="utf-8">
 	<meta http-equiv="x-ua-compatible" content="ie=edge">
     <script src="./js/badWordsMultiple.js" type="text/javascript"></script>
+    <script src="./js/logoutSuccess.js" type="text/javascript"></script>
     
     <title>MyUniMarket - New Post</title>
 	
@@ -191,10 +192,15 @@
             <div class="row">
                     <div class="float-right">
                         <a href="account.php" class="button primary" title="Account">Account</a>
-                        <input type="submit" value="Sign Out" class="button primary" />
+                        <input type="submit" value="Sign Out" id="logout" class="button primary" />
                     </div>
             </div>                
         </div>
+
+        <script type="text/javascript">
+            logoutSuccess('logout');
+        </script>
+
         <!-- Header Ends /-->
         <div class="content-container module">
             <!-- Title Section -->
