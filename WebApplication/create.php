@@ -219,7 +219,7 @@
                     <form method="post">
                         <label>
                             Item For Sale
-                            <input type="text" id="nameItem" name="itemName" value="" placeholder="Your Item ..." />
+                            <input maxlength="100" type="text" id="nameItem" name="itemName" value="" placeholder="Your Item ..." />
                         </label>
 
                         <label>
@@ -227,7 +227,7 @@
                             <input type="number" min="0.00" max="9999.99" step="0.01" name="itemPrice" value="" placeholder="Your Requested Price ..." />
                         </label>
                             Location
-                            <input type="text" id="locationItem" name="location" value="" placeholder="Your Location ..." />
+                            <input maxlength="100" type="text" id="locationItem" name="location" value="" placeholder="Your Location ..." />
                         </label>
                         <label> 
                             Select Category
