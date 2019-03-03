@@ -22,6 +22,11 @@
       //! If field has value DO SOMETHING
   }
 
+  //! If error message variable is not empty display the errors and finish running code there
+  if($error != ""){
+
+    $error = '<div class="signup-error" style="color:red;"><strong>Error:</strong><br>'.$error.'</div>';
+  }
   else{
 
       /**
