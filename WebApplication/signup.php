@@ -1,5 +1,9 @@
 <?php
 
+    use PHPMailer\PHPMailer\PHPMailer;
+    date_default_timezone_set('Etc/UTC');
+    require '../vendor/autoload.php';
+
     $error = "";
     $password = "";
     $confirmedPassword = "";
@@ -87,19 +91,24 @@
         $password_hash = password_hash($password, PASSWORD_DEFAULT); //? Hashing the password
         $query = "INSERT INTO `users` (`email`, `password`, `username`) VALUES ('".$email."', '".$password_hash."', '".$username."')";
         mysqli_query($link, $query);
-        
+
         $link = "http://localhost/MyUniMarket/WebApplication/confirm_email.php?user=".$email;
-        $message = '<html><head></head><body><p>Please confirm your email address for MyUniMarket by clicking on this : <a href="'.$link.'">link.</a></p></body></html>';
-        $to = $email;
-        $subject = "Confirm Email";
-        //$message = "Please confirm your email address for MyUniMarket by clicking on this link: ".;
-        $headers = "From: imihirsomani@gmail.com\r\n";
-        $headers .= 'MIME-Version: 1.0' . "\r\n";
-        $headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
-        if (mail($to, $subject, $message, $headers)) {
-            //echo "SUCCESS";
+        $mail = new PHPMailer;
+        $mail->isSMTP();
+        $mail->SMTPDebug = 0;
+        $mail->Host = 'smtp-mail.outlook.com';
+        $mail->Port = 587;
+        $mail->SMTPAuth = true;
+        $mail->Username = 'myunimarket@outlook.com';
+        $mail->Password = 'WebApplication@123';
+        $mail->setFrom('myunimarket@outlook.com', 'MyUniMarket');
+        $mail->addAddress($email, 'User');
+        $mail->Subject = 'Verify your email - MyUniMarket';
+        $mail->Body = "Please confirm your email address for MyUniMarket by clicking on this: ".$link;
+        if (!$mail->send()) {
+            //echo 'Mailer Error: ' . $mail->ErrorInfo;
         } else {
-            //echo "ERROR";
+            //echo 'Message sent!';
         }
     }
 
