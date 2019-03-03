@@ -11,7 +11,7 @@
 	1. msmtp `brew install msmtp` (For OSX)
 	1. PHPMailer https://github.com/PHPMailer/PHPMailer
 
-### We are going to use PHPMailer as our email API
+1. We are going to use PHPMailer as our email API
 	1. Composer.json and Compoer.lock are filed required by PHP dependency manager *composer.phar*
 	1. To install dependencies, run `php composer.phar install`
 	1. Now, PHPMailer dependency is added to your project.
