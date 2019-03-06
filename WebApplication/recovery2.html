@@ -6,7 +6,7 @@
     <meta charset="utf-8">
 	<meta http-equiv="x-ua-compatible" content="ie=edge">
     
-    <title>MyUniMarket - Recovery</title>
+    <title>MyUniMarket - Update Password</title>
 	
     <meta name="author" content="">
     <meta name="keywords" content="">
@@ -77,7 +77,7 @@
             <div class="title-section">
                 <div class="row">
                     <div class="small-12 columns">
-                        <h1>Password Recovery</h1>
+                        <h1>Update Password</h1>
                     </div> <!-- title /-->
                 </div><!-- row /-->
             </div>
@@ -87,10 +87,29 @@
            <div class="row">
                <!-- sidebar Ends -->
             	
-                <div class="medium-7 small-12 columns sidebar">
+                <!-- left area ends -->
+                <div class="medium-5 small-12 columns form-container">
+
+                        <h2>Create a new password for your account</h2>
+                        <form method="post">
+                            <label>
+                                New Password
+                                <input type="text" name="username" id="userName" value="" placeholder="Your New Password ..." />
+                            </label>
+        
+                                <label>
+                                    Reenter New Password
+                                    <input type="text" name="email" value="" placeholder="Confirm New Password ..." />
+                                </label>    
+                            <input type="submit" value="Update" class="button primary" id="submitButton" />
+                            <a href="signin.php"></a>
+                        </form>        
+                 </div>
+
+                 <div class="medium-7 small-12 columns sidebar">
 					
                     <div class="widget">
-                        <h2>Instructions for Password Recovery</h2>
+                        <h2>Instructions for Updating Password</h2>
                         
                         <div class="widget-content">
                         	
@@ -101,30 +120,6 @@
                     </div><!-- widget ends -->
 
                 </div>
-                <!-- left area ends -->
-                <div class="medium-5 small-12 columns form-container">
-
-                        <h2>Enter your credentials</h2>
-                        <form>
-    
-                            <label>
-                                Your MyUniMarket Email address
-                                <input type="text" value="" placeholder="Your Email Address ..." />
-                            </label>
-                        
-                            <input type="submit" value="Recover Password" class="button primary" />
-    
-                        </form>
-                        <div>
-                            Don't have an account?
-                        </div>
-                        <div>
-                            <a href="./signup.php">
-                                <input type="submit" value="Register" class="button primary" />
-                            </a>
-                        </div>
-        
-        </div>
             </div><!-- row ends /-->
    
         
