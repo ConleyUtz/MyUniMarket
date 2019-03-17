@@ -13,7 +13,8 @@ $link = mysqli_connect($host, $uname, $pwd, $database);
 
 if(mysqli_connect_error()){
     exit("There was an error connecting to the database");
-}else{
+}
+else{
     //echo "Database connection successful!";
 }
 
@@ -33,7 +34,18 @@ if ($_POST){
 
             $error .= "The email must be a purdue email! <br>";
         }
+        else{
+
+            $query = "SELECT password FROM users WHERE `email` = '".$email."' AND `isConfirmed` = true";
+            $result = mysqli_query($link, $query);
+            
+            if(mysqli_num_rows($result) == 0){
+        
+                $error .= "A user with the following email does not exist. <br>";
+            }
+        }
     }
+
     
     //! If error message variable is not empty display the errors and finish running code there
     if($error != ""){
