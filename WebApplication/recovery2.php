@@ -1,4 +1,54 @@
+<?php
 
+$error = "";
+$newPass = "";
+
+if ($_POST){
+
+    //! Checking if field 1 has correct input in it
+    if(!$_POST['newPass']){
+  
+      $error .= "Please enter a new password.<br>";
+  
+    }
+    else{
+
+        $newPass = $_POST['newPass'];
+
+    }
+
+    //! Checking if field 1 has correct input in it
+    if(!$_POST['newPassRe']){
+  
+        $error .= "Please re-enter the new password.<br>";
+    
+    }
+
+    if($_POST['newPassRe'] != $_POST['newPass']){
+  
+        $error .= "The passwords do not match.<br>";
+    
+    }
+    else{
+  
+        $newPass = $_POST['newPass'];
+    }
+    
+    //! If error message variable is not empty display the errors and finish running code there
+    if($error != ""){
+  
+      $error = '<div class="signup-error" style="color:red;"><strong>Error:</strong><br>'.$error.'</div>';
+    }
+    else{
+  
+        /**
+         * IFF all fields have correct values in them execute the following code.
+         */
+    }
+  
+    }
+
+?>
 <!doctype html>
 <html lang="en">
 <head>
@@ -91,15 +141,20 @@
                 <div class="medium-5 small-12 columns form-container">
 
                         <h2>Create a new password for your account</h2>
+
+                        <div class="err">
+                            <?php echo $error; ?>
+                        </div>
+
                         <form method="post">
                             <label>
                                 New Password
-                                <input type="text" name="username" id="userName" value="" placeholder="Your New Password ..." />
+                                <input type="password" name="newPass" id="userName" value="" placeholder="Your New Password ..." />
                             </label>
         
                                 <label>
-                                    Reenter New Password
-                                    <input type="text" name="email" value="" placeholder="Confirm New Password ..." />
+                                    Re-enter New Password
+                                    <input type="password" name="newPassRe" value="" placeholder="Confirm New Password ..." />
                                 </label>    
                             <input type="submit" value="Update" class="button primary" id="submitButton" />
                             <a href="signin.php"></a>
