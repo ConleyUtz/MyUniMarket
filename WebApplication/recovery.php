@@ -1,3 +1,42 @@
+<?php
+
+$error = "";
+
+if ($_POST){
+
+    //! Checking if field 1 has correct input in it
+    if(!$_POST['emailInput']){
+  
+      $error .= "Please enter an email address.<br>";
+  
+    }
+    else{
+  
+        $email = $_POST['emailInput'];
+        $arr = explode('@',$email);
+        if($arr[1] != "purdue.edu"){
+
+            $error .= "The email must be a purdue email! <br>";
+        }
+    }
+    
+    //! If error message variable is not empty display the errors and finish running code there
+    if($error != ""){
+  
+      $error = '<div class="signup-error" style="color:red;"><strong>Error:</strong><br>'.$error.'</div>';
+    }
+    else{
+  
+        /**
+         * IFF all fields have correct values in them execute the following code.
+         */
+    }
+  
+    }
+
+?>
+
+
 
 <!doctype html>
 <html lang="en">
@@ -114,7 +153,7 @@
     
                             <label>
                                 Your MyUniMarket Email address
-                                <input type="text" value="" placeholder="Your Email Address ..." />
+                                <input name="emailInput" type="text" value="" placeholder="Your Email Address ..." />
                             </label>
                         
                             <input type="submit" value="Recover Password" class="button primary" />
