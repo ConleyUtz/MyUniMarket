@@ -1,6 +1,21 @@
 <?php
 
+//? Used variables
 $error = "";
+
+//? Connecting to thee database
+$host = "localhost";
+$uname = "root";
+$pwd = "";
+$database = "my_uni_market";
+
+$link = mysqli_connect($host, $uname, $pwd, $database);
+
+if(mysqli_connect_error()){
+    exit("There was an error connecting to the database");
+}else{
+    //echo "Database connection successful!";
+}
 
 if ($_POST){
 
