@@ -36,11 +36,15 @@ if ($_POST){
         }
         else{
 
-            $query = "SELECT password FROM users WHERE `email` = '".$email."' AND `isConfirmed` = true";
-            $result = mysqli_query($link, $query);
+            if($result = mysqli_query($link, "SELECT password FROM users WHERE `email` = '".$email."' AND `isConfirmed` = true")){
             
-            if(mysqli_num_rows($result) == 0){
-        
+                if(mysqli_num_rows($result) == 0){
+            
+                    $error .= "A user with the following email does not exist. <br>";
+                }
+            }
+            else{
+
                 $error .= "A user with the following email does not exist. <br>";
             }
         }
