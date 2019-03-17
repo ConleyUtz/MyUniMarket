@@ -1,7 +1,22 @@
 <?php
 
+//? Used variables
 $error = "";
 $newPass = "";
+
+//? Connecting to thee database
+$host = "localhost";
+$uname = "root";
+$pwd = "";
+$database = "my_uni_market";
+
+$link = mysqli_connect($host, $uname, $pwd, $database);
+
+if(mysqli_connect_error()){
+    exit("There was an error connecting to the database");
+}else{
+    //echo "Database connection successful!";
+}
 
 if ($_POST){
 
@@ -24,6 +39,7 @@ if ($_POST){
     
     }
 
+    //! Checking if the two new passwords match
     if($_POST['newPassRe'] != $_POST['newPass']){
   
         $error .= "The passwords do not match.<br>";
@@ -44,6 +60,7 @@ if ($_POST){
         /**
          * IFF all fields have correct values in them execute the following code.
          */
+        $password_hash = password_hash($newPass, PASSWORD_DEFAULT); //? Hashing the password
     }
   
     }
