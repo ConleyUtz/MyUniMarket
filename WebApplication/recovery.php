@@ -105,7 +105,12 @@
                 <div class="medium-5 small-12 columns form-container">
 
                         <h2>Enter your credentials</h2>
-                        <form>
+
+                        <div class="err">
+                            <?php echo $error; ?>
+                        </div>
+
+                        <form method="post">
     
                             <label>
                                 Your MyUniMarket Email address
