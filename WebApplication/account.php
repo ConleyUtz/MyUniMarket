@@ -141,7 +141,7 @@
 
                         <!-- Store Content -->
                         <div class="products-wrap">
-                            //here
+                            
                             <div class="product list-product small-12 columns">
                                 <div class="medium-4 small-12 columns product-image">
                                     <a href="single-product.html">
@@ -177,7 +177,7 @@
 
                                     </div><!-- product meta /-->
                                 </div>
-                            </div><!-- Product /--> //till here
+                            </div><!-- Product /--> 
 
                             <div class="product list-product small-12 columns">
                                 <div class="medium-4 small-12 columns product-image">
