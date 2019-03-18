@@ -1,6 +1,5 @@
  <?php
- 
- <div class="product list-product small-12 columns">
+ echo '<div class="product list-product small-12 columns">
                                 <div class="medium-4 small-12 columns product-image">
                                     <a href="single-product.html">
                                         <img src="../ImageFiles/ProductImages/Image1.jpg" alt="" />
@@ -35,5 +34,5 @@
 
                                     </div><!-- product meta /-->
                                 </div>
-</div><!-- Product /--> 
+</div><!-- Product /-->'; 
 ?>
