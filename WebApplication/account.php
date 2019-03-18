@@ -65,34 +65,39 @@
 </head>
 
 <body>
-	<!-- MAIN Container Start here. -->
-	<div class="container">
-        
+    <!-- MAIN Container Start here. -->
+    <div class="container">
+
         <div class="top-info-bar">
             <div class="row">
                 <div class="logo float-left">
-                    <img alt="" src="../ImageFiles/MyUniMarket.png"/>
+                    <img alt="" src="../ImageFiles/MyUniMarket.png" />
                 </div><!-- Logo /-->
                 <div class="medium-6 small-12 columns hide-for-small-only">
-        
+
                 </div><!-- Right Ends /-->
-                        
+
             </div><!-- row /-->
         </div>
-        
+
         <!-- Header Starts -->
         <div class="header">
-                <div class="row">
-                        <div class="float-right">
-                            <a href="account.html" class="button primary" title="Account">Account</a>
-                            <input type="submit" value="Sign Out" class="button primary" />
-                        </div>
-                </div>                
+            <div class="row">
+                <div class="float-right">
+                    <a href="account.php" class="button primary" title="Account">Account</a>
+                    <input type="submit" value="Sign Out" id="logout" class="button primary" />
+                </div>
             </div>
-            <!-- Header Ends /-->
+        </div>
+
+        <script type="text/javascript">
+            logoutSuccess('logout');
+        </script>
+        
+        <!-- Header Ends /-->
         <div class="content-container module">
-			
-                <!-- Title Section -->
+
+            <!-- Title Section -->
             <div class="title-section">
                 <div class="row">
                     <div class="small-12 columns">
@@ -103,28 +108,28 @@
         </div>
         <!-- customer content -->
         <div class="customer-content module">
-        	<div class="row">
+            <div class="row">
                 <div class="medium-3 small-12 columns">
-                	<div class="widget">
-                    	<h2>Quick links</h2>
+                    <div class="widget">
+                        <h2>Quick links</h2>
                         <div class="widget-content">
-                        	<ul class="vertical menu">
-                                <li><a href="#">My Listings</a></li>
-                                <li><a href="404.html">Bookmarked Items</a></li>
-                                <li><a href="account2.html">Account Settings</a></li>
+                            <ul class="vertical menu">
+                                <li><a href="404.php">My Listings</a></li>
+                                <li><a href="404.php">Bookmarked Items</a></li>
+                                <li><a href="account2.php">Account Settings</a></li>
                             </ul>
                         </div><!-- widget content /-->
                     </div><!-- widget /-->
                 </div><!-- left column /-->
                 <div class="medium-9 small-12 columns">
-                	<div class="general-info dashboard-module">
-                    	<div class="float-left user-thumb">
-                        	<img alt="" src="images/help/user_thumb.jpg" />
+                    <div class="general-info dashboard-module">
+                        <div class="float-left user-thumb">
+                            <img alt="" src="images/help/user_thumb.jpg" />
                         </div><!-- user thumb /-->
                         <div class="user-detail float-left">
-                        	<h4>Conley Utz</h4>
+                            <h4>Conley Utz</h4>
                             <div class="pro-rating float-left">
-                            </div> 
+                            </div>
                             <a href="#">User Since: 2/5/2019</a></a>
                         </div><!-- user detail /-->
                         <div class="clearfix"></div>
@@ -132,111 +137,87 @@
                     </div><!-- general info ends /-->
 
                     <!-- Information Boxes -->
-                	<div class="general-info dashboard-module">
+                    <div class="general-info dashboard-module">
 
-                    <!-- Store Content -->
+                        <!-- Store Content -->
                         <div class="products-wrap">
-                        	<div class="product list-product small-12 columns">
-                                    <div class="medium-4 small-12 columns product-image">
-                                        <a href="single-product.html">
-                                            <img src="../ImageFiles/ProductImages/Image1.jpg" alt="" />
-                                            <img src="../ImageFiles/ProductImages/Image1.jpg" alt="" />
-                                        </a>
-                                    </div><!-- Product Image /-->
-                                    <div class="medium-8 small-12 columns">
-                                        <div class="product-title">
-                                            <a href="single-product.html">CS 354 - Textbook</a>
-                                        </div><!-- product title /-->	
-                                        <div class="product-meta">
-                                            <div class="prices">
-                                                <span class="price">$50</span> | 
-                                                <span class="price">Used - Acceptable</span>
-                                                <div class="store float-right">
-                                                        By: <a href="../Testing/HTML/404.html">Conley Utz</a>
-                                                        <br>
-                                                        <label>First Street Towers</label>
-
-                                                    </div>
+                            //here
+                            <div class="product list-product small-12 columns">
+                                <div class="medium-4 small-12 columns product-image">
+                                    <a href="single-product.html">
+                                        <img src="../ImageFiles/ProductImages/Image1.jpg" alt="" />
+                                        <img src="../ImageFiles/ProductImages/Image1.jpg" alt="" />
+                                    </a>
+                                </div><!-- Product Image /-->
+                                <div class="medium-8 small-12 columns">
+                                    <div class="product-title">
+                                        <a href="single-product.html">CS 354 - Textbook</a>
+                                    </div><!-- product title /-->
+                                    <div class="product-meta">
+                                        <div class="prices">
+                                            <span class="price">$50</span>
+                                            <div class="store float-right">
+                                                By: <a href="store-front.html">Conley Utz</a>
                                             </div>
-                                            <br>
-                                            <div class="product-detail">
-                                                	<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.</p>
-                                                </div><!-- product detail /-->
-                                             
-                                             <div class="cart-menu">
-                                                <ul class="menu">
-                                                	<li><a href="#" class="button primary" title="Contact">Contact Owner</a></li>
-                                                    
-                                                </ul>
-                                            </div><!-- product buttons /-->
-                                            <label>
-                                                    Description
-                                                    <textarea placeholder="Brief Description" rows="4"></textarea>
-                                                </label>    
+                                        </div>
 
-                                                <div class="cart-menu">
-                                                        <ul class="menu">
-                                                            <li><a href="#" class="button primary" title="Send">Send</a></li>
-                                                            
-                                                        </ul>
-                                                    </div><!-- product buttons /-->
-                                            
-                                        </div><!-- product meta /-->
-									</div>
-                                </div><!-- Product /-->
-                                
-                                <div class="product list-product small-12 columns">
-                                    <div class="medium-4 small-12 columns product-image">
-                                        <a href="single-product.html">
-                                            <img src="../ImageFiles/ProductImages/Image1.jpg" alt="" />
-                                            <img src="../ImageFiles/ProductImages/Image1.jpg" alt="" />
-                                        </a>
-                                    </div><!-- Product Image /-->
-                                    <div class="medium-8 small-12 columns">
-                                        <div class="product-title">
-                                            <a href="single-product.html">CS 354 - Textbook</a>
-                                        </div><!-- product title /-->	
-                                        <div class="product-meta">
-                                            <div class="prices">
-                                                <span class="price">$50</span> | 
-                                                <span class="price">Used - Acceptable</span>
-                                                <div class="store float-right">
-                                                        By: <a href="../Testing/HTML/404.html">Conley Utz</a>
-                                                        <br>
-                                                        <label>First Street Towers</label>
+                                        <div class="product-detail">
+                                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.</p>
+                                        </div><!-- product detail /-->
 
-                                                    </div>
+                                        <div class="cart-menu">
+                                            <ul class="menu">
+                                                <li><a href="#" class="button primary" title="Add to cart">Contact Owner</a></li>
+                                                <li><a href="#" title="Add to wish list"><i class="fa fa-heart"></i></a></li>
+                                                <li><a href="#" title="Open Product Page"><i class="fa fa-retweet"></i></a></li>
+                                                <li><a href="#" title="Quick View"><i class="fa fa-search-plus"></i></a></li>
+
+                                            </ul>
+                                        </div><!-- product buttons /-->
+
+                                    </div><!-- product meta /-->
+                                </div>
+                            </div><!-- Product /--> //till here
+
+                            <div class="product list-product small-12 columns">
+                                <div class="medium-4 small-12 columns product-image">
+                                    <a href="single-product.html">
+                                        <img src="../ImageFiles/ProductImages/Image2.jpg" alt="" />
+                                        <img src="../ImageFiles/ProductImages/Image2.jpg" alt="" />
+                                    </a>
+                                </div><!-- Product Image /-->
+                                <div class="medium-8 small-12 columns">
+                                    <div class="product-title">
+                                        <a href="single-product.html">Amazon Echo Dot</a>
+                                    </div><!-- product title /-->
+                                    <div class="product-meta">
+                                        <div class="prices">
+                                            <span class="price">$30</span>
+                                            <div class="store float-right">
+                                                By: <a href="store-front.html">Conley Utz</a>
                                             </div>
-                                            <br>
-                                            <div class="product-detail">
-                                                	<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.</p>
-                                                </div><!-- product detail /-->
-                                             
-                                             <div class="cart-menu">
-                                                <ul class="menu">
-                                                    <a href="#" class="button primary" title="Contact">Edit Post</a> 
-                                                    <a href="#" class="button primary" title="Contact">Mark As Sold</a>
-                                                    <a id="deletePostButton" class="button third" title="DeletePost">Delete Post</a>
-                                                </ul>
-                                            </div><!-- product buttons /-->
-                                            <br>
-                                            <div class="cart-menu">
-                                                    <ul class="menu">
-                                                        <a href="#" class="button primary" title="Contact">Confirm Sold</a>
-                                                        <a id="deletePostButton" class="button third" title="DeletePost">Confirm Deletion</a>
-                                                    </ul>
-                                                </div><!-- product buttons /-->     
-                                            
-                                        </div><!-- product meta /-->
-									</div>
-                                </div><!-- Product /-->                
+                                        </div>
+                                        <div class="product-detail">
+                                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.</p>
+                                        </div><!-- product detail /-->
+                                        <div class="cart-menu">
+                                            <ul class="menu">
+                                                <li><a href="#" class="button primary" title="Add to cart">Contact Owner</a></li>
+                                                <li><a href="#" title="Add to wish list"><i class="fa fa-heart"></i></a></li>
+                                                <li><a href="#" title="Open Product Page"><i class="fa fa-retweet"></i></a></li>
+                                                <li><a href="#" title="Quick View"><i class="fa fa-search-plus"></i></a></li>
+                                            </ul>
+                                        </div> <!-- product buttons /-->
+                                    </div> <!-- product meta /-->
+                                </div>
+                            </div><!-- Product /-->
                             <div class="clearfix"></div>
                         </div><!-- products wrap /-->
                     </div> <!-- store content /-->
-                </div> <!-- right ends /-->          
+                </div> <!-- right ends /-->
             </div> <!-- Row /-->
         </div> <!-- customer content /-->
-        
+
         <!-- Footer -->
         <div class="footer">
             <div class="footerbottom">
@@ -244,35 +225,36 @@
                     <div class="medium-6 small-12 columns">
                         <div class="clearfix"></div>
                         <div class="copyrightinfo">2019 © <a href="#">MyUniMarket</a> All Rights Reserved.</div>
-                    </div><!--left side-->
+                    </div>
+                    <!--left side-->
                 </div>
             </div>
-        </div> <!--Footer Ends-->
-
-	</div>
-    <!-- MAIN Container Ends here. -->
-	<a href="#top" id="top" class="animated fadeInUp start-anim"><i class="fa fa-angle-up"></i></a>
-	<!-- Page Preloader -->
-    <div class="preloader">
-        <div class="cssload-thecube">
-            <div class="cssload-cube cssload-c1"></div>
-            <div class="cssload-cube cssload-c2"></div>
-            <div class="cssload-cube cssload-c4"></div>
-            <div class="cssload-cube cssload-c3"></div>
         </div>
-	</div>
-    	
-    <!-- Including Jquery so All js Can run -->
-	<script type="text/javascript" src="js/jquery-1.12.3.min.js"></script>
-    
-   	<!-- Including Foundation JS so Foundation function can work. -->
-    <script type="text/javascript" src="js/foundation.min.js"></script>
-   	<!-- Crousel JS -->
-   <script type="text/javascript" src="js/owl.carousel.min.js"></script>
-    <!-- jQuery Timer plugin delete if not using -->
-    <script src="js/jquery.simple.timer.js"></script>
-   <!-- Webful JS -->
-   <script src="js/webful.js"></script> 
+        <!--Footer Ends-->
+
+        <!-- MAIN Container Ends here. -->
+        <a href="#top" id="top" class="animated fadeInUp start-anim"><i class="fa fa-angle-up"></i></a>
+        <!-- Page Preloader -->
+        <div class="preloader">
+            <div class="cssload-thecube">
+                <div class="cssload-cube cssload-c1"></div>
+                <div class="cssload-cube cssload-c2"></div>
+                <div class="cssload-cube cssload-c4"></div>
+                <div class="cssload-cube cssload-c3"></div>
+            </div>
+        </div>
+
+        <!-- Including Jquery so All js Can run -->
+        <script type="text/javascript" src="js/jquery-1.12.3.min.js"></script>
+
+        <!-- Including Foundation JS so Foundation function can work. -->
+        <script type="text/javascript" src="js/foundation.min.js"></script>
+        <!-- Crousel JS -->
+        <script type="text/javascript" src="js/owl.carousel.min.js"></script>
+        <!-- jQuery Timer plugin delete if not using -->
+        <script src="js/jquery.simple.timer.js"></script>
+        <!-- Webful JS -->
+        <script src="js/webful.js"></script>
 </body>
 
 </html>
