@@ -13,6 +13,7 @@
     }
     $user = $_GET['user'];
     $query = "UPDATE `users` SET isConfirmed=true WHERE email='".$user."'";
-    mysqli_query($link, $query);
-    header("Location: signin.php");
+    if(mysqli_query($link, $query)){
+        header("Location: signin.php");
+    }
 ?>
