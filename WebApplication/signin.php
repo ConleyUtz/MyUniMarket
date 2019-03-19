@@ -179,7 +179,7 @@
                             <input type="password" value="" placeholder="Enter password ..." name="password" />
                         </label>
                         <input type="submit" value="Sign In" class="button primary" />
-                        <a href="404.php">Forgot password?</a>
+                        <a href="recovery.php">Forgot password?</a>
 
                     </form>
                     <div>

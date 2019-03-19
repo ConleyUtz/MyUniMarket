@@ -1,5 +1,9 @@
 <?php
 
+use PHPMailer\PHPMailer\PHPMailer;
+date_default_timezone_set('Etc/UTC');
+require '../vendor/autoload.php';
+
 //? Used variables
 $error = "";
 
@@ -57,10 +61,25 @@ if ($_POST){
       $error = '<div class="signup-error" style="color:red;"><strong>Error:</strong><br>'.$error.'</div>';
     }
     else{
-  
-        /**
-         * IFF all fields have correct values in them execute the following code.
-         */
+        $link = "http://localhost/MyUniMarket/WebApplication/recovery2.php?user=".$email;
+        $mail = new PHPMailer;
+        $mail->isSMTP();
+        $mail->SMTPDebug = 0;
+        $mail->Host = 'smtp-mail.outlook.com';
+        $mail->Port = 587;
+        $mail->SMTPAuth = true;
+        $mail->Username = 'myunimarket@outlook.com';
+        $mail->Password = 'WebApplication@123';
+        $mail->setFrom('myunimarket@outlook.com', 'MyUniMarket');
+        $mail->addAddress($email, 'User');
+        $mail->Subject = 'Verify your email - MyUniMarket';
+        $mail->Body = "Please confirm your email address for MyUniMarket for password recovery by clicking on this: ".$link;
+        if (!$mail->send()) {
+            //echo 'Mailer Error: ' . $mail->ErrorInfo;
+        } else {
+            //echo 'Message sent!';
+            $error = '<div class="signup-success" style="color:green;"><p>Email sent!</p></div>';
+        }
     }
   
     }

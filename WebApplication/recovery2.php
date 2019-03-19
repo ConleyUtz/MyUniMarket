@@ -3,6 +3,7 @@
 //? Used variables
 $error = "";
 $newPass = "";
+$email = $_GET['user'];
 
 //? Connecting to thee database
 $host = "localhost";
@@ -61,6 +62,10 @@ if ($_POST){
          * IFF all fields have correct values in them execute the following code.
          */
         $password_hash = password_hash($newPass, PASSWORD_DEFAULT); //? Hashing the password
+        $query = "UPDATE `users` SET password='".$password_hash."' WHERE email='".$email."'";
+        if(mysqli_query($link, $query)){
+            header("Location: signin.php");
+        }
     }
   
     }
