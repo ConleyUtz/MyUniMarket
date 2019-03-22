@@ -1,14 +1,14 @@
 <?php
-    session_start();
-    $testerID = "";
-    if(!$_SESSION['email']){
+    //session_start();
+    //$testerID = "";
+    //if(!$_SESSION['email']){
 
-        header('Location: signin.php'); 
-    }
-    else{
+    //    header('Location: signin.php'); 
+    //}
+    //else{
 
-        $testerID = $_SESSION['email'];
-    }
+    //    $testerID = $_SESSION['email'];
+    //}
 
     
 ?>
