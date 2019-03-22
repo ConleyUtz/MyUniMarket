@@ -167,12 +167,13 @@
                             <h2>Categories</h2>
                             <div class="widget-content">
                                 <ul class="menu vertical">
-                                    <li><a href="#">Category 1</a></li>
-                                    <li><a href="#">Category 2</a></li>
-                                    <li><a href="#">Category 3</a></li>
-                                    <li><a href="#">Category 4</a></li>
-                                    <li><a href="#">Category 5</a></li>
+                                    <li><a href="market1.php">Category 1</a></li>
+                                    <li><a href="market2.php">Category 2</a></li>
+                                    <li><a href="market3.php">Category 3</a></li>
+                                    <li><a href="market4.php">Category 4</a></li>
+                                    <li><a href="market5.php">Category 5</a></li>
                                 </ul>
+                                <a href="market.php"><input type="button" class="button secondary" value="Reset"/></a>
                             </div><!-- widget content /-->
                         </div><!-- widget /-->
 
