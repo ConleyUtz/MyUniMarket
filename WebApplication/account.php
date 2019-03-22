@@ -1,5 +1,16 @@
 <?php
 
+    session_start();
+    $testerID = "";
+    if(!$_SESSION['email']){
+
+        header('Location: signin.php'); 
+    }
+    else{
+
+        $testerID = $_SESSION['email'];
+    }
+
     $host = "localhost";
     $uname = "root";
     $pwd = "";
@@ -12,22 +23,13 @@
     }else{
         //echo "Database connection successfull";
     }
-    session_start();
-    $testerID = "";
-    if(!$_SESSION['email']){
-
-        header('Location: signin.php'); 
-    }
-    else{
-
-        $testerID = $_SESSION['email'];
-    }
 
     if(isset($_POST['deleteListing'])){
         $query = 'DELETE FROM items WHERE `itemId`=42';
 
         mysqli_query($link, $query);
     }
+    
 ?>
 
 <!doctype html>
