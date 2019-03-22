@@ -1,12 +1,31 @@
 <?php
 
+    session_start();
+    $testerID = "";
+    if(!$_SESSION['email']){
 
- $error = "";
-    $password = "";
-    $confirmedPassword = "";
-    $email = "";
-    $username = "";
+        header('Location: signin.php'); 
+    }
+    else{
 
+        $testerID = $_SESSION['email'];
+    }
+    //? Variables to be used
+    $itemName = "";
+    $itemPrice = "";
+    $itemDescription = "";
+    $location = "";
+    $itemCategory = "";
+    $itemQualPity = "";
+    $newitemName = "";
+    $newitemPrice = "";
+    $newitemDescription = "";
+    $newlocation = "";
+    $newitemCategory = "";
+    $newitemQuality = "";
+    $error = "";
+
+    //? Connecting to the database
     $host = "localhost";
     $uname = "root";
     $pwd = "";
@@ -19,6 +38,10 @@
     }else{
         //echo "Database connection successful!";
     }
+
+
+
+    
 ?>
     
 <!doctype html>
@@ -27,6 +50,9 @@
 	<!-- important for compatibility charset -->
     <meta charset="utf-8">
 	<meta http-equiv="x-ua-compatible" content="ie=edge">
+
+    <script src="./js/badWordsMultiple.js" type="text/javascript"></script>
+    <script src="./js/logoutSuccess.js" type="text/javascript"></script>
     
     <title>MyUniMarket - Edit Post</title>
 	
@@ -82,6 +108,7 @@
                                 <img alt="" src="../ImageFiles/MyUniMarket.png" />
                             </a> 
                         </div><!-- Logo /-->
+                        <div class="medium-6 small-12 columns hide-for-small-only">
                 </div><!-- Right Ends /-->                
         </div>
         <!-- top Bar Ends here /-->
@@ -90,11 +117,16 @@
         <div class="header">
             <div class="row">
                     <div class="float-right">
-                        <a href="account.html" class="button primary" title="Account">Account</a>
-                        <input type="submit" value="Sign Out" class="button primary" />
+                        <a href="account.php" class="button primary" title="Account">Account</a>
+                        <input type="submit" value="Sign Out" id="logout" class="button primary" />
                     </div>
             </div>                
         </div>
+
+        <script type="text/javascript">
+            logoutSuccess('logout');
+        </script>
+
         <!-- Header Ends /-->
         <div class="content-container module">
             <!-- Title Section -->
@@ -109,27 +141,27 @@
             <div class = "row">
                 <div class="medium-5 small-12 medium-offset-1 columns form-container">
                     <form>
-                        <label>
+                      <label>
                             Item For Sale
-                            <input type="text" value="" placeholder="Your Item ..." />
+                            <input maxlength="100" type="text" id="nameItem" name="itemName" value="" placeholder="Your Item ..." />
                         </label>
 
                         <label>
                             Price
-                            <input type="text" value="" placeholder="Your Requested Price ..." />
+                            <input type="number" min="0.00" max="9999.99" step="0.01" name="itemPrice" value="" placeholder="Your Requested Price ..." />
                         </label>
                             Location
-                            <input type="text" value="" placeholder="Your Location ..." />
+                            <input maxlength="100" type="text" id="locationItem" name="location" value="" placeholder="Your Location ..." />
                         </label>
                         <label> 
                             Select Category
-                            <select>
-                                <option value="0">Category 1</option>
+                            <select name="itemCategory">
+                            <option disabled value="0"> -- Select an option -- </option>
                                 <option value="1">Category 2</option>
                                 <option value="2">Category 3</option>
                                 <option value="3">Category 4</option>
                                 <option value="4">Category 5</option>
-                                <option value="5">Category 6</option>
+                                <option selected value="5">Other</option>
                             </select>
                         </label>
                         <label>
@@ -158,7 +190,7 @@
                         </label>
                         <label>
                             Description
-                            <textarea placeholder="Brief Description" rows="4"></textarea>
+                            <textarea name="itemDescription" placeholder="Brief Description" id="descriptionItem" rows="4" maxlength="200"></textarea>
                         </label>        
                         <label>
                             Image Upload: [Upload Button Here]
@@ -166,6 +198,14 @@
                         <br>
                         <input type="submit" value="Update Post" class="button primary" />
                     </form>
+
+                    <script type='text/javascript'>
+            
+                    badWordsParser('nameItem','locationItem','descriptionItem','postCreate');
+        
+                    </script>
+
+
                 </div><!-- main search form /-->
                 <div class="medium-5 small-12 columns form-container">
                         <img alt="" src="../ImageFiles/ProductImages/Image2.jpg"/> preview here
