@@ -171,7 +171,7 @@
                                     <li><a href="market2.php">Category 2</a></li>
                                     <li><a href="market3.php">Category 3</a></li>
                                     <li><a href="market4.php">Category 4</a></li>
-                                    <li><a href="market5.php">Category 5</a></li>
+                                    <li><a href="market5.php">Other</a></li>
                                 </ul>
                                 <a href="market.php"><input type="button" class="button secondary" value="Reset"/></a>
                             </div><!-- widget content /-->

@@ -24,7 +24,7 @@
         if ($num > 0) {
 
             while ($row = mysqli_fetch_assoc($result)) {
-
+                
                 echo '<div class="product list-product small-12 columns">
                 <div class="medium-4 small-12 columns product-image">
                     <a href="single-product.html">
