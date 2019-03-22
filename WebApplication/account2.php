@@ -242,7 +242,7 @@
 
                 header('Location: logout.php'); 
             }
-        }
+        } 
         
     }
 
