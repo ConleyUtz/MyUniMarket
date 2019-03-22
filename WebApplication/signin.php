@@ -42,7 +42,6 @@
             //echo "Database connection successful!";
         }
         $query = "SELECT password FROM users WHERE `email` = '".$email."' AND `isConfirmed` = true";
-        
         if($result = mysqli_query($link, $query)){
             $row = mysqli_fetch_array($result);
             $hashed_password = $row['password'];

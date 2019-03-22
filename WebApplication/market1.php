@@ -167,7 +167,7 @@
                             <h2>Categories</h2>
                             <div class="widget-content">
                                 <ul class="menu vertical">
-                                    <li><a href="market1.php">Category 1</a></li>
+                                    <li><a href="#">Category 1</a></li>
                                     <li><a href="#">Category 2</a></li>
                                     <li><a href="#">Category 3</a></li>
                                     <li><a href="#">Category 4</a></li>
@@ -201,7 +201,7 @@
                         <div class="products-wrap">
 
                             <!-- Mihir Shit-->
-                            <?php require 'listing.php';?>
+                            <?php require 'listing1.php';?>
                             <!-- Mihir Shit -->
 
                             <div class="product list-product small-12 columns">
