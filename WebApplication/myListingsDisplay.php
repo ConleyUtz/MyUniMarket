@@ -34,6 +34,14 @@ if($result = mysqli_query($link, $query)){
     if ($num > 0) {
 
         while ($row = mysqli_fetch_assoc($result)) {
+
+            $query = "SELECT username FROM users WHERE `userId` = '".$row['userId']."'";
+
+                if($result = mysqli_query($link, $query)){
+
+                $row1 = mysqli_fetch_array($result);
+                $uname = $row1['username'];
+            }
             
             echo '<div class="product list-product small-12 columns">
             <div class="medium-4 small-12 columns product-image">
@@ -50,7 +58,7 @@ if($result = mysqli_query($link, $query)){
                     <div class="prices">
                         <span class="price">'.$row['price'].'</span>
                         <div class="store float-right">
-                            By: <a href="store-front.html">Conley Utz -!!!THERE IS NO FIELD FOR THIS IN DB. ADDITIONAL QUERY REQUIRED!!!-</a>
+                            By: <a href="store-front.html">'.$uname.'</a>
                         </div>
                     </div>
 

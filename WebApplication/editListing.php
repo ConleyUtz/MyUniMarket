@@ -269,10 +269,10 @@
                             Select Category
                             <select name="newitemCategory">
                             <option disabled value="0"> -- Select an option -- </option>
-                                <option value="1">Category 2</option>
-                                <option value="2">Category 3</option>
-                                <option value="3">Category 4</option>
-                                <option value="4">Category 5</option>
+                                <option value="1">Category 1</option>
+                                <option value="2">Category 2</option>
+                                <option value="3">Category 3</option>
+                                <option value="4">Category 4</option>
                                 <option selected value="<?php echo $itemCategory ?>">Other</option>
                             </select>
                         </label>
