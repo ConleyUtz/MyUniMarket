@@ -15,7 +15,7 @@
     }
 
     //? Getting the whole table from MySQL database
-    $query = "SELECT * FROM items";
+    $query = "SELECT * FROM items WHERE `category` = 2";
 
     if($result = mysqli_query($link, $query)){
     
@@ -24,7 +24,7 @@
         if ($num > 0) {
 
             while ($row = mysqli_fetch_assoc($result)) {
-                
+
                 echo '<div class="product list-product small-12 columns">
                 <div class="medium-4 small-12 columns product-image">
                     <a href="single-product.html">

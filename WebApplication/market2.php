@@ -200,7 +200,7 @@
                         <br>
                         <div class="products-wrap">
                             <!-- Mihir Shit-->
-                            <?php require 'listing.php';?>
+                            <?php require 'listing2.php';?>
                             <!-- Mihir Shit -->
                         </div><!-- products wrap /-->
                     </div>
