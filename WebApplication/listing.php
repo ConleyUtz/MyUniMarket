@@ -51,10 +51,6 @@
                         <div class="cart-menu">
                             <ul class="menu">
                                 <li><a href="#" class="button primary" title="Add to cart">Contact Owner</a></li>
-                                <li><a href="#" title="Add to wish list"><i class="fa fa-heart"></i></a></li>
-                                <li><a href="#" title="Open Product Page"><i class="fa fa-retweet"></i></a></li>
-                                <li><a href="#" title="Quick View"><i class="fa fa-search-plus"></i></a></li>
-
                             </ul>
                         </div><!-- product buttons /-->
 

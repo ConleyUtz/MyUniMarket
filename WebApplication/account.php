@@ -1,7 +1,10 @@
 <?php
 
     session_start();
+
     $testerID = "";
+    $userID = "";
+    
     if(!$_SESSION['email']){
 
         header('Location: signin.php'); 
@@ -24,8 +27,18 @@
         //echo "Database connection successfull";
     }
 
+    $query = "SELECT userId FROM users WHERE `email` = '".$_SESSION['email']."'";
+
+    if($result = mysqli_query($link, $query)){
+
+    $row = mysqli_fetch_array($result);
+    $userID = $row['userId'];
+    }
+
     if(isset($_POST['deleteListing'])){
-        $query = 'DELETE FROM items WHERE `itemId`=42';
+
+
+        $query = "DELETE FROM items WHERE `userId`=".$userID." AND `name` = '".$_POST['listingName']."'";
 
         mysqli_query($link, $query);
     }
@@ -162,45 +175,7 @@
 
                         <!-- Store Content -->
                         <div class="products-wrap">
-                         <?php require 'listing.php';?>
-
-                            <div class="product list-product small-12 columns">
-                                <div class="medium-4 small-12 columns product-image">
-                                    <a href="single-product.html">
-                                        <img src="../ImageFiles/ProductImages/Image2.jpg" alt="" />
-                                        <img src="../ImageFiles/ProductImages/Image2.jpg" alt="" />
-                                    </a>
-                                </div><!-- Product Image /-->
-                                <div class="medium-8 small-12 columns">
-                                    <div class="product-title">
-                                        <a href="single-product.html">Amazon Echo Dot</a>
-                                    </div><!-- product title /-->
-                                    <div class="product-meta">
-                                        <div class="prices">
-                                            <span class="price">$30</span>
-                                            <div class="store float-right">
-                                                By: <a href="store-front.html">Conley Utz</a>
-                                            </div>
-                                        </div>
-                                        <div class="product-detail">
-                                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.</p>
-                                        </div><!-- product detail /-->
-                                        <div class="cart-menu">
-                                            <ul class="menu">
-                                                <li><a href="#" class="button primary" title="Add to cart" id="contactButton">Contact Owner</a></li>
-                                                <!--<li><a href="#" class="button primary" title="Delete Listing" id="deleteListing">Delete</a></li>/-->
-                                                <li><a href="#" title="Add to wish list"><i class="fa fa-heart"></i></a></li>
-                                                <li><a href="#" title="Open Product Page"><i class="fa fa-retweet"></i></a></li>
-                                                <li><a href="#" title="Quick View"><i class="fa fa-search-plus"></i></a></li>
-                                            </ul>
-                                            <form method="post" onsubmit="return confirm('Do you really want to delete this listing?');">
-                                                <input type="submit" name="deleteListing" value="Delete" class="button third" id="deleteListing" />
-                                            </form>
-                                            
-                                        </div> <!-- product buttons /-->
-                                    </div> <!-- product meta /-->
-                                </div>
-                            </div><!-- Product /-->
+                                <?php require 'myListingsDisplay.php';?>
                             <div class="clearfix"></div>
                         </div><!-- products wrap /-->
                     </div> <!-- store content /-->
