@@ -48,6 +48,12 @@
         $_SESSION['listingName'] = $_POST['listingName'];
         header("Location: editListing.php");
     }
+
+    if(isset($_POST['markAsSold'])){
+
+        $query = "UPDATE items SET sold= 1 WHERE `userId` = ".$userID." AND `name`= '".$_POST['listingName']."'";
+        mysqli_query($link, $query);
+    }
     
 ?>
 
