@@ -66,7 +66,7 @@
 
                         <div class="cart-menu">
                             <ul class="menu">
-                                <li><a href="#" class="button primary" title="Add to cart">Contact Owner</a></li>
+                                <li><a href="send_email.php" class="button primary" title="Add to cart">Contact Owner</a></li>
                             </ul>
                         </div><!-- product buttons /-->
 
