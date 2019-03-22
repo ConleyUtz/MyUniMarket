@@ -12,6 +12,12 @@
         $testerID = $_SESSION['email'];
     }
 
+    if(isset($_POST['userProfile'])){
+
+        $_SESSION['profileName'] = $_POST['userName'];
+        header("Location: profile.php");
+    }
+
     
 ?>
 

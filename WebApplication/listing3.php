@@ -48,7 +48,10 @@
                         <div class="prices">
                             <span class="price">'.$row['price'].'</span>
                             <div class="store float-right">
-                                By: <a href="store-front.html">'.$usr.'</a>
+                            <form method="post">
+                            By: <input type="submit" name="userProfile" value="'.$usr.'" class="button primary" id="userProf" />
+                            <input  style="display:none;" type="text" name="userName" value="'.$usr.'">
+                        </form>
                             </div>
                         </div>
 
