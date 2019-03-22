@@ -1,6 +1,6 @@
  <?php
 
-    $uname = "";
+    $usr = "";
 
     //? Connecting to the database
     $host = "localhost";
@@ -29,10 +29,10 @@
 
                 $query = "SELECT username FROM users WHERE `userId` = '".$row['userId']."'";
 
-                if($result = mysqli_query($link, $query)){
+                if($rslt = mysqli_query($link, $query)){
 
-                $row1 = mysqli_fetch_array($result);
-                $uname = $row1['username'];
+                $row1 = mysqli_fetch_array($rslt);
+                $usr = $row1['username'];
                 }
 
 
@@ -52,7 +52,7 @@
                         <div class="prices">
                             <span class="price">'.$row['price'].'</span>
                             <div class="store float-right">
-                                By: <a href="store-front.html">'.$uname.'</a>
+                                By: <a href="store-front.html">'.$usr.'</a>
                             </div>
                         </div>
 

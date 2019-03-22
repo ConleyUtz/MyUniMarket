@@ -7,6 +7,7 @@ $host = "localhost";
 $uname = "root";
 $pwd = "";
 $database = "my_uni_market";
+$usr="";
 
 $link = mysqli_connect($host, $uname, $pwd, $database);
 
@@ -37,10 +38,10 @@ if($result = mysqli_query($link, $query)){
 
             $query = "SELECT username FROM users WHERE `userId` = '".$row['userId']."'";
 
-                if($result = mysqli_query($link, $query)){
+                if($rslt = mysqli_query($link, $query)){
 
-                $row1 = mysqli_fetch_array($result);
-                $uname = $row1['username'];
+                $row1 = mysqli_fetch_array($rslt);
+                $usr = $row1['username'];
             }
             
             echo '<div class="product list-product small-12 columns">
@@ -58,7 +59,7 @@ if($result = mysqli_query($link, $query)){
                     <div class="prices">
                         <span class="price">'.$row['price'].'</span>
                         <div class="store float-right">
-                            By: <a href="store-front.html">'.$uname.'</a>
+                            By: <a href="store-front.html">'.$usr.'</a>
                         </div>
                     </div>
 

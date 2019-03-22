@@ -24,7 +24,15 @@
 
             while ($row = mysqli_fetch_assoc($result)) {
 
-                if ($_SESSION['min'] && $_SESSION['max']) {
+                $query = "SELECT username FROM users WHERE `userId` = '".$row['userId']."'";
+
+                if($rslt = mysqli_query($link, $query)){
+
+                    $row1 = mysqli_fetch_array($rslt);
+                    $usr = $row1['username'];
+                }
+
+                if (isset($_SESSION['min']) && isset($_SESSION['max'])) {
                     if ($_SESSION['min'] < $row['price'] && $row['price'] < $_SESSION['max']) {
                         echo '<div class="product list-product small-12 columns">
                 <div class="medium-4 small-12 columns product-image">
@@ -41,7 +49,7 @@
                         <div class="prices">
                             <span class="price">' . $row['price'] . '</span>
                             <div class="store float-right">
-                                By: <a href="store-front.html">Conley Utz -!!!THERE IS NO FIELD FOR THIS IN DB. ADDITIONAL QUERY REQUIRED!!!-</a>
+                                By: <a href="store-front.html">'.$usr.'</a>
                             </div>
                         </div>
 
@@ -79,7 +87,7 @@
                             <div class="prices">
                                 <span class="price">' . $row['price'] . '</span>
                                 <div class="store float-right">
-                                    By: <a href="store-front.html">Conley Utz -!!!THERE IS NO FIELD FOR THIS IN DB. ADDITIONAL QUERY REQUIRED!!!-</a>
+                                    By: <a href="store-front.html">'.$usr.'</a>
                                 </div>
                             </div>
     
