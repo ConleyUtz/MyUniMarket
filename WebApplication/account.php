@@ -42,6 +42,12 @@
 
         mysqli_query($link, $query);
     }
+
+    if(isset($_POST['editListing'])){
+
+        $_SESSION['listingName'] = $_POST['listingName'];
+        header("Location: editListing.php");
+    }
     
 ?>
 

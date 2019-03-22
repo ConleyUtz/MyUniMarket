@@ -2,6 +2,9 @@
 
     session_start();
     $testerID = "";
+    $listingName = "";
+    $userID = "";
+
     if(!$_SESSION['email']){
 
         header('Location: signin.php'); 
@@ -10,13 +13,21 @@
 
         $testerID = $_SESSION['email'];
     }
+
+    if(!$_SESSION['listingName']){
+
+        header('Location: 404.php'); 
+    }
+    else{
+
+        $listingName = $_SESSION['listingName'];
+    }
+
     //? Variables to be used
-    $itemName = "Dummy";
-    $itemPrice = "20";
-    $itemDescription = "Demo";
-    $location = "xyz";
-    $itemCategory = "";
-    $itemQuality = "";
+    $itemName = "";
+    $itemPrice = "";
+    $itemDescription = "";
+    $location = "";
     $newitemName = "";
     $newitemPrice = "";
     $newitemDescription = "";
@@ -39,6 +50,26 @@
         //echo "Database connection successful!";
     }
 
+    //? Setting userID
+    $query = "SELECT userId FROM users WHERE `email` = '".$_SESSION['email']."'";
+
+    if($result = mysqli_query($link, $query)){
+
+    $row = mysqli_fetch_array($result);
+    $userID = $row['userId'];
+    }
+
+    $query = "SELECT * FROM items WHERE `userId` = ".$userID." AND `name`= '".$listingName."'";
+
+    if($result = mysqli_query($link, $query)){
+
+        $row = mysqli_fetch_array($result);
+        $itemName = $row['name'];
+        $itemPrice = $row['price'];
+        $itemDescription = $row['description'];
+        $location = $row['location'];
+    }
+
 
     if($_POST){
 
@@ -55,10 +86,10 @@
             $error .= "A price is required.<br>";
         }
         else{
-            $newitemPrice = $_POST['newitemprice'];
+            $newitemPrice = $_POST['newitemPrice'];
         }   
 
-        if(!$_POST['location']){
+        if(!$_POST['newlocation']){
 
             $error .= "A location is required.<br>";
         }
@@ -79,14 +110,16 @@
             $error .= "A Categotry is required.<br>";
         }
         else{
+
             $newitemCategory = $_POST['newitemCategory'];
         }   
 
-        if(!$_POST['newquality']){
+        if(!isset($_POST['newquality'])){
 
             $error .= "Please select the quality of the item.<br>";
         }
         else{
+
             $newitemQuality = $_POST['newquality'];
         }   
 
@@ -102,15 +135,17 @@
                     //$tempID = "1"; //! Temporary solution for testing
                     
                     //? Creating a query and sending it to the database
-                    $query = 'UPDATE users SET itemName="'.$newitemName.'" WHERE `email`="'.$testerID.'"';
-                    $query = 'UPDATE users SET itemPrice="'.$newitemPrice.'" WHERE `email`="'.$testerID.'"';
-                    $query = 'UPDATE users SET itemDescription="'.$newitemDescription.'" WHERE `email`="'.$testerID.'"';
-                    $query = 'UPDATE users SET location="'.$newlocation.'" WHERE `email`="'.$testerID.'"';
-                    $query = 'UPDATE users SET itemCategory="'.$newitemCategory.'" WHERE `email`="'.$testerID.'"';
-                    $query = 'UPDATE users SET itemQuality="'.$newitemQuality.'" WHERE `email`="'.$testerID.'"';
+                    $query = "UPDATE items SET name= '".$newitemName."' WHERE `userId` = ".$userID." AND `name`= '".$listingName."';";
+                    $query .= "UPDATE items SET price= ".$newitemPrice." WHERE `userId` = ".$userID." AND `name`= '".$listingName."';";
+                    $query .= "UPDATE items SET location='".$newlocation."' WHERE `userId` = ".$userID." AND `name`= '".$listingName."';";
+                    $query .= "UPDATE items SET category= ".$newitemCategory." WHERE `userId` = ".$userID." AND `name`= '".$listingName."';";
+                    $query .= "UPDATE items SET quality= ".$newitemQuality." WHERE `userId` = ".$userID." AND `name`= '".$listingName."';";
+                    $query .= "UPDATE items SET description='".$newitemDescription."' WHERE `userId` = ".$userID." AND `name`= '".$listingName."'";
 
-                    
+                    $query = "UPDATE items SET name= '".$newitemName."',price= ".$newitemPrice.",location='".$newlocation."',category= ".$newitemCategory.",quality= ".$newitemQuality.",description='".$newitemDescription."' WHERE `userId` = ".$userID." AND `name`= '".$listingName."'";
                     mysqli_query($link, $query);
+
+                    mysqli_close($link);
         }
     }      
 
@@ -213,7 +248,10 @@
             <!-- Title Section End -->
             <div class = "row">
                 <div class="medium-5 small-12 medium-offset-1 columns form-container">
-                    <form>
+                <div class="err">
+                    <?php echo $error; ?>
+                </div>
+                    <form method="post">
                       <label>
                             Item For Sale
                             <input maxlength="100" type="text" id="nameItem" name="newitemName" value="<?php echo $itemName ?>" placeholder="Your Item ..." />
