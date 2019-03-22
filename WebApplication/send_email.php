@@ -20,7 +20,7 @@
         $mail->Username = 'myunimarket@outlook.com';
         $mail->Password = 'WebApplication@123';
         $mail->setFrom('myunimarket@outlook.com', 'MyUniMarket');
-        $mail->addAddress($email, 'User');
+        $mail->addAddress($_SESSION['toEmail'], 'User');
         $mail->Subject = 'You have a new message! - MyUniMarket';
         $mail->Body = $emailBody;
         if (!$mail->send()) {

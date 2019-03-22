@@ -18,6 +18,33 @@
         header("Location: profile.php");
     }
 
+    if(isset($_POST['contactUser'])){
+
+        $host = "localhost";
+        $uname = "root";
+        $pwd = "";
+        $database = "my_uni_market";
+
+        $link = mysqli_connect($host, $uname, $pwd, $database);
+
+        if(mysqli_connect_error()){
+            exit("There was an error connecting to the database");
+        }else{
+            //echo "Database connection successful!";
+        }
+
+        $query = "SELECT email FROM users WHERE `username` = '".$_POST['userName']."' AND `isConfirmed` = true";
+
+        if($result = mysqli_query($link, $query)){
+
+            $row = mysqli_fetch_array($result);
+            $_SESSION['toEmail'] = $row['email'];
+            $_SESSION['fromEmail'] = $_POST['senderEmail'];
+        }
+        
+        header("Location: send_email.php");
+    }
+
     
 ?>
 

@@ -68,9 +68,10 @@
                         </div><!-- product location /-->
 
                         <div class="cart-menu">
-                            <ul class="menu">
-                                <li><a href="#" class="button primary" title="Add to cart">Contact Owner</a></li>
-                            </ul>
+                        <form method="post">
+                        Enter your email here: <input type="text" name="senderEmail">
+                        <input type="submit" name="contactUser" value="Send Contact Request" class="button primary" id="userProf" />
+                    </form>
                         </div><!-- product buttons /-->
 
                     </div><!-- product meta /-->
