@@ -82,9 +82,10 @@ if($result = mysqli_query($link, $query)){
 
                     <div class="cart-menu">
 
-                    <ul class="menu">
-                                <li><a href="#" class="button primary" title="Add to cart">Contact Owner</a></li>
-                            </ul>
+                    <form method="post">
+                        Enter your email here: <input type="text" name="senderEmail">
+                        <input type="submit" name="contactUser" value="Send Contact Request" class="button primary" id="userProf" />
+                    </form>
 
                     </div><!-- product buttons /-->
 
@@ -92,6 +93,31 @@ if($result = mysqli_query($link, $query)){
             </div>
         </div><!-- Product /-->'; 
         }
+    }
+}
+
+if(isset($_POST['contactUser'])){
+
+    $host = "localhost";
+    $uname = "root";
+    $pwd = "";
+    $database = "my_uni_market";
+
+    $link = mysqli_connect($host, $uname, $pwd, $database);
+
+    if(mysqli_connect_error()){
+        exit("There was an error connecting to the database");
+    }else{
+        //echo "Database connection successful!";
+    }
+
+    $query = "SELECT email FROM users WHERE `username` = '".$_POST['userName']."' AND `isConfirmed` = true";
+
+    if($result = mysqli_query($link, $query)){
+
+        $row = mysqli_fetch_array($result);
+        $_SESSION['toEmail'] = $row['email'];
+        header("Location: send_email.php");
     }
 }
 

@@ -35,16 +35,14 @@
             //echo "Database connection successful!";
         }
 
-        $query = "SELECT email FROM users WHERE `username` = '".$_POST['userName']."' AND `isConfirmed` = true";
+        $query = "SELECT email FROM users WHERE `username` = '".$_POST['userName']."'";
 
         if($result = mysqli_query($link, $query)){
 
             $row = mysqli_fetch_array($result);
             $_SESSION['toEmail'] = $row['email'];
-            $_SESSION['fromEmail'] = $_POST['senderEmail'];
+            header("Location: send_email.php");
         }
-        
-        header("Location: send_email.php");
     }
 
     

@@ -4,10 +4,26 @@
     //We need the email of the user this email will be sent to by queries the DB of the specific listing to fetch the email, and that will go in $mail->addAddress.
     //Also, update the body to reflect the message that will be sent inside the body of the email.
 
+    //?
+    //?
+    //?
+    //?
+    //?
+    //?
+    //! The email for the user this is going to be sent to is in $_SESSION['toEmail']
+    //! There also is the email of current person in $_SESSION['email]
+    //?
+    //?
+    //?
+    //?
+    //?
+    //? 
+
     session_start();
     use PHPMailer\PHPMailer\PHPMailer;
     date_default_timezone_set('Etc/UTC');
     require '../vendor/autoload.php';
+
 
     if($_POST){
         $emailBody = $_POST['email'];
@@ -34,6 +50,7 @@
 <html>
     <body>
         <form method="post">
+            <p>Enter your email contents here:</p>
             <textarea name="email" rows="4" cols="50">
             </textarea>
             <p><input type="submit" value="Submit"></p>

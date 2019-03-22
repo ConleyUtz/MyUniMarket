@@ -71,6 +71,7 @@
                         <form method="post">
                         Enter your email here: <input type="text" name="senderEmail">
                         <input type="submit" name="contactUser" value="Send Contact Request" class="button primary" id="userProf" />
+                        <input  style="display:none;" type="text" name="userName" value="'.$usr.'">
                     </form>
                         </div><!-- product buttons /-->
 

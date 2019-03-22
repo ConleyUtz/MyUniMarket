@@ -39,10 +39,8 @@
 
             $row = mysqli_fetch_array($result);
             $_SESSION['toEmail'] = $row['email'];
-            $_SESSION['fromEmail'] = $_POST['senderEmail'];
+            header("Location: send_email.php");
         }
-        
-        header("Location: send_email.php");
     }
 
     
