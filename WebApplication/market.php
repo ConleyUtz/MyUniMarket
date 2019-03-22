@@ -177,18 +177,20 @@
                             </div><!-- widget content /-->
                         </div><!-- widget /-->
 
-                        <div class="widget shop-filter">
-                            <h2>Filters</h2>
-                            <div class="widget-content">
-                                <div>
-                                    <span>Price</span> <input type="text" placeholder="min" />
-                                    <span>- </span>
-                                    <input type="text" placeholder="max" />
-                                    <div class="clearfix"></div>
-                                </div>
-                                <input type="button" class="button secondary" value="Apply" />
-                            </div><!-- widget content /-->
-                        </div><!-- widget /-->
+                        <form method = "get" action="price_filter_session.php">
+                            <div class="widget shop-filter">
+                                <h2>Filters</h2>
+                                <div class="widget-content">
+                                    <div>
+                                        <span>Price</span> <input type="text" placeholder="min" name="min"/>
+                                        <span>- </span>
+                                        <input type="text" placeholder="max" name="max"/>
+                                        <div class="clearfix"></div>
+                                    </div>
+                                    <input type="submit" class="button secondary" value="Apply" />
+                                </div><!-- widget content /-->
+                            </div><!-- widget /-->
+                        </form>
 
                         
 
