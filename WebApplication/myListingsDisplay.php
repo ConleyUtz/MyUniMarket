@@ -58,10 +58,15 @@ if($result = mysqli_query($link, $query)){
                         <p>'.$row['description'].'</p>
                     </div><!-- product detail /-->
 
+                    <div class="product-detail">
+                            <p>Location: '.$row['location'].'</p>
+                        </div><!-- product location /-->
+
                     <div class="cart-menu">
                         <form method="post" onsubmit="return confirm("Do you really want to delete this listing?");">
-                            <input type="submit" name="deleteListing" value="Delete" class="button third" id="deleteListing" />
+                            <a href="editListing.php" class="button primary" title="Edit the listing">Edit Listing</a>
                             <br>
+                            <input type="submit" name="deleteListing" value="Delete" class="button third" id="deleteListing" />
                             <input type="submit" name="markAsSold" value="Mark As Sold" class="button third" id="markAsSold" />
                             <input  style="display:none;" type="text" name="listingName" value="'.$row['name'].'">
                         </form>

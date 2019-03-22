@@ -45,8 +45,12 @@
                         </div>
 
                         <div class="product-detail">
-                            <p>'.$row['description'].'</p>
+                            <p>Location: '.$row['description'].'</p>
                         </div><!-- product detail /-->
+
+                        <div class="product-detail">
+                            <p>'.$row['location'].'</p>
+                        </div><!-- product location /-->
 
                         <div class="cart-menu">
                             <ul class="menu">

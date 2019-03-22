@@ -48,6 +48,10 @@
                             <p>'.$row['description'].'</p>
                         </div><!-- product detail /-->
 
+                        <div class="product-detail">
+                            <p> Location: '.$row['location'].'</p>
+                        </div><!-- product location /-->
+
                         <div class="cart-menu">
                             <ul class="menu">
                                 <li><a href="#" class="button primary" title="Add to cart">Contact Owner</a></li>
