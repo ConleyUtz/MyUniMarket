@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Feb 22, 2019 at 06:22 PM
+-- Generation Time: Mar 22, 2019 at 08:02 AM
 -- Server version: 10.1.37-MariaDB
 -- PHP Version: 7.3.1
 
@@ -36,16 +36,17 @@ CREATE TABLE `items` (
   `category` int(11) NOT NULL,
   `quality` int(11) NOT NULL,
   `description` text NOT NULL,
-  `userId` int(11) NOT NULL
+  `userId` int(11) NOT NULL,
+  `isSold` tinyint(1) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `items`
 --
 
-INSERT INTO `items` (`itemId`, `name`, `price`, `location`, `category`, `quality`, `description`, `userId`) VALUES
-(1, 'Item1', '50.99', 'Hawkins Hall', 2, 2, 'This is the description text.', 1),
-(2, 'Item2', '99.12', 'PMU', 3, 1, 'This is the description text.', 2);
+INSERT INTO `items` (`itemId`, `name`, `price`, `location`, `category`, `quality`, `description`, `userId`, `isSold`) VALUES
+(1, 'Item1', '50.99', 'Hawkins Hall', 2, 2, 'This is the description text.', 1, 0),
+(2, 'Item2', '99.12', 'PMU', 3, 1, 'This is the description text.', 2, 0);
 
 -- --------------------------------------------------------
 
@@ -99,7 +100,7 @@ ALTER TABLE `items`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `userId` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `userId` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
