@@ -198,11 +198,13 @@
                     <!-- Store Content -->
                     <div class="medium-9 small-12 columns store-content">
                         <br>
+
                         <div class="products-wrap">
                             <!-- Mihir Shit-->
-                            <?php require 'listing.php';?>
+                            <?php require 'listing1.php';?>
                             <!-- Mihir Shit -->
                         </div><!-- products wrap /-->
+
                     </div>
                     <!-- store content /-->
 

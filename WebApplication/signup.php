@@ -1,8 +1,9 @@
 <?php
 
-    use PHPMailer\PHPMailer\PHPMailer;
+    //? Commented out mailer
+    //** */use PHPMailer\PHPMailer\PHPMailer;
     date_default_timezone_set('Etc/UTC');
-    require '../vendor/autoload.php';
+    //** */require '../vendor/autoload.php';
 
     $error = "";
     $password = "";
@@ -92,7 +93,9 @@
         $query = "INSERT INTO `users` (`email`, `password`, `username`) VALUES ('".$email."', '".$password_hash."', '".$username."')";
         mysqli_query($link, $query);
 
-       $link = "http://localhost/MyUniMarket/WebApplication/confirm_email.php?user=".$email;
+        //? Commented out mailer
+        /*
+        $link = "http://localhost/MyUniMarket/WebApplication/confirm_email.php?user=".$email;
         $mail = new PHPMailer;
         $mail->isSMTP();
         $mail->SMTPDebug = 0;
@@ -109,7 +112,7 @@
             //echo 'Mailer Error: ' . $mail->ErrorInfo;
         } else {
             //echo 'Message sent!';
-        }
+        }*/
     }
 
   }
