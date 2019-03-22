@@ -59,14 +59,13 @@ if($result = mysqli_query($link, $query)){
                     </div><!-- product detail /-->
 
                     <div class="cart-menu">
-                        <ul class="menu">
-                            <li><a href="#" class="button primary" title="Add to cart">Contact Owner</a></li>
-                        </ul>
-                        <br>
                         <form method="post" onsubmit="return confirm("Do you really want to delete this listing?");">
                             <input type="submit" name="deleteListing" value="Delete" class="button third" id="deleteListing" />
+                            <br>
+                            <input type="submit" name="markAsSold" value="Mark As Sold" class="button third" id="markAsSold" />
                             <input  style="display:none;" type="text" name="listingName" value="'.$row['name'].'">
                         </form>
+
                     </div><!-- product buttons /-->
 
                 </div><!-- product meta /-->
