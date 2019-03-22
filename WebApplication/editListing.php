@@ -11,12 +11,12 @@
         $testerID = $_SESSION['email'];
     }
     //? Variables to be used
-    $itemName = "";
-    $itemPrice = "";
-    $itemDescription = "";
-    $location = "";
+    $itemName = "Dummy";
+    $itemPrice = "20";
+    $itemDescription = "Demo";
+    $location = "xyz";
     $itemCategory = "";
-    $itemQualPity = "";
+    $itemQuality = "";
     $newitemName = "";
     $newitemPrice = "";
     $newitemDescription = "";
@@ -40,6 +40,79 @@
     }
 
 
+    if($_POST){
+
+        if(!$_POST['newitemName']){
+
+            $error .= "Itemname field is required.<br>";
+        }
+        else{
+            $newitemName = $_POST['newitemName'];
+        }   
+
+        if(!$_POST['newitemPrice']){
+
+            $error .= "A price is required.<br>";
+        }
+        else{
+            $newitemPrice = $_POST['newitemprice'];
+        }   
+
+        if(!$_POST['location']){
+
+            $error .= "A location is required.<br>";
+        }
+        else{
+            $newlocation = $_POST['newlocation'];
+        }   
+
+        if(!$_POST['newitemDescription']){
+
+            $error .= "A Description is required.<br>";
+        }
+        else{
+            $newitemDescription = $_POST['newitemDescription'];
+        }   
+
+        if(!$_POST['newitemCategory']){
+
+            $error .= "A Categotry is required.<br>";
+        }
+        else{
+            $newitemCategory = $_POST['newitemCategory'];
+        }   
+
+        if(!$_POST['newquality']){
+
+            $error .= "Please select the quality of the item.<br>";
+        }
+        else{
+            $newitemQuality = $_POST['newquality'];
+        }   
+
+
+
+        if($error != ""){
+
+            $error = '<div class="signup-error" style="color:red;"><strong>Error:</strong><br>'.$error.'</div>';
+        }
+        else{
+    
+                    //TODO NEEDS SESSION VARIABLE OF ID TO CORRECTLY UPDATE
+                    //$tempID = "1"; //! Temporary solution for testing
+                    
+                    //? Creating a query and sending it to the database
+                    $query = 'UPDATE users SET itemName="'.$newitemName.'" WHERE `email`="'.$testerID.'"';
+                    $query = 'UPDATE users SET itemPrice="'.$newitemPrice.'" WHERE `email`="'.$testerID.'"';
+                    $query = 'UPDATE users SET itemDescription="'.$newitemDescription.'" WHERE `email`="'.$testerID.'"';
+                    $query = 'UPDATE users SET location="'.$newlocation.'" WHERE `email`="'.$testerID.'"';
+                    $query = 'UPDATE users SET itemCategory="'.$newitemCategory.'" WHERE `email`="'.$testerID.'"';
+                    $query = 'UPDATE users SET itemQuality="'.$newitemQuality.'" WHERE `email`="'.$testerID.'"';
+
+                    
+                    mysqli_query($link, $query);
+        }
+    }      
 
     
 ?>
@@ -143,54 +216,55 @@
                     <form>
                       <label>
                             Item For Sale
-                            <input maxlength="100" type="text" id="nameItem" name="itemName" value="" placeholder="Your Item ..." />
+                            <input maxlength="100" type="text" id="nameItem" name="newitemName" value="<?php echo $itemName ?>" placeholder="Your Item ..." />
                         </label>
 
                         <label>
                             Price
-                            <input type="number" min="0.00" max="9999.99" step="0.01" name="itemPrice" value="" placeholder="Your Requested Price ..." />
+                            <input type="number" min="0.00" max="9999.99" step="0.01" name="newitemPrice" value="<?php echo $itemPrice ?>" placeholder="Your Requested Price ..." />
                         </label>
+                        <label>
                             Location
-                            <input maxlength="100" type="text" id="locationItem" name="location" value="" placeholder="Your Location ..." />
+                            <input maxlength="100" type="text" id="locationItem" name="newlocation" value="<?php echo $location ?>" placeholder="Your Location ..." />
                         </label>
                         <label> 
                             Select Category
-                            <select name="itemCategory">
+                            <select name="newitemCategory">
                             <option disabled value="0"> -- Select an option -- </option>
                                 <option value="1">Category 2</option>
                                 <option value="2">Category 3</option>
                                 <option value="3">Category 4</option>
                                 <option value="4">Category 5</option>
-                                <option selected value="5">Other</option>
+                                <option selected value="<?php echo $itemCategory ?>">Other</option>
                             </select>
                         </label>
                         <label>
                             Quality
                             <div class="row">
                                 <div class="medium-1 small-12 columns">
-                            <input type="radio" name="quality" value="0"> 1<br>
+                            <input type="radio" name="newquality" value="0"> 1<br>
                         </div>
                         <div class="medium-1 small-12 columns">
 
-                            <input type="radio" name="quality" value="1"> 2<br>
+                            <input type="radio" name="newquality" value="1" chec> 2<br>
                         </div>
                             <div class="medium-1 small-12 columns">
 
-                            <input type="radio" name="quality" value="2"> 3 <br>
+                            <input type="radio" name="newquality" value="2"> 3 <br>
                             </div>
                             <div class="medium-1 small-12 columns">
 
-                            <input type="radio" name="quality" value="3"> 4<br>
+                            <input type="radio" name="newquality" value="3"> 4<br>
                             </div>
                             <div class="medium-1 small-12 columns">
 
-                            <input type="radio" name="quality" value="4"> 5<br>
+                            <input type="radio" name="newquality" value="4"> 5<br>
                             </div>
                         </div>
                         </label>
                         <label>
                             Description
-                            <textarea name="itemDescription" placeholder="Brief Description" id="descriptionItem" rows="4" maxlength="200"></textarea>
+                            <textarea name="newitemDescription" placeholder="Brief Description" id="descriptionItem" rows="4" maxlength="200"><?php echo $itemDescription ?></textarea>
                         </label>        
                         <label>
                             Image Upload: [Upload Button Here]
