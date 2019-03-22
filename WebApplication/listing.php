@@ -14,7 +14,7 @@
     }
 
     //? Getting the whole table from MySQL database
-    $query = "SELECT * FROM items";
+    $query = "SELECT * FROM items WHERE `isSold` = 0";
 
     if($result = mysqli_query($link, $query)){
     

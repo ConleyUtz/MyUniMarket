@@ -15,7 +15,7 @@
     }
 
     //? Getting the whole table from MySQL database
-    $query = "SELECT * FROM items WHERE `category` = 3";
+    $query = "SELECT * FROM items WHERE `category` = 3 AND `isSold` = 0";
 
     if($result = mysqli_query($link, $query)){
     

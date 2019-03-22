@@ -51,7 +51,13 @@
 
     if(isset($_POST['markAsSold'])){
 
-        $query = "UPDATE items SET sold= 1 WHERE `userId` = ".$userID." AND `name`= '".$_POST['listingName']."'";
+        $query = "UPDATE items SET isSold= 1 WHERE `userId` = ".$userID." AND `name`= '".$_POST['listingName']."'";
+        mysqli_query($link, $query);
+    }
+
+    if(isset($_POST['unmark'])){
+
+        $query = "UPDATE items SET isSold= 0 WHERE `userId` = ".$userID." AND `name`= '".$_POST['listingName']."'";
         mysqli_query($link, $query);
     }
     

@@ -73,7 +73,8 @@ if($result = mysqli_query($link, $query)){
 
                     <div class="cart-menu">
                         <form method="post" onsubmit="return confirm("Do you really want to delete this listing?");">
-                        <input type="submit" name="editListing" value="Edit Listing" class="button primary" id="edListing" />
+                            <input type="submit" name="editListing" value="Edit Listing" class="button primary" id="edListing" />
+                            <input type="submit" name="unmark" value="Unmark" class="button primary" id="unmarkSold" />
                             <br>
                             <input type="submit" name="deleteListing" value="Delete" class="button third" id="deleteListing" />
                             <input type="submit" name="markAsSold" value="Mark As Sold" class="button third" id="markAsSold" />
