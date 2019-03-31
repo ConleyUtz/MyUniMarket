@@ -5,6 +5,7 @@
     $pwd = "";
     $database = "my_uni_market";
 
+
     $link = mysqli_connect($host, $uname, $pwd, $database);
 
     if(mysqli_connect_error()){
@@ -34,12 +35,18 @@
 
                 if (isset($_SESSION['min']) && isset($_SESSION['max'])) {
                     if ($_SESSION['min'] < $row['price'] && $row['price'] < $_SESSION['max']) {
-                        echo '<div class="product list-product small-12 columns">
+                        echo '
+                        <div class="product list-product small-12 columns">
                 <div class="medium-4 small-12 columns product-image">
                     <a href="single-product.html">
                         <img src="../ImageFiles/ProductImages/Image1.jpg" alt="" />
                         <img src="../ImageFiles/ProductImages/Image1.jpg" alt="" />
                     </a>
+                    <div class="pro-buttons menu-centered">
+                        <ul class="menu">
+                            <li><a href="#" title="Add to bookmarks"><i class="fa fa-bookmark-o"></i></a></li>
+                        </ul>
+                    </div>
                 </div><!-- Product Image /-->
                 <div class="medium-8 small-12 columns">
                     <div class="product-title">
