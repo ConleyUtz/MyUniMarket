@@ -123,7 +123,10 @@
         <div class="top-info-bar">
             <div class="row">
                 <div class="logo float-left">
-                    <img alt="" src="../ImageFiles/MyUniMarket.png" />
+                <a href="market.php"> <!--NEEDS TO BE INDEX.HTML-->
+                                <img alt="" src="../ImageFiles/MyUniMarket.png" />
+                </a>
+                    
                 </div><!-- Logo /-->
                 <div class="medium-6 small-12 columns hide-for-small-only">
 
