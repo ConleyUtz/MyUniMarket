@@ -277,27 +277,14 @@
                         </label>
                         <label>
                             Quality
-                            <div class="row">
-                                <div class="medium-1 small-12 columns">
-                            <input type="radio" name="newquality" value="0"> 1<br>
-                        </div>
-                        <div class="medium-1 small-12 columns">
-
-                            <input type="radio" name="newquality" value="1" chec> 2<br>
-                        </div>
-                            <div class="medium-1 small-12 columns">
-
-                            <input type="radio" name="newquality" value="2"> 3 <br>
-                            </div>
-                            <div class="medium-1 small-12 columns">
-
-                            <input type="radio" name="newquality" value="3"> 4<br>
-                            </div>
-                            <div class="medium-1 small-12 columns">
-
-                            <input type="radio" name="newquality" value="4"> 5<br>
-                            </div>
-                        </div>
+                            <select name="itemCategory">
+                            <option disabled value="0"> -- Select a quality  -- </option>
+                                <option value="1">Used - Poor</option>
+                                <option value="2">Used - Acceptable</option>
+                                <option value="3">Used - Good</option>
+                                <option value="4">Used - Like New</option>
+                                <option selected value="5">New</option>
+                            </select>
                         </label>
                         <label>
                             Description

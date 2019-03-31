@@ -37,6 +37,7 @@ Stylesheet for Webful MarketPlace
 
 
 
+
 /*-------------------------
 01 - General & Basic Styles
 -------------------------*/
@@ -817,8 +818,6 @@ Customer Account CSS Ends
 /*----------------------
 12 - 404 Page CSS Starts
 --------------------------*/
-.pageerror { 
-}
 .pageerror h1 {
     text-align: center;
     margin-top: 50px;
@@ -1687,10 +1686,7 @@ Single Store CSS Ends
 	margin-bottom:15px; 
 }
 .item-quantity .qty {
-	margin-bottom:0px;
 	padding:5px;
-	height:35px;
-	width:50px;
 	display:inline;
 	margin-right:15px;
 }

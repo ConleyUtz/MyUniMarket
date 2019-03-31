@@ -42,16 +42,20 @@
                         <img src="../ImageFiles/ProductImages/Image1.jpg" alt="" />
                         <img src="../ImageFiles/ProductImages/Image1.jpg" alt="" />
                     </a>
-                    <div class="pro-buttons menu-centered">
-                        <ul class="menu">
-                            <li><a href="#" title="Add to bookmarks"><i class="fa fa-bookmark-o"></i></a></li>
-                        </ul>
-                    </div>
                 </div><!-- Product Image /-->
                 <div class="medium-8 small-12 columns">
-                    <div class="product-title">
-                        <a href="single-product.html">' . $row['name'] . '</a>
-                    </div><!-- product title /-->
+                    <div class="row">
+                        <div class="medium-3 small-12 columns">
+                            <div class="product-title">
+                                <a href="single-product.html">' . $row['name'] . '</a>
+                            </div><!-- product title /-->
+                        </div>
+                        <div class="medium-2 small-12 columns">
+                            <ul class="menu">
+                            <li><a href="#" title="Add to bookmarks"><i class="fa fa-bookmark-o fa-2x"></i></a></li>
+                            </ul>
+                        </div>
+                    </div>
                     <div class="product-meta">
                         <div class="prices">
                             <span class="price">' . $row['price'] . '</span>
