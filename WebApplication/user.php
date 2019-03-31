@@ -72,7 +72,7 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <script src="./js/logoutSuccess.js" type="text/javascript"></script>
 
-    <title>MyUniMarket - Account</title>
+    <title>MyUniMarket - User</title>
 
     <meta name="author" content="">
     <meta name="keywords" content="">
@@ -153,7 +153,7 @@
             <div class="title-section">
                 <div class="row">
                     <div class="small-12 columns">
-                        <h1>Account Page - Your Listings</h1>
+                        <h1>User Page</h1>
                     </div> <!-- title /-->
                 </div><!-- row /-->
             </div>
@@ -161,17 +161,14 @@
         <!-- customer content -->
         <div class="customer-content module">
             <div class="row">
-                <div class="medium-3 small-12 columns">
-                    <div class="widget">
-                        <h2>Quick links</h2>
+                <div class="medium-3 small-12 columns sidebar">
+                <div class="widget">
+                        <h2>Insert Text Here</h2>
                         <div class="widget-content">
-                            <ul class="vertical menu">
-                                <li><a href="404.php">My Listings</a></li>
-                                <li><a href="404.php">Bookmarked Items</a></li>
-                                <li><a href="account2.php">Account Settings</a></li>
-                            </ul>
+                            <strong>Bold Text Here</strong>
+                            <p>Regular Text Here</p>
                         </div><!-- widget content /-->
-                    </div><!-- widget /-->
+                    </div><!-- widget ends -->
                 </div><!-- left column /-->
                 <div class="medium-9 small-12 columns">
                     <div class="general-info dashboard-module">
@@ -179,10 +176,9 @@
                             <img alt="" src="images/help/user_thumb.jpg" />
                         </div><!-- user thumb /-->
                         <div class="user-detail float-left">
-                            <h4>Conley Utz</h4>
+                            <h4>{Insert Username Here}'s Page</h4>
                             <div class="pro-rating float-left">
                             </div>
-                            <a href="#">User Since: 2/5/2019</a></a>
                         </div><!-- user detail /-->
                         <div class="clearfix"></div>
                         <br>
@@ -193,7 +189,7 @@
 
                         <!-- Store Content -->
                         <div class="products-wrap">
-                                <?php require 'myListingsDisplay.php';?>
+                                <?php require 'myListingsDisplay.php';?> <!-- Loop Here -->
                             <div class="clearfix"></div>
                         </div><!-- products wrap /-->
                     </div> <!-- store content /-->

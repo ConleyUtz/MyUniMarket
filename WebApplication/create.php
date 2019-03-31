@@ -179,9 +179,9 @@
         <div class="top-info-bar">
         	<div class="row">
                     <div class="logo float-left">
-                            <a href="market.php"> <!--NEEDS TO BE INDEX.HTML-->
-                                <img alt="" src="../ImageFiles/MyUniMarket.png" />
-                            </a> 
+                    <?php
+                    echo  '<a href="market.php"><img src="../ImageFiles/MyUniMarket.png"  /></a>';
+                    ?>
                         </div><!-- Logo /-->
                 </div><!-- Right Ends /-->                
         </div>
@@ -232,7 +232,7 @@
                         <label> 
                             Select Category
                             <select name="itemCategory">
-                            <option disabled value="0"> -- Select an option -- </option>
+                            <option disabled value="0"> -- Select an category -- </option>
                                 <option value="1">Category 1</option>
                                 <option value="2">Category 2</option>
                                 <option value="3">Category 3</option>
@@ -242,27 +242,14 @@
                         </label>
                         <label>
                             Quality
-                            <div class="row">
-                                <div class="medium-1 small-12 columns">
-                            <input type="radio" name="quality" value="0"> 1<br>
-                        </div>
-                        <div class="medium-1 small-12 columns">
-
-                            <input type="radio" name="quality" value="1"> 2<br>
-                        </div>
-                            <div class="medium-1 small-12 columns">
-
-                            <input type="radio" name="quality" value="2"> 3 <br>
-                            </div>
-                            <div class="medium-1 small-12 columns">
-
-                            <input type="radio" name="quality" value="3"> 4<br>
-                            </div>
-                            <div class="medium-1 small-12 columns">
-
-                            <input type="radio" name="quality" value="4"> 5<br>
-                            </div>
-                        </div>
+                            <select name="itemCategory">
+                            <option disabled value="0"> -- Select a quality  -- </option>
+                                <option value="1">Used - Poor</option>
+                                <option value="2">Used - Acceptable</option>
+                                <option value="3">Used - Good</option>
+                                <option value="4">Used - Like New</option>
+                                <option selected value="5">New</option>
+                            </select>
                         </label>
                         <label>
                             Description
