@@ -8,8 +8,6 @@
 
     if(mysqli_connect_error()){
         exit("There was an error connecting to the database");
-    }else{
-        //echo "Database connection successful!";
     }
     $user = $_GET['user'];
     $query = "UPDATE `users` SET isConfirmed=true WHERE email='".$user."'";
