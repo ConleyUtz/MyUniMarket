@@ -67,7 +67,6 @@
             $query = "INSERT INTO `users` (`email`, `password`, `username`) VALUES ('".$email."', '".$password_hash."', '".$username."')";
             mysqli_query($link, $query);
 
-            //? Commented out mailer
             $link = "http://localhost/MyUniMarket/WebApplication/confirm_email.php?user=".$email;
             $mail = new PHPMailer;
             $mail->isSMTP();
