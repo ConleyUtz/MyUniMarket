@@ -63,7 +63,7 @@
           $error = '<div class="signup-error" style="color:red;"><strong>Error:</strong><br>'.$error.'</div>';
         }else{
             $error = '<div class="signup-success" style="color:green;"><p>Sign Up Success!</p></div>';
-            $password_hash = password_hash($password, PASSWORD_DEFAULT); //? Hashing the password
+            $password_hash = password_hash($password, PASSWORD_DEFAULT);
             $query = "INSERT INTO `users` (`email`, `password`, `username`) VALUES ('".$email."', '".$password_hash."', '".$username."')";
             mysqli_query($link, $query);
 
