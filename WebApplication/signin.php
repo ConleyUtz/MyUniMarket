@@ -1,33 +1,28 @@
 <?php
-
   session_start();
-
   $error = "";
   $password = "";
   $email = "";
 
   if ($_POST){
-    //! Checking if the email field is empty
+
     if(!$_POST['email']){
       $error .= "An email address is required.<br>";
     }else{
       $email = $_POST['email'];
     }
-      
-    //! Checking if the password field is empty
+
     if(!$_POST['password']){
       $error .= "The password is required.<br>";
     }else{
         $password = $_POST['password'];
     }
 
-    //! Checking the validity of the email
     if($_POST['email'] && filter_var($_POST['email'],FILTER_VALIDATE_EMAIL) == false){
       $error .= "The email address is invalid.<br>";
       $email = "";
     }
 
-    //! Checking if the error message is empty. If not run the main code
     if($error != ""){
       $error = '<div class="signin-error" style="color:red;"><strong>Error:</strong><br>'.$error.'</div>';
     }else{
@@ -36,11 +31,11 @@
         $pwd = "";
         $database = "my_uni_market";
         $link = mysqli_connect($host, $uname, $pwd, $database);
+
         if(mysqli_connect_error()){
             exit("There was an error connecting to the database");
-        }else{
-            //echo "Database connection successful!";
         }
+
         $query = "SELECT password FROM users WHERE `email` = '".$email."' AND `isConfirmed` = true";
         if($result = mysqli_query($link, $query)){
             $row = mysqli_fetch_array($result);
