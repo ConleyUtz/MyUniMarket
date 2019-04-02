@@ -1,3 +1,3 @@
-function contactOwner(contactButtonID){
+$("#userProf").click(function() {
     
-}
+});
