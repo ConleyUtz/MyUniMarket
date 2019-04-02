@@ -1,4 +1,7 @@
 <?php
+
+    include 'DatabaseConnection.php';
+
     use PHPMailer\PHPMailer\PHPMailer;
     require '../vendor/autoload.php';
 
@@ -13,11 +16,14 @@
     $pwd = "";
     $database = "my_uni_market";
 
-    $link = mysqli_connect($host, $uname, $pwd, $database);
+    //$link = mysqli_connect($host, $uname, $pwd, $database);
 
-    if(mysqli_connect_error()){
+    $instance = DatabaseConnection::getInstance();
+    $link = $instance->getConnection();
+
+    /*if(mysqli_connect_error()){
         exit("There was an error connecting to the database");
-    }
+    }*/
 
     if ($_POST){
 
