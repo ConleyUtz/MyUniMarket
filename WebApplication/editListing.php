@@ -114,13 +114,13 @@
             $newitemCategory = $_POST['newitemCategory'];
         }   
 
-        if(!isset($_POST['newquality'])){
+        if(!isset($_POST['newitemQuality'])){
 
             $error .= "Please select the quality of the item.<br>";
         }
         else{
 
-            $newitemQuality = $_POST['newquality'];
+            $newitemQuality = $_POST['newitemQuality'];
         }   
 
 
@@ -277,7 +277,7 @@
                         </label>
                         <label>
                             Quality
-                            <select name="itemCategory">
+                            <select name="newitemQuality">
                             <option disabled value="0"> -- Select a quality  -- </option>
                                 <option value="1">Used - Poor</option>
                                 <option value="2">Used - Acceptable</option>
