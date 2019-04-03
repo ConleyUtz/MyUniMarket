@@ -4,6 +4,7 @@
     session_start();
 
     $testerID = "";
+    $listings = "";
 
     if(!$_SESSION['email']){
 
@@ -45,7 +46,204 @@
         }
     }
 
+    //? Sorting By Category
+    if(isset($_GET["name"])){
+
+        //? Connecting to the database
+        $host = "localhost";
+        $uname = "root";
+        $pwd = "";
+        $database = "my_uni_market";
+        $query = "";
+
+
+        $link = mysqli_connect($host, $uname, $pwd, $database);
+
+        if(mysqli_connect_error()){
+            exit("There was an error connecting to the database");
+        }else{
+            //echo "Database connection successful!";
+        }
+
+        if($_GET["name"] == "cat1"){
+
+            $query = "SELECT * FROM items WHERE `category` = 1 AND `isSold` = 0";
+        }
+        else if($_GET["name"] == "cat2"){
+
+            $query = "SELECT * FROM items WHERE `category` = 2 AND `isSold` = 0";
+        }
+        else if($_GET["name"] == "cat3"){
+            
+            $query = "SELECT * FROM items WHERE `category` = 3 AND `isSold` = 0";
+        }
+        else if($_GET["name"] == "cat4"){
+
+            $query = "SELECT * FROM items WHERE `category` = 4 AND `isSold` = 0";
+        }
+        else if($_GET["name"] == "cat5"){
+
+            $query = "SELECT * FROM items WHERE `category` = 5 AND `isSold` = 0";
+        }
+
+        if($query != ""){
+
+            if($result = mysqli_query($link, $query)){
     
+                //? General loop
+                $num = mysqli_num_rows($result);
+                if ($num > 0) {
+        
+                    while ($row = mysqli_fetch_assoc($result)) {
+        
+                        $query = "SELECT username FROM users WHERE `userId` = '".$row['userId']."'";
+        
+                        if($rslt = mysqli_query($link, $query)){
+        
+                        $row1 = mysqli_fetch_array($rslt);
+                        $usr = $row1['username'];
+                        }
+        
+        
+        
+                        $listings .= '<div class="product list-product small-12 columns">
+                        <div class="medium-4 small-12 columns product-image">
+                            <a href="single-product.html">
+                                <img src="../ImageFiles/ProductImages/Image1.jpg" alt="" />
+                                <img src="../ImageFiles/ProductImages/Image1.jpg" alt="" />
+                            </a>
+                        </div><!-- Product Image /-->
+                        <div class="medium-8 small-12 columns">
+                            <div class="product-title">
+                                <a href="single-product.html">'.$row['name'].'</a>
+                            </div><!-- product title /-->
+                            <div class="product-meta">
+                                <div class="prices">
+                                    <span class="price">'.$row['price'].'</span>
+                                    <div class="store float-right">
+                                    <form method="post">
+                                    By: <input type="submit" name="userProfile" value="'.$usr.'" class="button primary" id="userProf" />
+                                    <input  style="display:none;" type="text" name="userName" value="'.$usr.'">
+                                </form>
+                                    </div>
+                                </div>
+        
+                                <div class="product-detail">
+                                    <p>'.$row['description'].'</p>
+                                </div><!-- product detail /-->
+        
+                                <div class="product-detail">
+                                    <p>Location: '.$row['location'].'</p>
+                                </div><!-- product location /-->
+        
+                                <div class="cart-menu">
+                                <form method="post">
+                                Enter your email here: <input type="text" name="senderEmail">
+                                <input type="submit" name="contactUser" value="Send Contact Request" class="button primary" id="userProf" />
+                                <input  style="display:none;" type="text" name="userName" value="'.$usr.'">
+                            </form>
+                                </div><!-- product buttons /-->
+        
+                            </div><!-- product meta /-->
+                        </div>
+                    </div><!-- Product /-->'; 
+                    }
+                }
+            }
+        }
+    }
+    else{
+
+        //? Connecting to the database
+        $host = "localhost";
+        $uname = "root";
+        $pwd = "";
+        $database = "my_uni_market";
+
+
+        $link = mysqli_connect($host, $uname, $pwd, $database);
+
+        if(mysqli_connect_error()){
+            exit("There was an error connecting to the database");
+        }else{
+            //echo "Database connection successful!";
+        }
+
+        //? Getting the whole table from MySQL database
+        $query = "SELECT * FROM items WHERE `isSold` = 0";
+
+        if($result = mysqli_query($link, $query)){
+        
+            //? General loop
+            $num = mysqli_num_rows($result);
+            if ($num > 0) {
+
+                while ($row = mysqli_fetch_assoc($result)) {
+
+                    $query = "SELECT username FROM users WHERE `userId` = '".$row['userId']."'";
+
+                    if($rslt = mysqli_query($link, $query)){
+
+                        $row1 = mysqli_fetch_array($rslt);
+                        $usr = $row1['username'];
+                    }
+
+                    $listings .= '
+                        <div class="product list-product small-12 columns">
+                <div class="medium-4 small-12 columns product-image">
+                    <a href="single-product.html">
+                        <img src="../ImageFiles/ProductImages/Image1.jpg" alt="" />
+                        <img src="../ImageFiles/ProductImages/Image1.jpg" alt="" />
+                    </a>
+                </div><!-- Product Image /-->
+                <div class="medium-8 small-12 columns">
+                    <div class="row">
+                        <div class="medium-3 small-12 columns">
+                            <div class="product-title">
+                                <a href="single-product.html">' . $row['name'] . '</a>
+                            </div><!-- product title /-->
+                        </div>
+                        <div class="medium-2 small-12 columns">
+                            <ul class="menu">
+                            <li><a href="#" title="Add to bookmarks"><i class="fa fa-bookmark-o fa-2x"></i></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="product-meta">
+                        <div class="prices">
+                            <span class="price">' . $row['price'] . '</span>
+                            <div class="store float-right">
+                                <form method="post">
+                                    By: <input type="submit" name="userProfile" value="'.$usr.'" class="button primary" id="userProf" />
+                                    <input  style="display:none;" type="text" name="userName" value="'.$usr.'">
+                                </form>
+                            </div>
+                        </div>
+
+                        <div class="product-detail">
+                            <p>' . $row['description'] . '</p>
+                        </div><!-- product detail /-->
+
+                        <div class="product-detail">
+                            <p>Location: '.$row['location'].'</p>
+                        </div><!-- product location /-->
+
+                        <div class="cart-menu">
+
+                            <form method="post">
+                                    Enter your email here: <input type="text" name="userName">
+                                    <input type="submit" name="contactUser" value="Send Contanct Request" class="button primary" id="userProf" />
+                                    <input  style="display:none;" type="text" name="userName" value="'.$usr.'">
+                            </form>
+                        </div><!-- product buttons /-->
+
+                    </div><!-- product meta /-->
+                </div>
+            </div><!-- Product /-->';
+                }
+            }
+        }
+    }    
 ?>
 
 
@@ -164,19 +362,21 @@
                     <!-- store sidebar -->
                     <div class="sidebar store-sidebar medium-3 small-12 columns">
 
+                    <form method="get">
                         <div class="widget">
                             <h2>Categories</h2>
                             <div class="widget-content">
                                 <ul class="menu vertical">
-                                    <li><a href="market1.php">Category 1</a></li>
-                                    <li><a href="market2.php">Category 2</a></li>
-                                    <li><a href="market3.php">Category 3</a></li>
-                                    <li><a href="market4.php">Category 4</a></li>
-                                    <li><a href="market5.php">Other</a></li>
+                                    <li><a href="?name=cat1">Category 1</a></li>
+                                    <li><a href="?name=cat2">Category 2</a></li>
+                                    <li><a href="?name=cat3">Category 3</a></li>
+                                    <li><a href="?name=cat4">Category 4</a></li>
+                                    <li><a href="?name=cat5">Other</a></li>
                                 </ul>
                                 <a href="market.php"><input type="button" class="button secondary" value="Reset"/></a>
                             </div><!-- widget content /-->
                         </div><!-- widget /-->
+                    </form>
 
                         <form method = "get" action="price_filter_session.php">
                             <div class="widget shop-filter">
@@ -203,7 +403,7 @@
                         <br>
                         <div class="products-wrap">
                             <!-- Mihir Shit-->
-                            <?php require 'listing.php';?>
+                            <?php echo $listings; ?>
                             <!-- Mihir Shit -->
                         </div><!-- products wrap /-->
                     </div>
