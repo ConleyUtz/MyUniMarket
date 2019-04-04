@@ -1,4 +1,7 @@
 <?php
+
+  include 'DatabaseConnection.php';
+
   session_start();
   $error = "";
   $password = "";
@@ -26,18 +29,10 @@
     if($error != ""){
       $error = '<div class="signin-error" style="color:red;"><strong>Error:</strong><br>'.$error.'</div>';
     }else{
-        $host = "localhost";
-        $uname = "root";
-        $pwd = "";
-        $database = "my_uni_market";
-        $link = mysqli_connect($host, $uname, $pwd, $database);
-
-        if(mysqli_connect_error()){
-            exit("There was an error connecting to the database");
-        }
+        $dbConnection = DatabaseConnection::getInstance()->getConnection();
 
         $query = "SELECT password FROM users WHERE `email` = '".$email."' AND `isConfirmed` = true";
-        if($result = mysqli_query($link, $query)){
+        if($result = mysqli_query($dbConnection, $query)){
             $row = mysqli_fetch_array($result);
             $hashed_password = $row['password'];
             if(password_verify($password, $hashed_password)) {

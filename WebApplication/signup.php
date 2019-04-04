@@ -11,19 +11,7 @@
     $email = "";
     $username = "";
 
-    $host = "localhost";
-    $uname = "root";
-    $pwd = "";
-    $database = "my_uni_market";
-
-    //$link = mysqli_connect($host, $uname, $pwd, $database);
-
-    $instance = DatabaseConnection::getInstance();
-    $link = $instance->getConnection();
-
-    /*if(mysqli_connect_error()){
-        exit("There was an error connecting to the database");
-    }*/
+    $dbConnection = DatabaseConnection::getInstance()->getConnection();
 
     if ($_POST){
 
@@ -71,7 +59,7 @@
             $error = '<div class="signup-success" style="color:green;"><p>Sign Up Success!</p></div>';
             $password_hash = password_hash($password, PASSWORD_DEFAULT);
             $query = "INSERT INTO `users` (`email`, `password`, `username`) VALUES ('".$email."', '".$password_hash."', '".$username."')";
-            mysqli_query($link, $query);
+            mysqli_query($dbConnection, $query);
 
             $link = "http://localhost/MyUniMarket/WebApplication/verify_email.php?user=".$email;
             $mail = new PHPMailer;
