@@ -1,115 +1,55 @@
 <?php
-
-    //? Checking for session
+    include 'DatabaseConnection.php';
     session_start();
-
     $testerID = "";
     $listings = "";
-    //? Default Query
     $query = "SELECT * FROM items WHERE `isSold` = 0";
-
+    $dbConnection = DatabaseConnection::getInstance()->getConnection();
     if(!$_SESSION['email']){
-
         header('Location: signin.php'); 
-    }
-    else{
-
+    }else{
         $testerID = $_SESSION['email'];
     }
-
     if(isset($_POST['userProfile'])){
-
         $_SESSION['profileName'] = $_POST['userName'];
         header("Location: profile.php");
     }
-
-    if(isset($_POST['contactUser'])){
-
-        $host = "localhost";
-        $uname = "root";
-        $pwd = "";
-        $database = "my_uni_market";
-
-        $link = mysqli_connect($host, $uname, $pwd, $database);
-
-        if(mysqli_connect_error()){
-            exit("There was an error connecting to the database");
-        }else{
-            //echo "Database connection successful!";
-        }
-
-        $query = "SELECT email FROM users WHERE `username` = '".$_POST['userName']."'";
-
-        if($result = mysqli_query($link, $query)){
-
+    if(isset($_POST['contactUser'])) {
+        $query = "SELECT email FROM users WHERE `username` = '" . $_POST['userName'] . "'";
+        if ($result = mysqli_query($dbConnection, $query)) {
             $row = mysqli_fetch_array($result);
             $_SESSION['toEmail'] = $row['email'];
             header("Location: send_email.php");
         }
     }
-
-    //? Sorting By Category
     if(isset($_GET["name"])){
-
-
         if($_GET["name"] == "cat1"){
-
             $query = "SELECT * FROM items WHERE `category` = 1 AND `isSold` = 0";
         }
         else if($_GET["name"] == "cat2"){
-
             $query = "SELECT * FROM items WHERE `category` = 2 AND `isSold` = 0";
         }
         else if($_GET["name"] == "cat3"){
-            
             $query = "SELECT * FROM items WHERE `category` = 3 AND `isSold` = 0";
         }
         else if($_GET["name"] == "cat4"){
-
             $query = "SELECT * FROM items WHERE `category` = 4 AND `isSold` = 0";
         }
         else if($_GET["name"] == "cat5"){
-
             $query = "SELECT * FROM items WHERE `category` = 5 AND `isSold` = 0";
         }
     }
-    
-    //? Final Dynamic Sorting
     if($query != ""){
-
-        //? Connecting to the database
-        $host = "localhost";
-        $uname = "root";
-        $pwd = "";
-        $database = "my_uni_market";
-
-
-        $link = mysqli_connect($host, $uname, $pwd, $database);
-
-        if(mysqli_connect_error()){
-            exit("There was an error connecting to the database");
-        }else{
-            //echo "Database connection successful!";
-        }
-
-        if($result = mysqli_query($link, $query)){
-        
-            //? General loop
+        if($result = mysqli_query($dbConnection, $query)){
             $num = mysqli_num_rows($result);
             if ($num > 0) {
-
                 while ($row = mysqli_fetch_assoc($result)) {
-
                     $query = "SELECT username FROM users WHERE `userId` = '".$row['userId']."'";
-
-                    if($rslt = mysqli_query($link, $query)){
-
+                    if($rslt = mysqli_query($dbConnection, $query)){
                     $row1 = mysqli_fetch_array($rslt);
                     $usr = $row1['username'];
                     }
-
                     //! PRICE FILTER MAYBE GOES HERE
-
                     $listings .= '<div class="product list-product small-12 columns">
                     <div class="medium-4 small-12 columns product-image">
                         <a href="single-product.html">
