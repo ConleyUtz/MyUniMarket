@@ -1,55 +1,45 @@
 <?php
-  session_start();
-  $error = "";
-  $password = "";
-  $email = "";
-
-  if ($_POST){
-
-    if(!$_POST['email']){
-      $error .= "An email address is required.<br>";
-    }else{
-      $email = $_POST['email'];
-    }
-
-    if(!$_POST['password']){
-      $error .= "The password is required.<br>";
-    }else{
-        $password = $_POST['password'];
-    }
-
-    if($_POST['email'] && filter_var($_POST['email'],FILTER_VALIDATE_EMAIL) == false){
-      $error .= "The email address is invalid.<br>";
-      $email = "";
-    }
-
-    if($error != ""){
-      $error = '<div class="signin-error" style="color:red;"><strong>Error:</strong><br>'.$error.'</div>';
-    }else{
-        $host = "localhost";
-        $uname = "root";
-        $pwd = "";
-        $database = "my_uni_market";
-        $link = mysqli_connect($host, $uname, $pwd, $database);
-
-        if(mysqli_connect_error()){
-            exit("There was an error connecting to the database");
+    include 'DatabaseConnection.php';
+    session_start();
+    $error = "";
+    $password = "";
+    $email = "";
+    if ($_POST){
+        if(!$_POST['email']){
+          $error .= "An email address is required.<br>";
+        }else{
+          $email = $_POST['email'];
         }
 
-        $query = "SELECT password FROM users WHERE `email` = '".$email."' AND `isConfirmed` = true";
-        if($result = mysqli_query($link, $query)){
-            $row = mysqli_fetch_array($result);
-            $hashed_password = $row['password'];
-            if(password_verify($password, $hashed_password)) {
-                $_SESSION['email'] = $email;
-                header("Location: market.php");
-            }else{
-                $error = "Invalid email address or password combination OR you haven't verified your email.";
-                $error = '<div class="signin-error" style="color:red;"><strong>Error:</strong><br>'.$error.'</div>';
-            } 
+        if(!$_POST['password']){
+          $error .= "The password is required.<br>";
+        }else{
+            $password = $_POST['password'];
+        }
+
+        if($_POST['email'] && filter_var($_POST['email'],FILTER_VALIDATE_EMAIL) == false){
+          $error .= "The email address is invalid.<br>";
+          $email = "";
+        }
+
+        if($error != ""){
+          $error = '<div class="signin-error" style="color:red;"><strong>Error:</strong><br>'.$error.'</div>';
+        }else{
+            $dbConnection = DatabaseConnection::getInstance()->getConnection();
+            $query = "SELECT password FROM users WHERE `email` = '".$email."' AND `isConfirmed` = true";
+            if($result = mysqli_query($dbConnection, $query)){
+                $row = mysqli_fetch_array($result);
+                $hashed_password = $row['password'];
+                if(password_verify($password, $hashed_password)) {
+                    $_SESSION['email'] = $email;
+                    header("Location: market.php");
+                }else{
+                    $error = "Invalid email address or password combination OR you haven't verified your email.";
+                    $error = '<div class="signin-error" style="color:red;"><strong>Error:</strong><br>'.$error.'</div>';
+                }
+            }
         }
     }
-  }
 ?>
 
 
