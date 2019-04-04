@@ -6,4 +6,3 @@
     if(mysqli_query($dbConnection, $query)){
         header("Location: signin.php");
     }
-?>
