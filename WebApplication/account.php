@@ -166,7 +166,7 @@
                         <h2>Quick links</h2>
                         <div class="widget-content">
                             <ul class="vertical menu">
-                                <li><a href="404.php">My Listings</a></li>
+                                <li><a href="account.php">My Listings</a></li>
                                 <li><a href="404.php">Bookmarked Items</a></li>
                                 <li><a href="account2.php">Account Settings</a></li>
                             </ul>
