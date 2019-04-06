@@ -27,7 +27,7 @@
     $row = mysqli_fetch_array($result);
 
     if(!empty($row['bookmarks']))
-      $bookmarksArr = str_split($row['bookmarks']);
+      $bookmarksArr = explode(',' , $row['bookmarks']);
   }
 
   //! Display ***$bookmarksArr*** variable
