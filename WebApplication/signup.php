@@ -206,9 +206,16 @@
 
                         <div class="widget-content">
 
-                            <strong>Bold Text Here</strong>
+                            <strong>In connection with accessing the services you will not:</strong>
                             </label>
-                            <p>Regular Text Here</p>
+                            <ul>
+                                <li> post, list or upload content or items in inappropriate categories or areas on our website;</li>
+                                <li> post false, inaccurate, misleading, deceptive, defamatory, or libelous content; </li>
+                                <li> violate the intellectual property rights of any third party such as copyright, patent, trademark, trade secret or other proprietary rights, rights of publicity or privacy;</li>
+                                <li> violate any law, statute, ordinance or regulation; </li>
+                                <li> list, offer or sell products that are stolen or counterfeit; </li>
+                                <li> take any action that may undermine the ratings system.</li>
+                            </ul>
                         </div><!-- widget content /-->
                     </div><!-- widget ends -->
 
