@@ -1,13 +1,13 @@
 <?php
-    //include 'DatabaseConnection.php';
+    include 'DatabaseConnection.php';
     use PHPMailer\PHPMailer\PHPMailer;
-   // require '../vendor/autoload.php';
+    require '../vendor/autoload.php';
     $error = "";
     $password = "";
     $confirmedPassword = "";
     $email = "";
     $username = "";
-   // $dbConnection = DatabaseConnection::getInstance()->getConnection();
+    $dbConnection = DatabaseConnection::getInstance()->getConnection();
     if ($_POST){
         if(!$_POST['username']){
             $error .= "A username is required.<br>";
