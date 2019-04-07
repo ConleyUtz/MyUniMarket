@@ -1,17 +1,13 @@
 <?php
-
+    include 'DatabaseConnection.php';
+    $dbConnection = DatabaseConnection::getInstance()->getConnection();
     session_start();
     $testerID = "";
     if(!$_SESSION['email']){
-
         header('Location: signin.php'); 
-    }
-    else{
-
+    }else{
         $testerID = $_SESSION['email'];
     }
-
-    //? Variables to be used
     $itemName = "";
     $itemPrice = "";
     $itemDescription = "";
@@ -19,104 +15,48 @@
     $itemCategory = "";
     $itemQuality = "";
     $error = "";
-
-    //? Connecting to the database
-    $host = "localhost";
-    $uname = "root";
-    $pwd = "";
-    $database = "my_uni_market";
-
-    $link = mysqli_connect($host, $uname, $pwd, $database);
-
-    if(mysqli_connect_error()){
-        exit("There was an error connecting to the database");
-    }else{
-        //echo "Database connection successful!";
-    }
-
     if ($_POST){
-
-        //! Checking if the item name field is empty
         if(!$_POST['itemName']){
-    
           $error .= "A name for the item is required.<br>";
-        
-        }
-        else{
-
+        }else{
           $itemName = $_POST['itemName'];
         }
-    
-        //! Checking if the item price field is empty
         if(!$_POST['itemPrice']){
-    
           $error .= "A price is required.<br>";
-        }
-        else{
-
+        }else{
             $itemPrice = $_POST['itemPrice'];
         }
-
-        //! Checking if the location field is empty
         if(!$_POST['location']){
-    
             $error .= "A location is required.<br>";
-        }
-        else{
-  
+        }else{
               $location = $_POST['location'];
         }
-
-        //! Checking if the item description field is empty
         if(!$_POST['itemDescription']){
-    
             $error .= "A description is required.<br>";
-        }
-        else{
-  
+        }else{
             $itemDescription = $_POST['itemDescription'];
         }
-
-        //! Checking if the category is selected
         if(!$_POST['itemCategory']){
-    
             $error .= "A category is required.<br>";
-        }
-        else{
-  
+        }else{
             $itemCategory = $_POST['itemCategory'];
         }
-
-        //! Checking if the quality is selected
         if(!isset($_POST['quality'])){
-    
             $error .= "Please select the quality of the item.<br>";
-        }
-        else{
-  
+        }else{
             $itemQuality = $_POST['quality'];
         }
-    
-    
-        //! Checking if the error message is empty. If not run the main code
         if($error != ""){
-    
           $error = '<div class="signin-error" style="color:red;"><strong>Error:</strong><br>'.$error.'</div>';
-        }
-        else{
-
+        }else{
             $query = "SELECT userId FROM users WHERE `email` = '".$testerID."'";
-            $result = mysqli_query($link, $query);
+            $result = mysqli_query($dbConnection, $query);
             $row = mysqli_fetch_array($result);
             $userID = $row['userId'];
-    
             $query = "INSERT INTO `items` (`name`, `price`, `location`, `category`, `quality`, `description`, `userId`) VALUES ('".$itemName."', '".$itemPrice."', '".$location."', '".$itemCategory."', '".$itemQuality."', '".$itemDescription."', '".$userID."')";
-
-            mysqli_query($link, $query);
+            mysqli_query($dbConnection, $query);
         }
-    
     }
-
 ?>
 <!doctype html>
 <html lang="en">
@@ -219,15 +159,15 @@
                     <form method="post">
                         <label>
                             Item For Sale
-                            <input maxlength="100" type="text" id="nameItem" name="itemName" value="" placeholder="Your Item ..." />
+                            <input maxlength="100" type="text" id="nameItem" name="itemName" value="" placeholder="Enter Item Name" />
                         </label>
 
                         <label>
                             Price
-                            <input type="number" min="0.00" max="9999.99" step="0.01" name="itemPrice" value="" placeholder="Your Requested Price ..." />
+                            <input type="number" min="0.00" max="9999.99" step="0.01" name="itemPrice" value="" placeholder="Enter Requested Price" />
                         </label>
                             Location
-                            <input maxlength="100" type="text" id="locationItem" name="location" value="" placeholder="Your Location ..." />
+                            <input maxlength="100" type="text" id="locationItem" name="location" value="" placeholder="Enter Your Location" />
                         </label>
                         <label> 
                             Select Category
