@@ -29,7 +29,6 @@
             $password = $_POST['password'];
         }
         if(!$_POST['confirmPassword']){
-
             $error .= "Confirmation of your password is required.<br>";
         }else {
             $confirmedPassword = $_POST['confirmPassword'];
