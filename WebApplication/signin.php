@@ -179,19 +179,6 @@
 
         </div> <!-- content-container /-->
 
-
-        <!-- Call to Action box -->
-        <div class="call-to-action">
-            <div class="row">
-                <div class="medium-5 small-12 columns">
-                    <h4> InsertTextHere</h4>
-                </div>
-                <div class="medium-7 small-12 columns signup-form">
-                </div>
-            </div><!-- row -->
-        </div>
-        <!-- Call to Action End -->
-
         <!-- Footer -->
         <div class="footer">
 
