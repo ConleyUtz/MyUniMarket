@@ -178,12 +178,7 @@
                         <div class="user-detail float-left">
                             <h4>{Insert Username Here}'s Page</h4>
                             <div class="pro-rating float-left">
-                                Ratings: 23&nbsp;&nbsp;&nbsp;&nbsp;
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star off"></i>
+                                Ratings: 23&nbsp;&nbsp;&nbsp;&nbsp;| 4.3
                             </div>
                             <a href="account.php" class="button primary" title="Account">Account</a>
 
