@@ -48,6 +48,7 @@
   if($checkEmail){
 
     //TODO Implement ability to rate
+    //TODO Remove the person from the permission list
   }
 
 ?>

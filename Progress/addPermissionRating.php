@@ -6,8 +6,11 @@
   //? Session start && variable
   session_start();
   $testerID = "";
-  $bookmarksArr = "";
-  $bookmarsString = "";
+  $permissionArr = "";
+  $permissionString = "";
+
+  //! userID of the person whose profile is being viewed
+  $ratedID = "";
 
   //? Check session
   if(!$_SESSION['email']){
@@ -22,29 +25,27 @@
   //? Database Connect
   $dbConnection = DatabaseConnection::getInstance()->getConnection();
 
-  //? Checking if the button is pressed
-  if(isset($_GET['bookmark'])){
+  if(isset($_GET['soldEmail'])){
 
     //? Generate the query command/code
-    $query = "SELECT bookmarks FROM users WHERE `email` = '".$testerID."'";
+    $query = "SELECT ratePermission FROM users WHERE `email` = '".$_GET['soldEmail']."'";
 
     if($result = mysqli_query($dbConnection, $query)){
 
       $row = mysqli_fetch_array($result);
   
-      if(!empty($row['bookmarks']))
-        $bookmarksArr = explode( ',' , $row['bookmarks']);
+      if(!empty($row['ratePermission']))
+        $permissionArr = explode( ',' , $row['ratePermission']);
     }
 
-    array_push($bookmarksArr, $_GET['bookmark']);
+    array_push($permissionArr, $_GET['soldEmail']);
 
-    $bookmarsString = implode(',' , $bookmarksArr);
+    $permissionString = implode(',' , $permissionArr);
 
-    $query = "UPDATE users SET bookmarks= '".$bookmarsString."' WHERE `email` = '".$testerID."'";
+    $query = "UPDATE users SET ratePermission= '".$permissionString."' WHERE `email` = '".$testerID."'";
 
     mysqli_query($dbConnection, $query);
     mysqli_close($dbConnection);
-
   }
 
 ?>
