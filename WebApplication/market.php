@@ -244,7 +244,7 @@
 
             <div class="row">
                 <div class = "medium-3 small-12 columns">
-            <a href="create.php" class="button primary" title="Create Post">Create Post</a>
+            <a href="create-post.php" class="button primary" title="Create Post">Create Post</a>
         </div>
 
             <div class="medium-6 small-12 columns search-wrap">
