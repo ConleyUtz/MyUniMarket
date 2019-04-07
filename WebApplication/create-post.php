@@ -41,10 +41,10 @@
         }else{
             $itemCategory = $_POST['itemCategory'];
         }
-        if(!isset($_POST['quality'])){
+        if(!isset($_POST['itemQuality'])){
             $error .= "Please select the quality of the item.<br>";
         }else{
-            $itemQuality = $_POST['quality'];
+            $itemQuality = $_POST['itemQuality'];
         }
         if($error != ""){
           $error = '<div class="signin-error" style="color:red;"><strong>Error:</strong><br>'.$error.'</div>';
@@ -182,7 +182,7 @@
                         </label>
                         <label>
                             Quality
-                            <select name="itemCategory">
+                            <select name="itemQuality">
                             <option disabled value="0"> -- Select a quality  -- </option>
                                 <option value="1">Used - Poor</option>
                                 <option value="2">Used - Acceptable</option>
