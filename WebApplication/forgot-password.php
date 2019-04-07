@@ -25,7 +25,7 @@
         if($error != ""){
           $error = '<div class="signup-error" style="color:red;"><strong>Error:</strong><br>'.$error.'</div>';
         }else{
-            $link = "http://localhost/MyUniMarket/WebApplication/recovery2.php?user=".$email;
+            $link = "http://localhost/MyUniMarket/WebApplication/recover-password.php?user=".$email;
             $mail = new PHPMailer;
             $mail->isSMTP();
             $mail->SMTPDebug = 0;

@@ -1,75 +1,33 @@
 <?php
-
-//? Used variables
-$error = "";
-$newPass = "";
-$email = $_GET['user'];
-
-//? Connecting to thee database
-$host = "localhost";
-$uname = "root";
-$pwd = "";
-$database = "my_uni_market";
-
-$link = mysqli_connect($host, $uname, $pwd, $database);
-
-if(mysqli_connect_error()){
-    exit("There was an error connecting to the database");
-}else{
-    //echo "Database connection successful!";
-}
-
-if ($_POST){
-
-    //! Checking if field 1 has correct input in it
-    if(!$_POST['newPass']){
-  
-      $error .= "Please enter a new password.<br>";
-  
-    }
-    else{
-
-        $newPass = $_POST['newPass'];
-
-    }
-
-    //! Checking if field 1 has correct input in it
-    if(!$_POST['newPassRe']){
-  
-        $error .= "Please re-enter the new password.<br>";
-    
-    }
-
-    //! Checking if the two new passwords match
-    if($_POST['newPassRe'] != $_POST['newPass']){
-  
-        $error .= "The passwords do not match.<br>";
-    
-    }
-    else{
-  
-        $newPass = $_POST['newPass'];
-    }
-    
-    //! If error message variable is not empty display the errors and finish running code there
-    if($error != ""){
-  
-      $error = '<div class="signup-error" style="color:red;"><strong>Error:</strong><br>'.$error.'</div>';
-    }
-    else{
-  
-        /**
-         * IFF all fields have correct values in them execute the following code.
-         */
-        $password_hash = password_hash($newPass, PASSWORD_DEFAULT); //? Hashing the password
-        $query = "UPDATE `users` SET password='".$password_hash."' WHERE email='".$email."'";
-        if(mysqli_query($link, $query)){
-            header("Location: signin.php");
+    include 'DatabaseConnection.php';
+    $dbConnection = DatabaseConnection::getInstance()->getConnection();
+    $error = "";
+    $newPass = "";
+    $email = $_GET['user'];
+    if ($_POST){
+        if(!$_POST['newPass']){
+          $error .= "Please enter a new password.<br>";
+        }else{
+            $newPass = $_POST['newPass'];
+        }
+        if(!$_POST['newPassRe']){
+            $error .= "Please re-enter the new password.<br>";
+        }
+        if($_POST['newPassRe'] != $_POST['newPass']){
+            $error .= "The passwords do not match.<br>";
+        }else{
+            $newPass = $_POST['newPass'];
+        }
+        if($error != ""){
+          $error = '<div class="signup-error" style="color:red;"><strong>Error:</strong><br>'.$error.'</div>';
+        }else{
+            $password_hash = password_hash($newPass, PASSWORD_DEFAULT);
+            $query = "UPDATE `users` SET password='".$password_hash."' WHERE email='".$email."'";
+            if(mysqli_query($link, $query)){
+                header("Location: signin.php");
+            }
         }
     }
-  
-    }
-
 ?>
 <!doctype html>
 <html lang="en">
