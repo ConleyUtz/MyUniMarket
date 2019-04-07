@@ -47,7 +47,7 @@
             $password_hash = password_hash($password, PASSWORD_DEFAULT);
             $query = "INSERT INTO `users` (`email`, `password`, `username`) VALUES ('".$email."', '".$password_hash."', '".$username."')";
             mysqli_query($dbConnection, $query);
-            $link = "http://localhost/MyUniMarket/WebApplication/verify_email.php?user=".$email;
+            $link = "http://localhost/MyUniMarket/WebApplication/verify-email.php?user=".$email;
             $mail = new PHPMailer;
             $mail->isSMTP();
             $mail->SMTPDebug = 0;
