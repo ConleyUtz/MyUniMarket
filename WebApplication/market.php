@@ -66,6 +66,11 @@
                                     <div class="product-title">
                                         <a href="single-product.html">'.$row['name'].'</a>
                                     </div><!-- product title /-->
+                                    <div class="medium-2 small-12 columns">
+                                    <ul class="menu">
+                                    <li><a href="#" title="Add to bookmarks"><i class="fa fa-bookmark-o fa-2x"></i></a></li>
+                                    </ul>
+                                </div>
                                     <div class="product-meta">
                                         <div class="prices">
                                             <span class="price">'.$row['price'].'</span>
