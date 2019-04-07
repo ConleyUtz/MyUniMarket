@@ -1,89 +1,51 @@
 <?php
-
-use PHPMailer\PHPMailer\PHPMailer;
-date_default_timezone_set('Etc/UTC');
-require '../vendor/autoload.php';
-
-//? Used variables
-$error = "";
-
-//? Connecting to thee database
-$host = "localhost";
-$uname = "root";
-$pwd = "";
-$database = "my_uni_market";
-
-$link = mysqli_connect($host, $uname, $pwd, $database);
-
-if(mysqli_connect_error()){
-    exit("There was an error connecting to the database");
-}
-else{
-    //echo "Database connection successful!";
-}
-
-if ($_POST){
-
-    //! Checking if field 1 has correct input in it
-    if(!$_POST['emailInput']){
-  
-      $error .= "Please enter an email address.<br>";
-  
-    }
-    else{
-  
-        $email = $_POST['emailInput'];
-        $arr = explode('@',$email);
-        if($arr[1] != "purdue.edu"){
-
-            $error .= "The email must be a purdue email! <br>";
-        }
-        else{
-
-            if($result = mysqli_query($link, "SELECT password FROM users WHERE `email` = '".$email."' AND `isConfirmed` = true")){
-            
-                if(mysqli_num_rows($result) == 0){
-            
+    include 'DatabaseConnection.php';
+    $dbConnection = DatabaseConnection::getInstance()->getConnection();
+    use PHPMailer\PHPMailer\PHPMailer;
+    require '../vendor/autoload.php';
+    $error = "";
+    if($_POST){
+        if(!$_POST['emailInput']){
+          $error .= "Please enter an email address.<br>";
+        }else{
+            $email = $_POST['emailInput'];
+            $arr = explode('@',$email);
+            if($arr[1] != "purdue.edu"){
+                $error .= "The email must be a purdue email! <br>";
+            }else{
+                if($result = mysqli_query($dbConnection, "SELECT password FROM users WHERE `email` = '".$email."' AND `isConfirmed` = true")){
+                    if(mysqli_num_rows($result) == 0){
+                        $error .= "A user with the following email does not exist. <br>";
+                    }
+                }else{
                     $error .= "A user with the following email does not exist. <br>";
                 }
             }
-            else{
-
-                $error .= "A user with the following email does not exist. <br>";
+        }
+        if($error != ""){
+          $error = '<div class="signup-error" style="color:red;"><strong>Error:</strong><br>'.$error.'</div>';
+        }else{
+            $link = "http://localhost/MyUniMarket/WebApplication/recovery2.php?user=".$email;
+            $mail = new PHPMailer;
+            $mail->isSMTP();
+            $mail->SMTPDebug = 0;
+            $mail->Host = 'smtp-mail.outlook.com';
+            $mail->Port = 587;
+            $mail->SMTPAuth = true;
+            $mail->Username = 'myunimarket@outlook.com';
+            $mail->Password = 'WebApplication@123';
+            $mail->setFrom('myunimarket@outlook.com', 'MyUniMarket');
+            $mail->addAddress($email, 'User');
+            $mail->Subject = 'Verify your email - MyUniMarket';
+            $mail->Body = "Please confirm your email address for MyUniMarket for password recovery by clicking on this: ".$link;
+            if (!$mail->send()) {
+                //echo 'Mailer Error: ' . $mail->ErrorInfo;
+            } else {
+                //echo 'Message sent!';
+                $error = '<div class="signup-success" style="color:green;"><p>Email sent!</p></div>';
             }
         }
     }
-
-    
-    //! If error message variable is not empty display the errors and finish running code there
-    if($error != ""){
-  
-      $error = '<div class="signup-error" style="color:red;"><strong>Error:</strong><br>'.$error.'</div>';
-    }
-    else{
-        $link = "http://localhost/MyUniMarket/WebApplication/recovery2.php?user=".$email;
-        $mail = new PHPMailer;
-        $mail->isSMTP();
-        $mail->SMTPDebug = 0;
-        $mail->Host = 'smtp-mail.outlook.com';
-        $mail->Port = 587;
-        $mail->SMTPAuth = true;
-        $mail->Username = 'myunimarket@outlook.com';
-        $mail->Password = 'WebApplication@123';
-        $mail->setFrom('myunimarket@outlook.com', 'MyUniMarket');
-        $mail->addAddress($email, 'User');
-        $mail->Subject = 'Verify your email - MyUniMarket';
-        $mail->Body = "Please confirm your email address for MyUniMarket for password recovery by clicking on this: ".$link;
-        if (!$mail->send()) {
-            //echo 'Mailer Error: ' . $mail->ErrorInfo;
-        } else {
-            //echo 'Message sent!';
-            $error = '<div class="signup-success" style="color:green;"><p>Email sent!</p></div>';
-        }
-    }
-  
-    }
-
 ?>
 
 
