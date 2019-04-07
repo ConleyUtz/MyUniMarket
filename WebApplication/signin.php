@@ -130,12 +130,16 @@
                 <div class="medium-7 small-12 columns sidebar">
 
                     <div class="widget">
-                        <h2>About MyUniMarket</h2>
+                        <h2>About Us</h2>
 
                         <div class="widget-content">
 
-                            <strong>Bold Text Here</strong>
-                            <p>Regular Text Here</p>
+                            <strong>Welcome to MyUniMarket!</strong><br><br>
+                            <ul>
+                                <li> We provide a platform for college students to purchase and sell used college supplies from their peers at a discounted price. </li>
+                                <li> We work hard to offer the best selection of the college products available. As our guests’ shopping preferences are changing, our stores continually evolve to transition more and more of our footprint into relevant offerings.</li>
+                                <li> At MyUniMarket, each user is our most important guest. We constantly look for ways to create unique shopping experiences, anticipate needs and exceed expectations for our guests.</li>
+                            </ul>
                         </div><!-- widget content /-->
                     </div><!-- widget ends -->
 
@@ -184,7 +188,7 @@
         <div class="call-to-action">
             <div class="row">
                 <div class="medium-5 small-12 columns">
-                    <h4> InsertTextHere</h4>
+                    <h4> I can't think of anything to write here.</h4>
                 </div>
                 <div class="medium-7 small-12 columns signup-form">
                 </div>
