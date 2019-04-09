@@ -305,17 +305,17 @@
     <!-- MAIN Container Start here. -->
     <div class="container">
 
+        <!-- Top Bar Starts Here -->
         <div class="top-info-bar">
-            <div class="row">
-                <div class="logo float-left">
-                    <img alt="" src="../ImageFiles/MyUniMarket.png" />
-                </div><!-- Logo /-->
-                <div class="medium-6 small-12 columns hide-for-small-only">
-
-                </div><!-- Right Ends /-->
-
-            </div><!-- row /-->
+        	<div class="row">
+                    <div class="logo float-left">
+                    <?php
+                    echo  '<a href="market.php"><img src="../ImageFiles/MyUniMarket.png"  /></a>';
+                    ?>
+                        </div><!-- Logo /-->
+                </div><!-- Right Ends /-->                
         </div>
+        <!-- top Bar Ends here /-->
 
         <!-- Header Starts -->
         <div class="header">
@@ -330,6 +330,7 @@
         <script type="text/javascript">
             logoutSuccess('logout');
         </script>
+        
         <!-- Header Ends /-->
         <div class="content-container module">
 
@@ -337,7 +338,7 @@
             <div class="title-section">
                 <div class="row">
                     <div class="small-12 columns">
-                        <h1>Account Page - Settings</h1>
+                        <h1>Account Page - Bookmarked Posts</h1>
                     </div> <!-- title /-->
                 </div><!-- row /-->
             </div>
@@ -345,177 +346,48 @@
         <!-- customer content -->
         <div class="customer-content module">
             <div class="row">
-
                 <div class="medium-3 small-12 columns">
                     <div class="widget">
                         <h2>Quick links</h2>
-
                         <div class="widget-content">
                             <ul class="vertical menu">
                                 <li><a href="account.php">My Listings</a></li>
                                 <li><a href="account3.php">Bookmarked Items</a></li>
-                                <li><a href="account2.html">Account Settings</a></li>
+                                <li><a href="account2.php">Account Settings</a></li>
                             </ul>
                         </div><!-- widget content /-->
-
                     </div><!-- widget /-->
                 </div><!-- left column /-->
-
-
                 <div class="medium-9 small-12 columns">
                     <div class="general-info dashboard-module">
-
                         <div class="float-left user-thumb">
                             <img alt="" src="images/help/user_thumb.jpg" />
                         </div><!-- user thumb /-->
-
-
-
                         <div class="user-detail float-left">
                             <h4>Conley Utz</h4>
                             <div class="pro-rating float-left">
-                            </div> <a href="#">User Since: 2/5/2019</a></a>
+                            </div>
+                            <a href="#">User Since: 2/5/2019</a>
                         </div><!-- user detail /-->
                         <div class="clearfix"></div>
                         <br>
-                        <div class="row">
-                            <div style="text-align: center">
-
-                                <a class="button primary" title="Account" id="passButton">Change Password</a>
-                                <a class="button primary" id="useButton" title="Account">Change Username</a>
-                                <a id="deleteButton" class="button third" title="Account">Delete Account</a>
-                            </div>
-                        </div>
-
-                        <div class="err">
-                            <?php echo $error; ?>
-                        </div>
-
-                        <div id="passBlock" style="text-align: center; display: none">
-
-                            <h2>Change Your Password</h2>
-                            <form method="post">
-                                <label>
-                                    Your Old Password
-                                    <input type="password" name="oldPassword" value="" placeholder="Enter old password ..." />
-                                </label>
-
-                                <label>
-                                    Your New Password
-                                    <input type="password" name="newPassword" value="" placeholder="Enter new password ..." />
-                                </label>
-                                <label>
-                                    Confirm New Password
-                                    <input type="password" name="newPasswordConfirm" value="" placeholder="Confirm new password ..." />
-                                </label>
-                                <input type="submit" name="changePassword" value="Confirm" class="button primary" />
-                            </form>
-                        </div>
-
-                        <div id="useBlock" style="text-align: center; display: none">
-
-                            <h2>Change Your Username</h2>
-                            <form method="post">
-                                <label>
-                                    New Username
-                                    <input type="text" name="newUsername" value="" placeholder="Enter new username ..." />
-                                </label>
-
-                                <label>
-                                    Confirm New Username
-                                    <input type="text" name="confirmNewUsername" value="" placeholder="Confimr new username ..." />
-                                </label>
-                                <input type="submit" name="changeUsername" value="Confirm" class="button primary" />
-                            </form>
-                        </div>
-
-                        <div id="deleteBlock" style="text-align: center; display: none">
-
-                            <h2 style="color: rgb(255, 0, 0)">Delete Account</h2>
-                            <form method="post">
-                                <label>
-                                    Enter Username
-                                    <input type="text" name="currentUsername" value="" placeholder="Enter your username ..." />
-                                </label>
-
-                                <label>
-                                    Enter Password
-                                    <input type="password" name="currentPassword" value="" placeholder="Enter your password ..." />
-                                </label>
-                                <input type="submit" name="deleteAccount" value="Confirm" class="button third" />
-                            </form>
-                        </div>
-
-                        <script type="text/javascript">
-                    
-                            document.getElementById("passButton").onclick = function(){
-
-                                document.getElementById("useBlock").style.display = "none";
-                                document.getElementById("deleteBlock").style.display = "none";
-                                document.getElementById("passBlock").style.display = "block";
-
-                            }
-
-                            document.getElementById("useButton").onclick = function(){
-
-                                document.getElementById("useBlock").style.display = "block";
-                                document.getElementById("deleteBlock").style.display = "none";
-                                document.getElementById("passBlock").style.display = "none";
-
-                            }
-
-                            document.getElementById("deleteButton").onclick = function(){
-
-                                document.getElementById("useBlock").style.display = "none";
-                                document.getElementById("deleteBlock").style.display = "block";
-                                document.getElementById("passBlock").style.display = "none";
-
-                            }    
-                    </script>
-
                     </div><!-- general info ends /-->
 
                     <!-- Information Boxes -->
+                    <div class="general-info dashboard-module">
 
-
-
-                </div><!-- right ends /-->
-
-
-            </div><!-- Row /-->
-            <!--           <div class="header">
-                    <div class ="row">
-                            <div class="medium-9 small-12 columns float-right">
-                                    <div class="widget-content">
-
-                            <a href="account.html" class="button primary" title="Account">Change Password</a>
-                                        </div>
-                            </div> 
-
-                            <div class="medium-9 small-12 columns float-right">
-                                    <div class="widget-content">
-
-                            <a href="account.html" class="button primary" title="Account">Change Name</a>
-                        </div>
-
-                            </div>
-                            <div class="medium-9 small-12 columns float-right">
-                            <a href="account.html" class="button primary" title="Account">Delete Account</a>
-                                </div>
-        
-        
-                    </div>
-                </div>-->
-
-        </div><!-- customer content /-->
-
-
+                        <!-- Store Content -->
+                        <div class="products-wrap">
+                                <?php require 'myListingsDisplay.php';?>
+                            <div class="clearfix"></div>
+                        </div><!-- products wrap /-->
+                    </div> <!-- store content /-->
+                </div> <!-- right ends /-->
+            </div> <!-- Row /-->
+        </div> <!-- customer content /-->
 
         <!-- Footer -->
         <div class="footer">
-
-
-            <!-- Footer bottom -->
             <div class="footerbottom">
                 <div class="row inner-padding">
                     <div class="medium-6 small-12 columns">
@@ -524,34 +396,33 @@
                     </div>
                     <!--left side-->
                 </div>
-            </div><!-- footer Bottom -->
+            </div>
         </div>
-        <!-- Footer Ends here -->
+        <!--Footer Ends-->
 
-    </div>
-    <!-- MAIN Container Ends here. -->
-    <a href="#top" id="top" class="animated fadeInUp start-anim"><i class="fa fa-angle-up"></i></a>
-    <!-- Page Preloader -->
-    <div class="preloader">
-        <div class="cssload-thecube">
-            <div class="cssload-cube cssload-c1"></div>
-            <div class="cssload-cube cssload-c2"></div>
-            <div class="cssload-cube cssload-c4"></div>
-            <div class="cssload-cube cssload-c3"></div>
+        <!-- MAIN Container Ends here. -->
+        <a href="#top" id="top" class="animated fadeInUp start-anim"><i class="fa fa-angle-up"></i></a>
+        <!-- Page Preloader -->
+        <div class="preloader">
+            <div class="cssload-thecube">
+                <div class="cssload-cube cssload-c1"></div>
+                <div class="cssload-cube cssload-c2"></div>
+                <div class="cssload-cube cssload-c4"></div>
+                <div class="cssload-cube cssload-c3"></div>
+            </div>
         </div>
-    </div>
 
-    <!-- Including Jquery so All js Can run -->
-    <script type="text/javascript" src="js/jquery-1.12.3.min.js"></script>
+        <!-- Including Jquery so All js Can run -->
+        <script type="text/javascript" src="js/jquery-1.12.3.min.js"></script>
 
-    <!-- Including Foundation JS so Foundation function can work. -->
-    <script type="text/javascript" src="js/foundation.min.js"></script>
-    <!-- Crousel JS -->
-    <script type="text/javascript" src="js/owl.carousel.min.js"></script>
-    <!-- jQuery Timer plugin delete if not using -->
-    <script src="js/jquery.simple.timer.js"></script>
-    <!-- Webful JS -->
-    <script src="js/webful.js"></script>
+        <!-- Including Foundation JS so Foundation function can work. -->
+        <script type="text/javascript" src="js/foundation.min.js"></script>
+        <!-- Crousel JS -->
+        <script type="text/javascript" src="js/owl.carousel.min.js"></script>
+        <!-- jQuery Timer plugin delete if not using -->
+        <script src="js/jquery.simple.timer.js"></script>
+        <!-- Webful JS -->
+        <script src="js/webful.js"></script>
 </body>
 
 </html>

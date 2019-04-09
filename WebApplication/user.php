@@ -180,7 +180,25 @@
                             <div class="pro-rating float-left">
                                 Ratings: 23&nbsp;&nbsp;&nbsp;&nbsp;| 4.3
                             </div>
-                            <a href="account.php" class="button primary" title="Account">Account</a>
+                            <a href="#" class="button primary" title="Account">Rate {User}</a>
+                            
+                            <form method="post">
+                                <label> 
+                                    Select Rating
+                                    <select name="itemCategory">
+                                <option disabled value="0"> -- Select an rating -- </option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option selected value="5">5</option>
+                                    </select>
+                                </label>
+                            </form>
+                            <a href="account.php" class="button primary" title="RatingSubmit">Submit</a>
+
+
+
 
                         </div><!-- user detail /-->
                         <div class="clearfix"></div>
