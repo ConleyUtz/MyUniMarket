@@ -1,143 +1,120 @@
 <?php
 
-    //? DB Connection
     include 'DatabaseConnection.php';
 
-    //? Session start && variable
     session_start();
     $testerID = "";
-    $ratingNum = 0;
-    $ratingSum = 0;
+    $bookmarksArr = [];
     $listings = "";
-    $totalRating = 0;
 
-    if($ratingNum != 0){
-
-        $totalRating = round($ratingSum/$ratingNum,2);
-    }
-
-    //? Check session
     if(!$_SESSION['email']){
 
         header('Location: signin.php'); 
     }
-      else{
+    else{
 
         $testerID = $_SESSION['email'];
     }
 
-      //? Database Connect
+    //? Database Connect
     $dbConnection = DatabaseConnection::getInstance()->getConnection();
 
-    $user = $_SESSION['profileName'];
-
-    $query = "SELECT * FROM users WHERE `username` = '".$user."'";
-
-    if($rslt = mysqli_query($dbConnection, $query)){
-
-        $row1 = mysqli_fetch_array($rslt);
-        $userID = $row1['userId'];
-    }
-
-    //TODO HAS TO CHANGE FOR PROFILE PAGES
-    $query = "SELECT * FROM users WHERE `userId` = '".$userID."'";
+    $query = "SELECT bookmarks FROM users WHERE `isConfirmed` = 1 AND `email` = '".$testerID."'";
 
     if($result = mysqli_query($dbConnection, $query)){
-    
+
         $row = mysqli_fetch_array($result);
-    
-        //? Setting rating calculation variables
-        if($row['ratingAmount'] != 0){
-    
-            $ratingSum = $row['ratingTotal'];
-            $ratingNum = $row['ratingAmount'];
-        }
+
+        if(!empty($row['bookmarks']))
+            $bookmarksArr = explode(',' , $row['bookmarks']);
     }
 
-    //? Getting the whole table from MySQL database
-    $query = "SELECT * FROM items WHERE `userId` = ".$userID;
+    if(isset($_POST['userProfile'])){
+        
+        $_SESSION['profileName'] = $_POST['userName'];
+        header("Location: user.php");
+    }
 
-    if($result = mysqli_query($dbConnection, $query)){
+    for($i=0; $i < sizeof($bookmarksArr); $i++){
 
-        //? General loop
-        $num = mysqli_num_rows($result);
-        if ($num > 0) {
 
-            while ($row = mysqli_fetch_assoc($result)) {
+        $query = "SELECT * FROM items WHERE `itemId` = ".$bookmarksArr[$i]." AND `isSold` = 0";
 
-                $query = "SELECT username FROM users WHERE `userId` = '".$row['userId']."'";
+        if($result = mysqli_query($dbConnection, $query)){
 
-                if($rslt = mysqli_query($dbConnection, $query)){
+            $row1 = mysqli_fetch_array($result);
 
-                    $row1 = mysqli_fetch_array($rslt);
-                    $usr = $row1['username'];
+            $query = "SELECT username FROM users WHERE `userId` = '".$row1['userId']."'";
+
+            if($rslt = mysqli_query($dbConnection, $query)){
+                    $row2 = mysqli_fetch_array($rslt);
+                    $usr = $row2['username'];
                 }
-            
-                $listings .= '<div class="product list-product small-12 columns">
-                <div class="medium-4 small-12 columns product-image">
-                    <a href="single-product.html">
-                        <img src="../ImageFiles/ProductImages/Image1.jpg" alt="" />
-                        <img src="../ImageFiles/ProductImages/Image1.jpg" alt="" />
-                    </a>
-                </div><!-- Product Image /-->
-                <div class="medium-8 small-12 columns">
-                    <div class="product-title">
-                        <a href="single-product.html">'.$row['name'].'</a>
-                    </div><!-- product title /-->
-                    <div class="medium-2 small-12 columns">
-                    <ul class="menu">
-                    <li><a href="?bookmark='.$row['itemId'].'" title="Add to bookmarks"><i class="fa fa-bookmark-o fa-2x"></i></a></li>
-                    </ul>
-                </div>
-                    <div class="product-meta">
-                        <div class="prices">
-                            <span class="price">'.$row['price'].'</span>
-                            <div class="store float-right">
-                            <form method="post">
-                            By: <input type="submit" name="userProfile" value="'.$usr.'" class="button primary" id="userProf" />
-                            <input  style="display:none;" type="text" name="userName" value="'.$usr.'">
-                            <input  style="display:none;" type="text" name="itemID" value="'.$row['itemId'].'">
-                        </form>
-                            </div>
-                        </div>
-
-                        <div class="product-detail">
-                            <p>'.$row['description'].'</p>
-                        </div><!-- product detail /-->
-
-                        <div class="product-detail">
-                            <p>Location: '.$row['location'].'</p>
-                        </div><!-- product location /-->
-
-                        <div class="cart-menu">
+    
+            $listings .= '<div class="product list-product small-12 columns">
+            <div class="medium-4 small-12 columns product-image">
+                <a href="single-product.html">
+                    <img src="../ImageFiles/ProductImages/Image1.jpg" alt="" />
+                    <img src="../ImageFiles/ProductImages/Image1.jpg" alt="" />
+                </a>
+            </div><!-- Product Image /-->
+            <div class="medium-8 small-12 columns">
+                <div class="product-title">
+                    <a href="single-product.html">'.$row1['name'].'</a>
+                </div><!-- product title /-->
+                <div class="medium-2 small-12 columns">
+            </div>
+                <div class="product-meta">
+                    <div class="prices">
+                        <span class="price">'.$row1['price'].'</span>
+                        <div class="store float-right">
                         <form method="post">
+                        By: <input type="submit" name="userProfile" value="'.$usr.'" class="button primary" id="userProf" />
+                        <input  style="display:none;" type="text" name="userName" value="'.$usr.'">
+                        <input  style="display:none;" type="text" name="itemID" value="'.$row1['itemId'].'">
+                    </form>
+                        </div>
+                    </div>
+
+                    <div class="product-detail">
+                        <p>'.$row1['description'].'</p>
+                    </div><!-- product detail /-->
+
+                    <div class="product-detail">
+                        <p>Location: '.$row1['location'].'</p>
+                    </div><!-- product location /-->
+
+                    <div class="cart-menu">
+                    <form method="post">
                         Enter your email here: <input type="text" name="senderEmail">
                         <input type="submit" name="contactUser" value="Send Contact Request" class="button primary" id="userProf" />
-                        <input  style="display:none;" type="text" name="userName" value="'.$usr.'">
+                        <input type="submit" name="removeBookmark" value="Remove Bookmark" class="button primary" id="userProf" />
+                        <input  style="display:none;" type="text" name="itemID" value="'.$bookmarksArr[$i].'">
                     </form>
-                        </div><!-- product buttons /-->
 
-                    </div><!-- product meta /-->
-                </div>
-            </div><!-- Product /-->';
-            }
+                    </div><!-- product buttons /-->
+
+                </div><!-- product meta /-->
+            </div>
+        </div><!-- Product /-->'; 
         }
+
     }
 
-    if(isset($_POST['ratingSubmit'])){
+    if(isset($_POST['removeBookmark'])){
 
-        //! Input field rating
-        $newRating = $_POST['userRating'];
+        if (($key = array_search($_POST['itemID'], $bookmarksArr)) !== false) {
+            unset($bookmarksArr[$key]);
+        }
 
-        //? Appendding the new rating
-        $ratingNum++;
-        $ratingSum += $newRating;
+        $bookmarsString = implode(',' , $bookmarksArr);
 
-        //? Update the total rankings
-        $query = "UPDATE users SET ratingTotal= ".$ratingSum.",ratingAmount= ".$ratingNum." WHERE `userId` = '".$userID."'";
+        $query = "UPDATE users SET bookmarks= '".$bookmarsString."' WHERE `email` = '".$testerID."'";
 
         mysqli_query($dbConnection, $query);
         mysqli_close($dbConnection);
+
+        header("Refresh:0");
     }
     
 ?>
@@ -151,7 +128,7 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <script src="./js/logoutSuccess.js" type="text/javascript"></script>
 
-    <title>MyUniMarket - User</title>
+    <title>MyUniMarket - Account</title>
 
     <meta name="author" content="">
     <meta name="keywords" content="">
@@ -232,7 +209,7 @@
             <div class="title-section">
                 <div class="row">
                     <div class="small-12 columns">
-                        <h1>User Page</h1>
+                        <h1>Account Page - Bookmarked Posts</h1>
                     </div> <!-- title /-->
                 </div><!-- row /-->
             </div>
@@ -240,14 +217,17 @@
         <!-- customer content -->
         <div class="customer-content module">
             <div class="row">
-                <div class="medium-3 small-12 columns sidebar">
-                <div class="widget">
-                        <h2>Insert Text Here</h2>
+                <div class="medium-3 small-12 columns">
+                    <div class="widget">
+                        <h2>Quick links</h2>
                         <div class="widget-content">
-                            <strong>Bold Text Here</strong>
-                            <p>Regular Text Here</p>
+                            <ul class="vertical menu">
+                                <li><a href="account.php">My Listings</a></li>
+                                <li><a href="account3.php">Bookmarked Items</a></li>
+                                <li><a href="account2.php">Account Settings</a></li>
+                            </ul>
                         </div><!-- widget content /-->
-                    </div><!-- widget ends -->
+                    </div><!-- widget /-->
                 </div><!-- left column /-->
                 <div class="medium-9 small-12 columns">
                     <div class="general-info dashboard-module">
@@ -255,32 +235,10 @@
                             <img alt="" src="images/help/user_thumb.jpg" />
                         </div><!-- user thumb /-->
                         <div class="user-detail float-left">
-                            <h4><?php echo strtoupper($user); ?>'s Page</h4>
+                            <h4>Conley Utz</h4>
                             <div class="pro-rating float-left">
-                                Rating Number: <?php echo $ratingNum.'<br>' ?>
-                                Total Rating: <?php echo $totalRating ?>
                             </div>
-                            <a href="#" class="button primary" title="Account">Rate <?php echo strtoupper($user); ?></a>
-                            
-                            <form method="post">
-                                <label> 
-                                    Select Rating
-                                    <select name="userRating">
-                                <option disabled value="0"> -- Select an rating -- </option>
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                                <option value="4">4</option>
-                                <option selected value="5">5</option>
-                                    </select>
-                                </label>
-                                <input type="submit" name='ratingSubmit' class="button primary">
-                            </form>
-                            
-
-
-
-
+                            <a href="#">User Since: 2/5/2019</a>
                         </div><!-- user detail /-->
                         <div class="clearfix"></div>
                         <br>
@@ -291,7 +249,7 @@
 
                         <!-- Store Content -->
                         <div class="products-wrap">
-                                <?php echo $listings; ?> <!-- Loop Here -->
+                                <?php echo $listings; ?>
                             <div class="clearfix"></div>
                         </div><!-- products wrap /-->
                     </div> <!-- store content /-->

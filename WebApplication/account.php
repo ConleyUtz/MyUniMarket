@@ -167,7 +167,7 @@
                         <div class="widget-content">
                             <ul class="vertical menu">
                                 <li><a href="account.php">My Listings</a></li>
-                                <li><a href="404.php">Bookmarked Items</a></li>
+                                <li><a href="account3.php">Bookmarked Items</a></li>
                                 <li><a href="account2.php">Account Settings</a></li>
                             </ul>
                         </div><!-- widget content /-->
