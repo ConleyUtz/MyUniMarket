@@ -68,7 +68,7 @@
                                     </div><!-- product title /-->
                                     <div class="medium-2 small-12 columns">
                                     <ul class="menu">
-                                    <li><a href="#" title="Add to bookmarks"><i class="fa fa-bookmark-o fa-2x"></i></a></li>
+                                    <li><a href="?bookmark='.$row['itemId'].'" title="Add to bookmarks"><i class="fa fa-bookmark-o fa-2x"></i></a></li>
                                     </ul>
                                 </div>
                                     <div class="product-meta">
@@ -78,6 +78,7 @@
                                             <form method="post">
                                             By: <input type="submit" name="userProfile" value="'.$usr.'" class="button primary" id="userProf" />
                                             <input  style="display:none;" type="text" name="userName" value="'.$usr.'">
+                                            <input  style="display:none;" type="text" name="itemID" value="'.$row['itemId'].'">
                                         </form>
                                             </div>
                                         </div>
@@ -118,7 +119,7 @@
                             </div><!-- product title /-->
                             <div class="medium-2 small-12 columns">
                             <ul class="menu">
-                            <li><a href="#" title="Add to bookmarks"><i class="fa fa-bookmark-o fa-2x"></i></a></li>
+                            <li><a href="?bookmark='.$row['itemId'].'" title="Add to bookmarks"><i class="fa fa-bookmark-o fa-2x"></i></a></li>
                             </ul>
                         </div>
                             <div class="product-meta">
@@ -128,6 +129,7 @@
                                     <form method="post">
                                     By: <input type="submit" name="userProfile" value="'.$usr.'" class="button primary" id="userProf" />
                                     <input  style="display:none;" type="text" name="userName" value="'.$usr.'">
+                                    <input  style="display:none;" type="text" name="itemID" value="'.$row['itemId'].'">
                                 </form>
                                     </div>
                                 </div>
@@ -155,6 +157,12 @@
                 }
             }
         }
+    }
+
+    //? Bookmarking
+    if(isset($_GET["bookmark"])){
+
+        
     }
 ?>
 
