@@ -113,6 +113,8 @@
 
         mysqli_query($dbConnection, $query);
         mysqli_close($dbConnection);
+
+        header("Refresh:0");
     }
     
 ?>
