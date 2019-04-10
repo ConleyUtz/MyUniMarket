@@ -162,7 +162,30 @@
     //? Bookmarking
     if(isset($_GET["bookmark"])){
 
+        //? Generate the query command/code
+        $query = "SELECT bookmarks FROM users WHERE `email` = '".$testerID."'";
+
+        $bookmarksArr = [];
+
+        if($result = mysqli_query($dbConnection, $query)){
+
+          $row = mysqli_fetch_array($result);
         
+          if(!empty($row['bookmarks']))
+            $bookmarksArr = explode( ',' , $row['bookmarks']);
+            
+
+        }
+
+        if(!in_array($_GET['bookmark'],$bookmarksArr))
+        array_push($bookmarksArr, $_GET['bookmark']);
+
+        $bookmarsString = implode(',' , $bookmarksArr);
+
+        $query = "UPDATE users SET bookmarks= '".$bookmarsString."' WHERE   `email` = '".$testerID."'";
+
+        mysqli_query($dbConnection, $query);
+        mysqli_close($dbConnection);
     }
 ?>
 
