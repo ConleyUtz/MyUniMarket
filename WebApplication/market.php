@@ -232,15 +232,21 @@
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Lato:400,700%7CMontserrat:400,700" rel="stylesheet" type="text/css" />
     <script>
-        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+        (function(i, s, o, g, r, a, m) {
+            i['GoogleAnalyticsObject'] = r;
+            i[r] = i[r] || function() {
+                (i[r].q = i[r].q || []).push(arguments)
+            }, i[r].l = 1 * new Date();
+            a = s.createElement(o),
+                m = s.getElementsByTagName(o)[0];
+            a.async = 1;
+            a.src = g;
+            m.parentNode.insertBefore(a, m)
+        })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
 
-  ga('create', 'UA-62711679-1', 'auto');
-  ga('send', 'pageview');
-
-</script>
+        ga('create', 'UA-62711679-1', 'auto');
+        ga('send', 'pageview');
+    </script>
 </head>
 
 <body class="inner-page">
@@ -252,8 +258,10 @@
             <div class="row">
                 <div class="logo float-left">
                     <img alt="" src="../ImageFiles/MyUniMarket.png" />
-                </div><!-- Logo /-->
-            </div><!-- Right Ends /-->
+                </div>
+                <!-- Logo /-->
+            </div>
+            <!-- Right Ends /-->
         </div>
         <!-- top Bar Ends here /-->
 
@@ -278,25 +286,29 @@
                 <div class="row">
                     <div class="small-12 columns">
                         <h1>List Shop</h1>
-                    </div> <!-- title /-->
-                </div><!-- row /-->
+                    </div>
+                    <!-- title /-->
+                </div>
+                <!-- row /-->
             </div>
             <!-- Title Section End -->
 
             <div class="row">
-                <div class = "medium-3 small-12 columns">
-            <a href="create.php" class="button primary" title="Create Post">Create Post</a>
-        </div>
+                <div class="medium-3 small-12 columns">
+                    <a href="create.php" class="button primary" title="Create Post">Create Post</a>
+                </div>
 
-            <div class="medium-6 small-12 columns search-wrap">
-            	<div class="main-search-form">
-                    <form method="get">
-                	    <input type="text" name="keywordSearch" placeholder="What you are shopping for ..." />
-                        <button type="submit" class="primary button"><i class="fa fa-search"></i></button>
-                    </form>
-                </div><!-- main search form /-->
-            </div><!-- Second Column /-->
-        </div>
+                <div class="medium-6 small-12 columns search-wrap">
+                    <div class="main-search-form">
+                        <form method="get">
+                            <input type="text" name="keywordSearch" placeholder="What you are shopping for ..." />
+                            <button type="submit" class="primary button"><i class="fa fa-search"></i></button>
+                        </form>
+                    </div>
+                    <!-- main search form /-->
+                </div>
+                <!-- Second Column /-->
+            </div>
 
             <br>
 
@@ -307,38 +319,43 @@
                     <!-- store sidebar -->
                     <div class="sidebar store-sidebar medium-3 small-12 columns">
 
-                    <form method="get">
-                        <div class="widget">
-                            <h2>Categories</h2>
-                            <div class="widget-content">
-                                <ul class="menu vertical">
-                                    <li><a href="?name=cat1">Category 1</a></li>
-                                    <li><a href="?name=cat2">Category 2</a></li>
-                                    <li><a href="?name=cat3">Category 3</a></li>
-                                    <li><a href="?name=cat4">Category 4</a></li>
-                                    <li><a href="?name=cat5">Other</a></li>
-                                </ul>
-                                <a href="market.php"><input type="button" class="button secondary" value="Reset"/></a>
-                            </div><!-- widget content /-->
-                        </div><!-- widget /-->
-                    </form>
+                        <form method="get">
+                            <div class="widget">
+                                <h2>Categories</h2>
+                                <div class="widget-content">
+                                    <ul class="menu vertical">
+                                        <li><a href="?name=cat1">Category 1</a></li>
+                                        <li><a href="?name=cat2">Category 2</a></li>
+                                        <li><a href="?name=cat3">Category 3</a></li>
+                                        <li><a href="?name=cat4">Category 4</a></li>
+                                        <li><a href="?name=cat5">Other</a></li>
+                                    </ul>
+                                    <a href="market.php">
+                                        <input type="button" class="button secondary" value="Reset" />
+                                    </a>
+                                </div>
+                                <!-- widget content /-->
+                            </div>
+                            <!-- widget /-->
+                        </form>
 
-                        <form method = "get" action="price_filter_session.php">
+                        <form method="get" action="price_filter_session.php">
                             <div class="widget shop-filter">
                                 <h2>Filters</h2>
                                 <div class="widget-content">
                                     <div>
-                                        <span>Price</span> <input type="text" placeholder="min" name="min"/>
+                                        <span>Price</span>
+                                        <input type="text" placeholder="min" name="min" />
                                         <span>- </span>
-                                        <input type="text" placeholder="max" name="max"/>
+                                        <input type="text" placeholder="max" name="max" />
                                         <div class="clearfix"></div>
                                     </div>
                                     <input type="submit" class="button secondary" value="Apply" />
-                                </div><!-- widget content /-->
-                            </div><!-- widget /-->
+                                </div>
+                                <!-- widget content /-->
+                            </div>
+                            <!-- widget /-->
                         </form>
-
-                        
 
                     </div>
                     <!-- store sidebar Ends /-->
@@ -349,16 +366,19 @@
                         <div class="products-wrap">
                             <!-- Mihir Shit-->
                             <?php echo $listings; ?>
-                            <!-- Mihir Shit -->
-                        </div><!-- products wrap /-->
+                                <!-- Mihir Shit -->
+                        </div>
+                        <!-- products wrap /-->
                     </div>
                     <!-- store content /-->
 
-                </div><!-- Row /-->
+                </div>
+                <!-- Row /-->
             </div>
             <!-- customer content /-->
 
-        </div><!-- content container /-->
+        </div>
+        <!-- content container /-->
 
         <!-- Footer -->
         <div class="footer">
