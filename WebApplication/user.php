@@ -6,8 +6,8 @@
     //? Session start && variable
     session_start();
     $testerID = "";
-    $ratingArr = "";
-    $ratingNum = "";
+    $ratingNum = 0;
+    $ratingSum = 0;
     $listings = "";
 
     //? Check session
@@ -31,6 +31,21 @@
 
         $row1 = mysqli_fetch_array($rslt);
         $userID = $row1['userId'];
+    }
+
+    //TODO HAS TO CHANGE FOR PROFILE PAGES
+    $query = "SELECT * FROM users WHERE `userId` = '".$userID."'";
+
+    if($result = mysqli_query($dbConnection, $query)){
+    
+        $row = mysqli_fetch_array($result);
+    
+        //? Setting rating calculation variables
+        if($row['ratingAmount'] != 0){
+    
+            $ratingSum = $row['ratingTotal'];
+            $ratingNum = $row['ratingAmount'];
+        }
     }
 
     //? Getting the whole table from MySQL database
@@ -91,9 +106,25 @@
                         </div><!-- product meta /-->
                     </div>
                 </div><!-- Product /-->'; 
+            }
         }
     }
-}
+
+    if(isset($_POST['ratingSubmit'])){
+
+        //! Input field rating
+        $newRating = $_POST['userRating'];
+
+        //? Appendding the new rating
+        $ratingNum++;
+        $ratingSum += $newRating;
+
+        //? Update the total rankings
+        $query = "UPDATE users SET ratingTotal= ".$ratingSum.",ratingAmount= ".$ratingNum." WHERE `userId` = '".$userID."'";
+
+        mysqli_query($dbConnection, $query);
+        mysqli_close($dbConnection);
+    }
     
 ?>
 
@@ -212,14 +243,15 @@
                         <div class="user-detail float-left">
                             <h4><?php echo strtoupper($user); ?>'s Page</h4>
                             <div class="pro-rating float-left">
-                                Ratings: 23&nbsp;&nbsp;&nbsp;&nbsp;| 4.3
+                                Rating Number: <?php echo $ratingNum.'<br>' ?>
+                                Total Rating: <?php echo $ratingSum/$ratingNum ?>
                             </div>
                             <a href="#" class="button primary" title="Account">Rate <?php echo strtoupper($user); ?></a>
                             
                             <form method="post">
                                 <label> 
                                     Select Rating
-                                    <select name="itemCategory">
+                                    <select name="userRating">
                                 <option disabled value="0"> -- Select an rating -- </option>
                                 <option value="1">1</option>
                                 <option value="2">2</option>
@@ -228,8 +260,9 @@
                                 <option selected value="5">5</option>
                                     </select>
                                 </label>
+                                <input type="submit" name='ratingSubmit' class="button primary">
                             </form>
-                            <a href="account.php" class="button primary" title="RatingSubmit">Submit</a>
+                            
 
 
 
