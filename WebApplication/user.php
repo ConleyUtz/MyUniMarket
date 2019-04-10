@@ -11,11 +11,6 @@
     $listings = "";
     $totalRating = 0;
 
-    if($ratingNum != 0){
-
-        $totalRating = round($ratingSum/$ratingNum,2);
-    }
-
     //? Check session
     if(!$_SESSION['email']){
 
@@ -258,7 +253,10 @@
                             <h4><?php echo strtoupper($user); ?>'s Page</h4>
                             <div class="pro-rating float-left">
                                 Rating Number: <?php echo $ratingNum.'<br>' ?>
-                                Total Rating: <?php echo $totalRating ?>
+                                Total Rating: <?php if($ratingNum != 0)
+                                                        echo round($ratingSum/$ratingNum,2);
+                                                    else
+                                                        echo 0; ?>
                             </div>
                             <a href="#" class="button primary" title="Account">Rate <?php echo strtoupper($user); ?></a>
                             
