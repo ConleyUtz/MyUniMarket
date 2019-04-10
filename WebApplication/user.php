@@ -9,6 +9,12 @@
     $ratingNum = 0;
     $ratingSum = 0;
     $listings = "";
+    $totalRating = 0;
+
+    if($ratingNum != 0){
+
+        $totalRating = round($ratingSum/$ratingNum,2);
+    }
 
     //? Check session
     if(!$_SESSION['email']){
@@ -68,44 +74,52 @@
                 }
             
                 $listings .= '<div class="product list-product small-12 columns">
-                    <div class="medium-4 small-12 columns product-image">
-                        <a href="single-product.html">
-                            <img src="../ImageFiles/ProductImages/Image1.jpg" alt="" />
-                            <img src="../ImageFiles/ProductImages/Image1.jpg" alt="" />
-                        </a>
-                    </div><!-- Product Image /-->
-                    <div class="medium-8 small-12 columns">
-                        <div class="product-title">
-                            <a href="single-product.html">'.$row['name'].'</a>
-                        </div><!-- product title /-->
-                        <div class="product-meta">
-                            <div class="prices">
-                                <span class="price">'.$row['price'].'</span>
-                                <div class="store float-right">
-                                    By: <a href="#">'.$usr.'</a>
-                                </div>
-                            </div>
-
-                            <div class="product-detail">
-                                <p>'.$row['description'].'</p>
-                            </div><!-- product detail /-->
-
-                            <div class="product-detail">
-                                    <p>Location: '.$row['location'].'</p>
-                                </div><!-- product location /-->
-
-                            <div class="cart-menu">
-
+                <div class="medium-4 small-12 columns product-image">
+                    <a href="single-product.html">
+                        <img src="../ImageFiles/ProductImages/Image1.jpg" alt="" />
+                        <img src="../ImageFiles/ProductImages/Image1.jpg" alt="" />
+                    </a>
+                </div><!-- Product Image /-->
+                <div class="medium-8 small-12 columns">
+                    <div class="product-title">
+                        <a href="single-product.html">'.$row['name'].'</a>
+                    </div><!-- product title /-->
+                    <div class="medium-2 small-12 columns">
+                    <ul class="menu">
+                    <li><a href="?bookmark='.$row['itemId'].'" title="Add to bookmarks"><i class="fa fa-bookmark-o fa-2x"></i></a></li>
+                    </ul>
+                </div>
+                    <div class="product-meta">
+                        <div class="prices">
+                            <span class="price">'.$row['price'].'</span>
+                            <div class="store float-right">
                             <form method="post">
-                                Enter your email here: <input type="text" name="senderEmail">
-                                <input type="submit" name="contactUser" value="Send Contact Request" class="button primary" id="userProf" />
-                            </form>
+                            By: <input type="submit" name="userProfile" value="'.$usr.'" class="button primary" id="userProf" />
+                            <input  style="display:none;" type="text" name="userName" value="'.$usr.'">
+                            <input  style="display:none;" type="text" name="itemID" value="'.$row['itemId'].'">
+                        </form>
+                            </div>
+                        </div>
 
-                            </div><!-- product buttons /-->
+                        <div class="product-detail">
+                            <p>'.$row['description'].'</p>
+                        </div><!-- product detail /-->
 
-                        </div><!-- product meta /-->
-                    </div>
-                </div><!-- Product /-->'; 
+                        <div class="product-detail">
+                            <p>Location: '.$row['location'].'</p>
+                        </div><!-- product location /-->
+
+                        <div class="cart-menu">
+                        <form method="post">
+                        Enter your email here: <input type="text" name="senderEmail">
+                        <input type="submit" name="contactUser" value="Send Contact Request" class="button primary" id="userProf" />
+                        <input  style="display:none;" type="text" name="userName" value="'.$usr.'">
+                    </form>
+                        </div><!-- product buttons /-->
+
+                    </div><!-- product meta /-->
+                </div>
+            </div><!-- Product /-->';
             }
         }
     }
@@ -244,7 +258,7 @@
                             <h4><?php echo strtoupper($user); ?>'s Page</h4>
                             <div class="pro-rating float-left">
                                 Rating Number: <?php echo $ratingNum.'<br>' ?>
-                                Total Rating: <?php echo $ratingSum/$ratingNum ?>
+                                Total Rating: <?php echo $totalRating ?>
                             </div>
                             <a href="#" class="button primary" title="Account">Rate <?php echo strtoupper($user); ?></a>
                             

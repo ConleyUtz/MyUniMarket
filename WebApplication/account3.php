@@ -32,7 +32,7 @@
     if(isset($_POST['userProfile'])){
         
         $_SESSION['profileName'] = $_POST['userName'];
-        header("Location: profile.php");
+        header("Location: user.php");
     }
 
     for($i=0; $i < sizeof($bookmarksArr); $i++){
