@@ -106,46 +106,51 @@
                     else{
 
                         $listings .= '<div class="product list-product small-12 columns">
-                            <div class="medium-4 small-12 columns product-image">
-                                <a href="single-product.html">
-                                    <img src="../ImageFiles/ProductImages/Image1.jpg" alt="" />
-                                    <img src="../ImageFiles/ProductImages/Image1.jpg" alt="" />
-                                </a>
-                            </div><!-- Product Image /-->
-                            <div class="medium-8 small-12 columns">
-                                <div class="product-title">
-                                    <a href="single-product.html">'.$row['name'].'</a>
-                                </div><!-- product title /-->
-                                <div class="product-meta">
-                                    <div class="prices">
-                                        <span class="price">'.$row['price'].'</span>
-                                        <div class="store float-right">
-                                        <form method="post">
-                                        By: <input type="submit" name="userProfile" value="'.$usr.'" class="button primary" id="userProf" />
-                                        <input  style="display:none;" type="text" name="userName" value="'.$usr.'">
-                                    </form>
-                                        </div>
-                                    </div>
-
-                                    <div class="product-detail">
-                                        <p>'.$row['description'].'</p>
-                                    </div><!-- product detail /-->
-
-                                    <div class="product-detail">
-                                        <p>Location: '.$row['location'].'</p>
-                                    </div><!-- product location /-->
-
-                                    <div class="cart-menu">
+                        <div class="medium-4 small-12 columns product-image">
+                            <a href="single-product.html">
+                                <img src="../ImageFiles/ProductImages/Image1.jpg" alt="" />
+                                <img src="../ImageFiles/ProductImages/Image1.jpg" alt="" />
+                            </a>
+                        </div><!-- Product Image /-->
+                        <div class="medium-8 small-12 columns">
+                            <div class="product-title">
+                                <a href="single-product.html">'.$row['name'].'</a>
+                            </div><!-- product title /-->
+                            <div class="medium-2 small-12 columns">
+                            <ul class="menu">
+                            <li><a href="#" title="Add to bookmarks"><i class="fa fa-bookmark-o fa-2x"></i></a></li>
+                            </ul>
+                        </div>
+                            <div class="product-meta">
+                                <div class="prices">
+                                    <span class="price">'.$row['price'].'</span>
+                                    <div class="store float-right">
                                     <form method="post">
-                                    Enter your email here: <input type="text" name="senderEmail">
-                                    <input type="submit" name="contactUser" value="Send Contact Request" class="button primary" id="userProf" />
+                                    By: <input type="submit" name="userProfile" value="'.$usr.'" class="button primary" id="userProf" />
                                     <input  style="display:none;" type="text" name="userName" value="'.$usr.'">
                                 </form>
-                                    </div><!-- product buttons /-->
+                                    </div>
+                                </div>
 
-                                </div><!-- product meta /-->
-                            </div>
-                        </div><!-- Product /-->';
+                                <div class="product-detail">
+                                    <p>'.$row['description'].'</p>
+                                </div><!-- product detail /-->
+
+                                <div class="product-detail">
+                                    <p>Location: '.$row['location'].'</p>
+                                </div><!-- product location /-->
+
+                                <div class="cart-menu">
+                                <form method="post">
+                                Enter your email here: <input type="text" name="senderEmail">
+                                <input type="submit" name="contactUser" value="Send Contact Request" class="button primary" id="userProf" />
+                                <input  style="display:none;" type="text" name="userName" value="'.$usr.'">
+                            </form>
+                                </div><!-- product buttons /-->
+
+                            </div><!-- product meta /-->
+                        </div>
+                    </div><!-- Product /-->';
                     }
                 }
             }
