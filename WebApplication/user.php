@@ -1,65 +1,99 @@
 <?php
 
-    session_start();
+    //? DB Connection
+    include 'DatabaseConnection.php';
 
+    //? Session start && variable
+    session_start();
     $testerID = "";
-    $userID = "";
-    
+    $ratingArr = "";
+    $ratingNum = "";
+    $listings = "";
+
+    //? Check session
     if(!$_SESSION['email']){
 
         header('Location: signin.php'); 
     }
-    else{
+      else{
 
         $testerID = $_SESSION['email'];
     }
 
-    $host = "localhost";
-    $uname = "root";
-    $pwd = "";
-    $database = "my_uni_market";
+      //? Database Connect
+    $dbConnection = DatabaseConnection::getInstance()->getConnection();
 
-    $link = mysqli_connect($host, $uname, $pwd, $database);
+    $user = $_SESSION['profileName'];
 
-    if(mysqli_connect_error()){
-        exit("There was an error connecting to the database");
-    }else{
-        //echo "Database connection successfull";
+    $query = "SELECT * FROM users WHERE `username` = '".$user."'";
+
+    if($rslt = mysqli_query($dbConnection, $query)){
+
+        $row1 = mysqli_fetch_array($rslt);
+        $userID = $row1['userId'];
     }
 
-    $query = "SELECT userId FROM users WHERE `email` = '".$_SESSION['email']."'";
+    //? Getting the whole table from MySQL database
+    $query = "SELECT * FROM items WHERE `userId` = ".$userID;
 
-    if($result = mysqli_query($link, $query)){
+    if($result = mysqli_query($dbConnection, $query)){
 
-    $row = mysqli_fetch_array($result);
-    $userID = $row['userId'];
+        //? General loop
+        $num = mysqli_num_rows($result);
+        if ($num > 0) {
+
+            while ($row = mysqli_fetch_assoc($result)) {
+
+                $query = "SELECT username FROM users WHERE `userId` = '".$row['userId']."'";
+
+                if($rslt = mysqli_query($dbConnection, $query)){
+
+                    $row1 = mysqli_fetch_array($rslt);
+                    $usr = $row1['username'];
+                }
+            
+                $listings .= '<div class="product list-product small-12 columns">
+                    <div class="medium-4 small-12 columns product-image">
+                        <a href="single-product.html">
+                            <img src="../ImageFiles/ProductImages/Image1.jpg" alt="" />
+                            <img src="../ImageFiles/ProductImages/Image1.jpg" alt="" />
+                        </a>
+                    </div><!-- Product Image /-->
+                    <div class="medium-8 small-12 columns">
+                        <div class="product-title">
+                            <a href="single-product.html">'.$row['name'].'</a>
+                        </div><!-- product title /-->
+                        <div class="product-meta">
+                            <div class="prices">
+                                <span class="price">'.$row['price'].'</span>
+                                <div class="store float-right">
+                                    By: <a href="#">'.$usr.'</a>
+                                </div>
+                            </div>
+
+                            <div class="product-detail">
+                                <p>'.$row['description'].'</p>
+                            </div><!-- product detail /-->
+
+                            <div class="product-detail">
+                                    <p>Location: '.$row['location'].'</p>
+                                </div><!-- product location /-->
+
+                            <div class="cart-menu">
+
+                            <form method="post">
+                                Enter your email here: <input type="text" name="senderEmail">
+                                <input type="submit" name="contactUser" value="Send Contact Request" class="button primary" id="userProf" />
+                            </form>
+
+                            </div><!-- product buttons /-->
+
+                        </div><!-- product meta /-->
+                    </div>
+                </div><!-- Product /-->'; 
+        }
     }
-
-    if(isset($_POST['deleteListing'])){
-
-
-        $query = "DELETE FROM items WHERE `userId`=".$userID." AND `name` = '".$_POST['listingName']."'";
-
-        mysqli_query($link, $query);
-    }
-
-    if(isset($_POST['editListing'])){
-
-        $_SESSION['listingName'] = $_POST['listingName'];
-        header("Location: editListing.php");
-    }
-
-    if(isset($_POST['markAsSold'])){
-
-        $query = "UPDATE items SET isSold= 1 WHERE `userId` = ".$userID." AND `name`= '".$_POST['listingName']."'";
-        mysqli_query($link, $query);
-    }
-
-    if(isset($_POST['unmark'])){
-
-        $query = "UPDATE items SET isSold= 0 WHERE `userId` = ".$userID." AND `name`= '".$_POST['listingName']."'";
-        mysqli_query($link, $query);
-    }
+}
     
 ?>
 
@@ -176,11 +210,11 @@
                             <img alt="" src="images/help/user_thumb.jpg" />
                         </div><!-- user thumb /-->
                         <div class="user-detail float-left">
-                            <h4>{Insert Username Here}'s Page</h4>
+                            <h4><?php echo strtoupper($user); ?>'s Page</h4>
                             <div class="pro-rating float-left">
                                 Ratings: 23&nbsp;&nbsp;&nbsp;&nbsp;| 4.3
                             </div>
-                            <a href="#" class="button primary" title="Account">Rate {User}</a>
+                            <a href="#" class="button primary" title="Account">Rate <?php echo strtoupper($user); ?></a>
                             
                             <form method="post">
                                 <label> 
@@ -210,7 +244,7 @@
 
                         <!-- Store Content -->
                         <div class="products-wrap">
-                                <?php require 'myListingsDisplay.php';?> <!-- Loop Here -->
+                                <?php echo $listings; ?> <!-- Loop Here -->
                             <div class="clearfix"></div>
                         </div><!-- products wrap /-->
                     </div> <!-- store content /-->
