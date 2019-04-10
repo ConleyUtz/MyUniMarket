@@ -1,17 +1,13 @@
 <?php
-
+    include 'DatabaseConnection.php';
+    $dbConnection = DatabaseConnection::getInstance()->getConnection();
     session_start();
     $testerID = "";
     if(!$_SESSION['email']){
-
         header('Location: signin.php'); 
-    }
-    else{
-
+    }else{
         $testerID = $_SESSION['email'];
     }
-
-    //? Variables that will be used
     $oldPassword = "";
     $newPassword = "";
     $newPasswordConfirm ="";
@@ -20,237 +16,103 @@
     $currentUsername = "";
     $currentPassword = "";
     $error = "";
-
-    //? Connecting to the mysql server
-    $host = "localhost";
-    $uname = "root";
-    $pwd = "";
-    $database = "my_uni_market";
-
-    $link = mysqli_connect($host, $uname, $pwd, $database);
-
-    if(mysqli_connect_error()){
-        exit("There was an error connecting to the database");
-    }else{
-        //echo "Database connection successful!";
-    }
-    
-    //? Main Script
     if ($_POST){
-
-        //? Script for changing password
         if(isset($_POST['changePassword'])){
-
-            //! Checking if old username field is empty
             if(!$_POST['oldPassword']){
-
                 $error .= "Your current password is required.<br>";
-            }
-            else
+            }else{
                 $oldPassword = $_POST['oldPassword'];
-
-            //! Checking if new password field is empty
+            }
             if(!$_POST['newPassword']){
-
                 $error .= "A new password is required.<br>";
-            }
-            else
+            }else{
                 $newPassword = $_POST['newPassword'];
-
-            //! Checking if confirm password field is empty
-            if(!$_POST['newPasswordConfirm']){
-
-                $error .= "Confirmation is required.<br>";
             }
-            else
+            if(!$_POST['newPasswordConfirm']){
+                $error .= "Confirmation is required.<br>";
+            }else{
                 $newPasswordConfirm = $_POST['newPasswordConfirm'];
-
-            //! Checking if the new passwords match
+            }
             if(($_POST['newPasswordConfirm'] && $_POST['newPassword']) && $_POST['newPasswordConfirm'] != $_POST['newPassword']){
-
                 $error .= "Passwords do not match.<br>";
             }
-
-            //! Checking if the old and the new password are the same
             if(($_POST['oldPassword'] && $_POST['newPassword']) && $_POST['oldPassword'] == $_POST['newPassword']){
-
                 $error .= "The new password has to be different from the old one.<br>";
             }
-
             if($_POST['oldPassword']){
-
-                //TODO NEEDS SESSION VARIABLE OF THE ID TO BE IMPLEMENTED CORRECTLY
-                //$tempID = $testerID;  //! Temporary solution for testing
-
-                //? Generate the query command/code
                 $query = "SELECT password FROM users WHERE `email` = '".$testerID."'";
-
-                //? Query the database
-                $result = mysqli_query($link, $query);
-
-                //? Get the row from database as an array
+                $result = mysqli_query($dbConnection, $query);
                 $row = mysqli_fetch_array($result);
-
                 $hashed_password = $row['password'];
-
                 if(!password_verify($oldPassword, $hashed_password)) {
-                    
                     $error .= "Current password is incorrect.<br>";
                 }
             }
-
-            //! Displaying the error message if its not empty or executing main code if it is
             if($error != ""){
-
             $error = '<div class="signup-error" style="color:red;"><strong>Error:</strong><br>'.$error.'</div>';
-            }
-            else{
-
-                //TODO NEEDS SESSION VARIABLE OF ID TO CORRECTLY UPDATE
-                //$tempID = $testerID; //! Temporary solution for testing
-
-                //? Hashing the new password
-                //! Comment out the line after this comment and uncomment the one after that to test this without hashed password
+            }else{
                 $password_hash = password_hash($newPassword, PASSWORD_DEFAULT);
-                #$password_hash = $newPassword;
-
-                //? Creating a query and sending it to the database
                 $query = 'UPDATE users SET password="'.$password_hash.'" WHERE `email`="'.$testerID.'"';
-
-                mysqli_query($link, $query);
+                mysqli_query($dbConnection, $query);
             }
         }
-
-        //? Script for changing username
         if(isset($_POST['changeUsername'])){
-
-            //! Checking if new username field is empty
             if(!$_POST['newUsername']){
-
                 $error .= "New username field is required.<br>";
-            }
-            else
+            }else{
                 $newUsername = $_POST['newUsername'];
-
-            //! Checking if confirm field is empty
-            if(!$_POST['confirmNewUsername']){
-
-                $error .= "Confirmation for the new username is required.<br>";
             }
-            else
+            if(!$_POST['confirmNewUsername']){
+                $error .= "Confirmation for the new username is required.<br>";
+            }else{
                 $confirmNewUsername = $_POST['confirmNewUsername'];
-
-            //! Checking if the fields match
+            }
             if(($_POST['newUsername'] && $_POST['confirmNewUsername']) && $_POST['confirmNewUsername'] != $_POST['newUsername']){
-
                 $error .= "Username fields do not match.<br>";
             }
-
-            //TODO IFF THE USERNAMES ARE UNIQUE NEED TO CHECK IF ALREADY EXISTS
-
-            //! Displaying the error message if its not empty or executing main code if it is
             if($error != ""){
-
-            $error = '<div class="signup-error" style="color:red;"><strong>Error:</strong><br>'.$error.'</div>';
-            }
-            else{
-
-                //TODO NEEDS SESSION VARIABLE OF ID TO CORRECTLY UPDATE
-                //$tempID = "1"; //! Temporary solution for testing
-                
-                //? Creating a query and sending it to the database
+                $error = '<div class="signup-error" style="color:red;"><strong>Error:</strong><br>'.$error.'</div>';
+            }else{
                 $query = 'UPDATE users SET username="'.$newUsername.'" WHERE `email`="'.$testerID.'"';
-                
-                mysqli_query($link, $query);
+                mysqli_query($dbConnection, $query);
             }                
         }
-
-        //? Script for deleting the account
         if(isset($_POST['deleteAccount'])){
-
-            //! Checking if current username field is empty
             if(!$_POST['currentUsername']){
-
                 $error .= "Username is required.<br>";
-            }
-            else{
-
+            }else{
                 $currentUsername = $_POST['currentUsername'];
-
-                //TODO NEEDS SESSION VARIABLE OF THE ID TO BE IMPLEMENTED CORRECTLY
-                //$tempID = $testerID;  //! Temporary solution for testing
-
-                //? Generate the query command/code
                 $query = "SELECT username FROM users WHERE `email` = '".$testerID."'";
-
-                //? Query the database
-                $result = mysqli_query($link, $query);
-
-                //? Get the row from database as an array
+                $result = mysqli_query($dbConnection, $query);
                 $row = mysqli_fetch_array($result);
-
-                //? Checking if the usesrname is correct
                 if($row['username'] != $currentUsername){
-
                     $error .= "Incorrect username.<br>";
                 }
             }
-
-            //! Checking if current password field is empty
             if(!$_POST['currentPassword']){
-
                 $error .= "Current password is required.<br>";
-            }
-            else{
-
+            }else{
                 $currentPassword = $_POST['currentPassword'];
-
-                //TODO NEEDS SESSION VARIABLE OF THE ID TO BE IMPLEMENTED CORRECTLY
-                //$tempID = $testerID;  //! Temporary solution for testing
-
-                //? Generate the query command/code
                 $query = "SELECT password FROM users WHERE `email` = '".$testerID."'";
-
-                //? Query the database
-                $result = mysqli_query($link, $query);
-
-                //? Get the row from database as an array
+                $result = mysqli_query($dbConnection, $query);
                 $row = mysqli_fetch_array($result);
-
                 $hashed_password = $row['password'];
-
                 if(!password_verify($currentPassword, $hashed_password)) {
-                    
                     $error .= "Incorrect password.<br>";
                 }
             }
-
-            //! Displaying the error message if its not empty or executing main code if it is
             if($error != ""){
-
-            $error = '<div class="signup-error" style="color:red;"><strong>Error:</strong><br>'.$error.'</div>';
-            }
-            else{
-
-                //TODO NEEDS SESSION VARIABLE OF ID TO CORRECTLY UPDATE
-                //$tempID = $testerID; //! Temporary solution for testing
-
-                //? Creating a query and sending it to the database
+                $error = '<div class="signup-error" style="color:red;"><strong>Error:</strong><br>'.$error.'</div>';
+            }else{
                 $query = 'DELETE FROM users WHERE `email`="'.$testerID.'"';
-                                
-                mysqli_query($link, $query);
-
-                header('Location: logout.php'); 
+                mysqli_query($dbConnection, $query);
+                header('Location: logout.php');
             }
         } 
-        
     }
-
 ?>
-
 <!doctype html>
 <html lang="en">
-
 <head>
     <!-- important for compatibility charset -->
     <meta charset="utf-8">

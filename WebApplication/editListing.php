@@ -1,29 +1,20 @@
 <?php
-
+    include 'DatabaseConnection.php';
+    $dbConnection = DatabaseConnection::getInstance()->getConnection();
     session_start();
     $testerID = "";
     $listingName = "";
     $userID = "";
-
     if(!$_SESSION['email']){
-
         header('Location: signin.php'); 
-    }
-    else{
-
+    }else{
         $testerID = $_SESSION['email'];
     }
-
     if(!$_SESSION['listingName']){
-
         header('Location: 404.php'); 
-    }
-    else{
-
+    }else{
         $listingName = $_SESSION['listingName'];
     }
-
-    //? Variables to be used
     $itemName = "";
     $itemPrice = "";
     $itemDescription = "";
@@ -35,121 +26,65 @@
     $newitemCategory = "";
     $newitemQuality = "";
     $error = "";
-
-    //? Connecting to the database
-    $host = "localhost";
-    $uname = "root";
-    $pwd = "";
-    $database = "my_uni_market";
-
-    $link = mysqli_connect($host, $uname, $pwd, $database);
-
-    if(mysqli_connect_error()){
-        exit("There was an error connecting to the database");
-    }else{
-        //echo "Database connection successful!";
-    }
-
-    //? Setting userID
     $query = "SELECT userId FROM users WHERE `email` = '".$_SESSION['email']."'";
-
-    if($result = mysqli_query($link, $query)){
-
-    $row = mysqli_fetch_array($result);
-    $userID = $row['userId'];
+    if($result = mysqli_query($dbConnection, $query)){
+        $row = mysqli_fetch_array($result);
+        $userID = $row['userId'];
     }
-
     $query = "SELECT * FROM items WHERE `userId` = ".$userID." AND `name`= '".$listingName."'";
-
-    if($result = mysqli_query($link, $query)){
-
+    if($result = mysqli_query($dbConnection, $query)){
         $row = mysqli_fetch_array($result);
         $itemName = $row['name'];
         $itemPrice = $row['price'];
         $itemDescription = $row['description'];
         $location = $row['location'];
     }
-
-
     if($_POST){
-
         if(!$_POST['newitemName']){
-
             $error .= "Itemname field is required.<br>";
-        }
-        else{
+        }else{
             $newitemName = $_POST['newitemName'];
-        }   
-
-        if(!$_POST['newitemPrice']){
-
-            $error .= "A price is required.<br>";
         }
-        else{
+        if(!$_POST['newitemPrice']){
+            $error .= "A price is required.<br>";
+        }else{
             $newitemPrice = $_POST['newitemPrice'];
         }   
-
         if(!$_POST['newlocation']){
-
             $error .= "A location is required.<br>";
-        }
-        else{
+        }else{
             $newlocation = $_POST['newlocation'];
         }   
-
         if(!$_POST['newitemDescription']){
-
             $error .= "A Description is required.<br>";
-        }
-        else{
+        }else{
             $newitemDescription = $_POST['newitemDescription'];
         }   
-
         if(!$_POST['newitemCategory']){
 
             $error .= "A Categotry is required.<br>";
-        }
-        else{
-
+        }else{
             $newitemCategory = $_POST['newitemCategory'];
-        }   
-
+        }
         if(!isset($_POST['newitemQuality'])){
 
             $error .= "Please select the quality of the item.<br>";
-        }
-        else{
-
+        }else{
             $newitemQuality = $_POST['newitemQuality'];
-        }   
-
-
-
-        if($error != ""){
-
-            $error = '<div class="signup-error" style="color:red;"><strong>Error:</strong><br>'.$error.'</div>';
         }
-        else{
-    
-                    //TODO NEEDS SESSION VARIABLE OF ID TO CORRECTLY UPDATE
-                    //$tempID = "1"; //! Temporary solution for testing
-                    
-                    //? Creating a query and sending it to the database
+        if($error != ""){
+            $error = '<div class="signup-error" style="color:red;"><strong>Error:</strong><br>'.$error.'</div>';
+        }else{
                     $query = "UPDATE items SET name= '".$newitemName."' WHERE `userId` = ".$userID." AND `name`= '".$listingName."';";
                     $query .= "UPDATE items SET price= ".$newitemPrice." WHERE `userId` = ".$userID." AND `name`= '".$listingName."';";
                     $query .= "UPDATE items SET location='".$newlocation."' WHERE `userId` = ".$userID." AND `name`= '".$listingName."';";
                     $query .= "UPDATE items SET category= ".$newitemCategory." WHERE `userId` = ".$userID." AND `name`= '".$listingName."';";
                     $query .= "UPDATE items SET quality= ".$newitemQuality." WHERE `userId` = ".$userID." AND `name`= '".$listingName."';";
                     $query .= "UPDATE items SET description='".$newitemDescription."' WHERE `userId` = ".$userID." AND `name`= '".$listingName."'";
-
                     $query = "UPDATE items SET name= '".$newitemName."',price= ".$newitemPrice.",location='".$newlocation."',category= ".$newitemCategory.",quality= ".$newitemQuality.",description='".$newitemDescription."' WHERE `userId` = ".$userID." AND `name`= '".$listingName."'";
-                    mysqli_query($link, $query);
-
-                    mysqli_close($link);
+                    mysqli_query($dbConnection, $query);
         }
-    }      
-
-    
+    }
 ?>
     
     <!doctype html>

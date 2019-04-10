@@ -12,7 +12,7 @@
     }
     if(isset($_POST['userProfile'])){
         $_SESSION['profileName'] = $_POST['userName'];
-        header("Location: user.php");
+        header("Location: user-profile.php");
     }
     if(isset($_POST['contactUser'])) {
         $query = "SELECT email FROM users WHERE `username` = '" . $_POST['userName'] . "'";
@@ -92,11 +92,6 @@
                                         </div><!-- product location /-->
 
                                         <div class="cart-menu">
-                                        <form method="post">
-                                        Enter your email here: <input type="text" name="senderEmail">
-                                        <input type="submit" name="contactUser" value="Send Contact Request" class="button primary" id="userProf" />
-                                        <input  style="display:none;" type="text" name="userName" value="'.$usr.'">
-                                    </form>
                                         </div><!-- product buttons /-->
 
                                     </div><!-- product meta /-->
@@ -294,9 +289,9 @@
             <!-- Title Section End -->
 
             <div class="row">
-                <div class="medium-3 small-12 columns">
-                    <a href="create.php" class="button primary" title="Create Post">Create Post</a>
-                </div>
+                <div class = "medium-3 small-12 columns">
+            <a href="create-post.php" class="button primary" title="Create Post">Create Post</a>
+        </div>
 
                 <div class="medium-6 small-12 columns search-wrap">
                     <div class="main-search-form">

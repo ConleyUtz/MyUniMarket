@@ -1,66 +1,35 @@
 <?php
-
+    include 'DatabaseConnection.php';
+    $dbConnection = DatabaseConnection::getInstance()->getConnection();
     session_start();
-
     $testerID = "";
     $userID = "";
-    
     if(!$_SESSION['email']){
-
         header('Location: signin.php'); 
-    }
-    else{
-
+    }else{
         $testerID = $_SESSION['email'];
     }
-
-    $host = "localhost";
-    $uname = "root";
-    $pwd = "";
-    $database = "my_uni_market";
-
-    $link = mysqli_connect($host, $uname, $pwd, $database);
-
-    if(mysqli_connect_error()){
-        exit("There was an error connecting to the database");
-    }else{
-        //echo "Database connection successfull";
-    }
-
     $query = "SELECT userId FROM users WHERE `email` = '".$_SESSION['email']."'";
-
-    if($result = mysqli_query($link, $query)){
-
-    $row = mysqli_fetch_array($result);
-    $userID = $row['userId'];
+    if($result = mysqli_query($dbConnection, $query)){
+        $row = mysqli_fetch_array($result);
+        $userID = $row['userId'];
     }
-
     if(isset($_POST['deleteListing'])){
-
-
         $query = "DELETE FROM items WHERE `userId`=".$userID." AND `name` = '".$_POST['listingName']."'";
-
-        mysqli_query($link, $query);
+        mysqli_query($dbConnection, $query);
     }
-
     if(isset($_POST['editListing'])){
-
         $_SESSION['listingName'] = $_POST['listingName'];
         header("Location: editListing.php");
     }
-
     if(isset($_POST['markAsSold'])){
-
         $query = "UPDATE items SET isSold= 1 WHERE `userId` = ".$userID." AND `name`= '".$_POST['listingName']."'";
-        mysqli_query($link, $query);
+        mysqli_query($dbConnection, $query);
     }
-
     if(isset($_POST['unmark'])){
-
         $query = "UPDATE items SET isSold= 0 WHERE `userId` = ".$userID." AND `name`= '".$_POST['listingName']."'";
-        mysqli_query($link, $query);
+        mysqli_query($dbConnection, $query);
     }
-    
 ?>
 
 <!doctype html>
@@ -178,7 +147,7 @@
                             <ul class="vertical menu">
                                 <li><a href="account.php">My Listings</a></li>
                                 <li><a href="account3.php">Bookmarked Items</a></li>
-                                <li><a href="account2.php">Account Settings</a></li>
+                                <li><a href="account-settings.php">Account Settings</a></li>
                             </ul>
                         </div>
                         <!-- widget content /-->

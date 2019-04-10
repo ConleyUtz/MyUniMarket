@@ -1,76 +1,56 @@
 <?php
-
-//? Used variables
-$error = "";
-$newPass = "";
-$email = $_GET['user'];
-
-//? Connecting to thee database
-$host = "localhost";
-$uname = "root";
-$pwd = "";
-$database = "my_uni_market";
-
-$link = mysqli_connect($host, $uname, $pwd, $database);
-
-if(mysqli_connect_error()){
-    exit("There was an error connecting to the database");
-}else{
-    //echo "Database connection successful!";
-}
-
-if ($_POST){
-
-    //! Checking if field 1 has correct input in it
-    if(!$_POST['newPass']){
-  
-      $error .= "Please enter a new password.<br>";
-  
-    }
-    else{
-
-        $newPass = $_POST['newPass'];
-
-    }
-
-    //! Checking if field 1 has correct input in it
-    if(!$_POST['newPassRe']){
-  
-        $error .= "Please re-enter the new password.<br>";
-    
-    }
-
-    //! Checking if the two new passwords match
-    if($_POST['newPassRe'] != $_POST['newPass']){
-  
-        $error .= "The passwords do not match.<br>";
-    
-    }
-    else{
-  
-        $newPass = $_POST['newPass'];
-    }
-    
-    //! If error message variable is not empty display the errors and finish running code there
-    if($error != ""){
-  
-      $error = '<div class="signup-error" style="color:red;"><strong>Error:</strong><br>'.$error.'</div>';
-    }
-    else{
-  
-        /**
-         * IFF all fields have correct values in them execute the following code.
-         */
-        $password_hash = password_hash($newPass, PASSWORD_DEFAULT); //? Hashing the password
-        $query = "UPDATE `users` SET password='".$password_hash."' WHERE email='".$email."'";
-        if(mysqli_query($link, $query)){
-            header("Location: signin.php");
+    include 'DatabaseConnection.php';
+    $dbConnection = DatabaseConnection::getInstance()->getConnection();
+    use PHPMailer\PHPMailer\PHPMailer;
+    require '../vendor/autoload.php';
+    $error = "";
+    if($_POST){
+        if(!$_POST['emailInput']){
+          $error .= "Please enter an email address.<br>";
+        }else{
+            $email = $_POST['emailInput'];
+            $arr = explode('@',$email);
+            if($arr[1] != "purdue.edu"){
+                $error .= "The email must be a purdue email! <br>";
+            }else{
+                if($result = mysqli_query($dbConnection, "SELECT password FROM users WHERE `email` = '".$email."' AND `isConfirmed` = true")){
+                    if(mysqli_num_rows($result) == 0){
+                        $error .= "A user with the following email does not exist. <br>";
+                    }
+                }else{
+                    $error .= "A user with the following email does not exist. <br>";
+                }
+            }
+        }
+        if($error != ""){
+          $error = '<div class="signup-error" style="color:red;"><strong>Error:</strong><br>'.$error.'</div>';
+        }else{
+            $link = "http://localhost/MyUniMarket/WebApplication/recover-password.php?user=".$email;
+            $mail = new PHPMailer;
+            $mail->isSMTP();
+            $mail->SMTPDebug = 0;
+            $mail->Host = 'smtp-mail.outlook.com';
+            $mail->Port = 587;
+            $mail->SMTPAuth = true;
+            $mail->Username = 'myunimarket@outlook.com';
+            $mail->Password = 'WebApplication@123';
+            $mail->setFrom('myunimarket@outlook.com', 'MyUniMarket');
+            $mail->addAddress($email, 'User');
+            $mail->Subject = 'Verify your email - MyUniMarket';
+            $mail->Body = "Please confirm your email address for MyUniMarket for password recovery by clicking on this: ".$link;
+            if (!$mail->send()) {
+                //echo 'Mailer Error: ' . $mail->ErrorInfo;
+            } else {
+                //echo 'Message sent!';
+                $error = '<div class="signup-success" style="color:green;"><p>Email sent!</p></div>';
+            }
         }
     }
-  
-    }
+?>
 
-?><!doctype html>
+
+
+<!doctype html>
 <html lang="en">
 
 <head>
@@ -78,7 +58,7 @@ if ($_POST){
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
 
-    <title>MyUniMarket - Update Password</title>
+    <title>MyUniMarket - Recovery</title>
 
     <meta name="author" content="">
     <meta name="keywords" content="">
@@ -156,7 +136,7 @@ if ($_POST){
             <div class="title-section">
                 <div class="row">
                     <div class="small-12 columns">
-                        <h1>Update Password</h1>
+                        <h1>Password Recovery</h1>
                     </div>
                     <!-- title /-->
                 </div>
@@ -168,34 +148,10 @@ if ($_POST){
             <div class="row">
                 <!-- sidebar Ends -->
 
-                <!-- left area ends -->
-                <div class="medium-5 small-12 columns form-container">
-
-                    <h2>Create a new password for your account</h2>
-
-                    <div class="err">
-                        <?php echo $error; ?>
-                    </div>
-
-                    <form method="post">
-                        <label>
-                            New Password
-                            <input type="password" name="newPass" id="userName" value="" placeholder="Your New Password ..." />
-                        </label>
-
-                        <label>
-                            Re-enter New Password
-                            <input type="password" name="newPassRe" value="" placeholder="Confirm New Password ..." />
-                        </label>
-                        <input type="submit" value="Update" class="button primary" id="submitButton" />
-                        <a href="signin.php"></a>
-                    </form>
-                </div>
-
                 <div class="medium-7 small-12 columns sidebar">
 
                     <div class="widget">
-                        <h2>Instructions for Updating Password</h2>
+                        <h2>Instructions for Password Recovery</h2>
 
                         <div class="widget-content">
 
@@ -205,6 +161,35 @@ if ($_POST){
                         <!-- widget content /-->
                     </div>
                     <!-- widget ends -->
+
+                </div>
+                <!-- left area ends -->
+                <div class="medium-5 small-12 columns form-container">
+
+                    <h2>Enter your credentials</h2>
+
+                    <div class="err">
+                        <?php echo $error; ?>
+                    </div>
+
+                    <form method="post">
+
+                        <label>
+                            Your MyUniMarket Email address
+                            <input name="emailInput" type="text" value="" placeholder="Your Email Address ..." />
+                        </label>
+
+                        <input type="submit" value="Recover Password" class="button primary" />
+
+                    </form>
+                    <div>
+                        Don't have an account?
+                    </div>
+                    <div>
+                        <a href="./signup.php">
+                            <input type="submit" value="Register" class="button primary" />
+                        </a>
+                    </div>
 
                 </div>
             </div>
@@ -254,7 +239,7 @@ if ($_POST){
             <div class="cssload-cube cssload-c4"></div>
             <div class="cssload-cube cssload-c3"></div>
         </div>
-	</div>
+    </div>
 
     <!-- Including Jquery so All js Can run -->
     <script type="text/javascript" src="js/jquery-1.12.3.min.js"></script>

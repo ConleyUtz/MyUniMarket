@@ -1,5 +1,6 @@
 <?php
     include 'DatabaseConnection.php';
+    $dbConnection = DatabaseConnection::getInstance()->getConnection();
     use PHPMailer\PHPMailer\PHPMailer;
     require '../vendor/autoload.php';
     $error = "";
@@ -7,7 +8,6 @@
     $confirmedPassword = "";
     $email = "";
     $username = "";
-    $dbConnection = DatabaseConnection::getInstance()->getConnection();
     if ($_POST){
         if(!$_POST['username']){
             $error .= "A username is required.<br>";
@@ -29,7 +29,6 @@
             $password = $_POST['password'];
         }
         if(!$_POST['confirmPassword']){
-
             $error .= "Confirmation of your password is required.<br>";
         }else {
             $confirmedPassword = $_POST['confirmPassword'];
@@ -48,7 +47,7 @@
             $password_hash = password_hash($password, PASSWORD_DEFAULT);
             $query = "INSERT INTO `users` (`email`, `password`, `username`) VALUES ('".$email."', '".$password_hash."', '".$username."')";
             mysqli_query($dbConnection, $query);
-            $link = "http://localhost/MyUniMarket/WebApplication/verify_email.php?user=".$email;
+            $link = "http://localhost/MyUniMarket/WebApplication/verify-email.php?user=".$email;
             $mail = new PHPMailer;
             $mail->isSMTP();
             $mail->SMTPDebug = 0;
