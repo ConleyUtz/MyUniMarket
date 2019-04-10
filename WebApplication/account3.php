@@ -1,7 +1,12 @@
 <?php
 
+    include 'DatabaseConnection.php';
+
     session_start();
     $testerID = "";
+    $bookmarksArr = [];
+    $listings = "";
+
     if(!$_SESSION['email']){
 
         header('Location: signin.php'); 
@@ -11,241 +16,105 @@
         $testerID = $_SESSION['email'];
     }
 
-    //? Variables that will be used
-    $oldPassword = "";
-    $newPassword = "";
-    $newPasswordConfirm ="";
-    $newUsername = "";
-    $confirmNewUsername = "";
-    $currentUsername = "";
-    $currentPassword = "";
-    $error = "";
+    //? Database Connect
+    $dbConnection = DatabaseConnection::getInstance()->getConnection();
 
-    //? Connecting to the mysql server
-    $host = "localhost";
-    $uname = "root";
-    $pwd = "";
-    $database = "my_uni_market";
+    $query = "SELECT bookmarks FROM users WHERE `isConfirmed` = 1 AND `email` = '".$testerID."'";
 
-    $link = mysqli_connect($host, $uname, $pwd, $database);
+    if($result = mysqli_query($dbConnection, $query)){
 
-    if(mysqli_connect_error()){
-        exit("There was an error connecting to the database");
-    }else{
-        //echo "Database connection successful!";
+        $row = mysqli_fetch_array($result);
+
+        if(!empty($row['bookmarks']))
+            $bookmarksArr = explode(',' , $row['bookmarks']);
+    }
+
+    if(isset($_POST['userProfile'])){
+        
+        $_SESSION['profileName'] = $_POST['userName'];
+        header("Location: profile.php");
+    }
+
+    for($i=0; $i < sizeof($bookmarksArr); $i++){
+
+
+        $query = "SELECT * FROM items WHERE `itemId` = ".$bookmarksArr[$i]." AND `isSold` = 0";
+
+        if($result = mysqli_query($dbConnection, $query)){
+
+            $row1 = mysqli_fetch_array($result);
+
+            $query = "SELECT username FROM users WHERE `userId` = '".$row1['userId']."'";
+
+            if($rslt = mysqli_query($dbConnection, $query)){
+                    $row2 = mysqli_fetch_array($rslt);
+                    $usr = $row2['username'];
+                }
+    
+            $listings .= '<div class="product list-product small-12 columns">
+            <div class="medium-4 small-12 columns product-image">
+                <a href="single-product.html">
+                    <img src="../ImageFiles/ProductImages/Image1.jpg" alt="" />
+                    <img src="../ImageFiles/ProductImages/Image1.jpg" alt="" />
+                </a>
+            </div><!-- Product Image /-->
+            <div class="medium-8 small-12 columns">
+                <div class="product-title">
+                    <a href="single-product.html">'.$row1['name'].'</a>
+                </div><!-- product title /-->
+                <div class="medium-2 small-12 columns">
+            </div>
+                <div class="product-meta">
+                    <div class="prices">
+                        <span class="price">'.$row1['price'].'</span>
+                        <div class="store float-right">
+                        <form method="post">
+                        By: <input type="submit" name="userProfile" value="'.$usr.'" class="button primary" id="userProf" />
+                        <input  style="display:none;" type="text" name="userName" value="'.$usr.'">
+                        <input  style="display:none;" type="text" name="itemID" value="'.$row1['itemId'].'">
+                    </form>
+                        </div>
+                    </div>
+
+                    <div class="product-detail">
+                        <p>'.$row1['description'].'</p>
+                    </div><!-- product detail /-->
+
+                    <div class="product-detail">
+                        <p>Location: '.$row1['location'].'</p>
+                    </div><!-- product location /-->
+
+                    <div class="cart-menu">
+                    <form method="post">
+                        Enter your email here: <input type="text" name="senderEmail">
+                        <input type="submit" name="contactUser" value="Send Contact Request" class="button primary" id="userProf" />
+                        <input type="submit" name="removeBookmark" value="Remove Bookmark" class="button primary" id="userProf" />
+                        <input  style="display:none;" type="text" name="itemID" value="'.$bookmarksArr[$i].'">
+                    </form>
+
+                    </div><!-- product buttons /-->
+
+                </div><!-- product meta /-->
+            </div>
+        </div><!-- Product /-->'; 
+        }
+
+    }
+
+    if(isset($_POST['removeBookmark'])){
+
+        if (($key = array_search($_POST['itemID'], $bookmarksArr)) !== false) {
+            unset($bookmarksArr[$key]);
+        }
+
+        $bookmarsString = implode(',' , $bookmarksArr);
+
+        $query = "UPDATE users SET bookmarks= '".$bookmarsString."' WHERE `email` = '".$testerID."'";
+
+        mysqli_query($dbConnection, $query);
+        mysqli_close($dbConnection);
     }
     
-    //? Main Script
-    if ($_POST){
-
-        //? Script for changing password
-        if(isset($_POST['changePassword'])){
-
-            //! Checking if old username field is empty
-            if(!$_POST['oldPassword']){
-
-                $error .= "Your current password is required.<br>";
-            }
-            else
-                $oldPassword = $_POST['oldPassword'];
-
-            //! Checking if new password field is empty
-            if(!$_POST['newPassword']){
-
-                $error .= "A new password is required.<br>";
-            }
-            else
-                $newPassword = $_POST['newPassword'];
-
-            //! Checking if confirm password field is empty
-            if(!$_POST['newPasswordConfirm']){
-
-                $error .= "Confirmation is required.<br>";
-            }
-            else
-                $newPasswordConfirm = $_POST['newPasswordConfirm'];
-
-            //! Checking if the new passwords match
-            if(($_POST['newPasswordConfirm'] && $_POST['newPassword']) && $_POST['newPasswordConfirm'] != $_POST['newPassword']){
-
-                $error .= "Passwords do not match.<br>";
-            }
-
-            //! Checking if the old and the new password are the same
-            if(($_POST['oldPassword'] && $_POST['newPassword']) && $_POST['oldPassword'] == $_POST['newPassword']){
-
-                $error .= "The new password has to be different from the old one.<br>";
-            }
-
-            if($_POST['oldPassword']){
-
-                //TODO NEEDS SESSION VARIABLE OF THE ID TO BE IMPLEMENTED CORRECTLY
-                //$tempID = $testerID;  //! Temporary solution for testing
-
-                //? Generate the query command/code
-                $query = "SELECT password FROM users WHERE `email` = '".$testerID."'";
-
-                //? Query the database
-                $result = mysqli_query($link, $query);
-
-                //? Get the row from database as an array
-                $row = mysqli_fetch_array($result);
-
-                $hashed_password = $row['password'];
-
-                if(!password_verify($oldPassword, $hashed_password)) {
-                    
-                    $error .= "Current password is incorrect.<br>";
-                }
-            }
-
-            //! Displaying the error message if its not empty or executing main code if it is
-            if($error != ""){
-
-            $error = '<div class="signup-error" style="color:red;"><strong>Error:</strong><br>'.$error.'</div>';
-            }
-            else{
-
-                //TODO NEEDS SESSION VARIABLE OF ID TO CORRECTLY UPDATE
-                //$tempID = $testerID; //! Temporary solution for testing
-
-                //? Hashing the new password
-                //! Comment out the line after this comment and uncomment the one after that to test this without hashed password
-                $password_hash = password_hash($newPassword, PASSWORD_DEFAULT);
-                #$password_hash = $newPassword;
-
-                //? Creating a query and sending it to the database
-                $query = 'UPDATE users SET password="'.$password_hash.'" WHERE `email`="'.$testerID.'"';
-
-                mysqli_query($link, $query);
-            }
-        }
-
-        //? Script for changing username
-        if(isset($_POST['changeUsername'])){
-
-            //! Checking if new username field is empty
-            if(!$_POST['newUsername']){
-
-                $error .= "New username field is required.<br>";
-            }
-            else
-                $newUsername = $_POST['newUsername'];
-
-            //! Checking if confirm field is empty
-            if(!$_POST['confirmNewUsername']){
-
-                $error .= "Confirmation for the new username is required.<br>";
-            }
-            else
-                $confirmNewUsername = $_POST['confirmNewUsername'];
-
-            //! Checking if the fields match
-            if(($_POST['newUsername'] && $_POST['confirmNewUsername']) && $_POST['confirmNewUsername'] != $_POST['newUsername']){
-
-                $error .= "Username fields do not match.<br>";
-            }
-
-            //TODO IFF THE USERNAMES ARE UNIQUE NEED TO CHECK IF ALREADY EXISTS
-
-            //! Displaying the error message if its not empty or executing main code if it is
-            if($error != ""){
-
-            $error = '<div class="signup-error" style="color:red;"><strong>Error:</strong><br>'.$error.'</div>';
-            }
-            else{
-
-                //TODO NEEDS SESSION VARIABLE OF ID TO CORRECTLY UPDATE
-                //$tempID = "1"; //! Temporary solution for testing
-                
-                //? Creating a query and sending it to the database
-                $query = 'UPDATE users SET username="'.$newUsername.'" WHERE `email`="'.$testerID.'"';
-                
-                mysqli_query($link, $query);
-            }                
-        }
-
-        //? Script for deleting the account
-        if(isset($_POST['deleteAccount'])){
-
-            //! Checking if current username field is empty
-            if(!$_POST['currentUsername']){
-
-                $error .= "Username is required.<br>";
-            }
-            else{
-
-                $currentUsername = $_POST['currentUsername'];
-
-                //TODO NEEDS SESSION VARIABLE OF THE ID TO BE IMPLEMENTED CORRECTLY
-                //$tempID = $testerID;  //! Temporary solution for testing
-
-                //? Generate the query command/code
-                $query = "SELECT username FROM users WHERE `email` = '".$testerID."'";
-
-                //? Query the database
-                $result = mysqli_query($link, $query);
-
-                //? Get the row from database as an array
-                $row = mysqli_fetch_array($result);
-
-                //? Checking if the usesrname is correct
-                if($row['username'] != $currentUsername){
-
-                    $error .= "Incorrect username.<br>";
-                }
-            }
-
-            //! Checking if current password field is empty
-            if(!$_POST['currentPassword']){
-
-                $error .= "Current password is required.<br>";
-            }
-            else{
-
-                $currentPassword = $_POST['currentPassword'];
-
-                //TODO NEEDS SESSION VARIABLE OF THE ID TO BE IMPLEMENTED CORRECTLY
-                //$tempID = $testerID;  //! Temporary solution for testing
-
-                //? Generate the query command/code
-                $query = "SELECT password FROM users WHERE `email` = '".$testerID."'";
-
-                //? Query the database
-                $result = mysqli_query($link, $query);
-
-                //? Get the row from database as an array
-                $row = mysqli_fetch_array($result);
-
-                $hashed_password = $row['password'];
-
-                if(!password_verify($currentPassword, $hashed_password)) {
-                    
-                    $error .= "Incorrect password.<br>";
-                }
-            }
-
-            //! Displaying the error message if its not empty or executing main code if it is
-            if($error != ""){
-
-            $error = '<div class="signup-error" style="color:red;"><strong>Error:</strong><br>'.$error.'</div>';
-            }
-            else{
-
-                //TODO NEEDS SESSION VARIABLE OF ID TO CORRECTLY UPDATE
-                //$tempID = $testerID; //! Temporary solution for testing
-
-                //? Creating a query and sending it to the database
-                $query = 'DELETE FROM users WHERE `email`="'.$testerID.'"';
-                                
-                mysqli_query($link, $query);
-
-                header('Location: logout.php'); 
-            }
-        } 
-        
-    }
-
 ?>
 
 <!doctype html>
@@ -378,7 +247,7 @@
 
                         <!-- Store Content -->
                         <div class="products-wrap">
-                                <?php require 'myListingsDisplay.php';?>
+                                <?php echo $listings; ?>
                             <div class="clearfix"></div>
                         </div><!-- products wrap /-->
                     </div> <!-- store content /-->
