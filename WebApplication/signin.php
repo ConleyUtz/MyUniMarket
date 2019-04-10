@@ -80,15 +80,21 @@
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Lato:400,700%7CMontserrat:400,700" rel="stylesheet" type="text/css" />
     <script>
-        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+        (function(i, s, o, g, r, a, m) {
+            i['GoogleAnalyticsObject'] = r;
+            i[r] = i[r] || function() {
+                (i[r].q = i[r].q || []).push(arguments)
+            }, i[r].l = 1 * new Date();
+            a = s.createElement(o),
+                m = s.getElementsByTagName(o)[0];
+            a.async = 1;
+            a.src = g;
+            m.parentNode.insertBefore(a, m)
+        })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
 
-  ga('create', 'UA-62711679-1', 'auto');
-  ga('send', 'pageview');
-
-</script>
+        ga('create', 'UA-62711679-1', 'auto');
+        ga('send', 'pageview');
+    </script>
 </head>
 
 <body class="inner-page">
@@ -100,16 +106,18 @@
             <div class="row">
                 <div class="logo float-left">
                     <img alt="" src="../ImageFiles/MyUniMarket.png" />
-                </div><!-- Logo /-->
+                </div>
+                <!-- Logo /-->
 
                 <div class="medium-6 small-12 columns hide-for-small-only">
 
-                </div><!-- Right Ends /-->
+                </div>
+                <!-- Right Ends /-->
 
-            </div><!-- row /-->
+            </div>
+            <!-- row /-->
         </div>
         <!-- top Bar Ends here /-->
-
 
         <div class="content-container module">
 
@@ -118,8 +126,10 @@
                 <div class="row">
                     <div class="small-12 columns">
                         <h1>Welcome</h1>
-                    </div> <!-- title /-->
-                </div><!-- row /-->
+                    </div>
+                    <!-- title /-->
+                </div>
+                <!-- row /-->
             </div>
             <!-- Title Section End -->
 
@@ -134,14 +144,18 @@
 
                         <div class="widget-content">
 
-                            <strong>Welcome to MyUniMarket!</strong><br><br>
+                            <strong>Welcome to MyUniMarket!</strong>
+                            <br>
+                            <br>
                             <ul>
                                 <li> We provide a platform for college students to purchase and sell used college supplies from their peers at a discounted price. </li>
                                 <li> We work hard to offer the best selection of the college products available. As our guests’ shopping preferences are changing, our stores continually evolve to transition more and more of our footprint into relevant offerings.</li>
                                 <li> At MyUniMarket, each user is our most important guest. We constantly look for ways to create unique shopping experiences, anticipate needs and exceed expectations for our guests.</li>
                             </ul>
-                        </div><!-- widget content /-->
-                    </div><!-- widget ends -->
+                        </div>
+                        <!-- widget content /-->
+                    </div>
+                    <!-- widget ends -->
 
                 </div>
                 <!-- left area ends -->
@@ -177,12 +191,11 @@
                     </div>
 
                 </div>
-            </div><!-- row ends /-->
+            </div>
+            <!-- row ends /-->
 
-
-
-        </div> <!-- content-container /-->
-
+        </div>
+        <!-- content-container /-->
 
         <!-- Call to Action box -->
         <div class="call-to-action">
@@ -192,13 +205,13 @@
                 </div>
                 <div class="medium-7 small-12 columns signup-form">
                 </div>
-            </div><!-- row -->
+            </div>
+            <!-- row -->
         </div>
         <!-- Call to Action End -->
 
         <!-- Footer -->
         <div class="footer">
-
 
             <!-- Footer bottom -->
             <div class="footerbottom">
@@ -209,14 +222,15 @@
                     </div>
                     <!--left side-->
                 </div>
-            </div><!-- footer Bottom -->
+            </div>
+            <!-- footer Bottom -->
         </div>
         <!-- Footer Ends here -->
 
     </div>
     <!-- MAIN Container Ends here. -->
     <a href="#top" id="top" class="animated fadeInUp start-anim"><i class="fa fa-angle-up"></i></a>
-    <!-- Page Preloader 
+    <!-- Page Preloader -->
     <div class="preloader">
         <div class="cssload-thecube">
             <div class="cssload-cube cssload-c1"></div>
@@ -224,8 +238,8 @@
             <div class="cssload-cube cssload-c4"></div>
             <div class="cssload-cube cssload-c3"></div>
         </div>
-	</div>
-    	-->
+    </div>
+
     <!-- Including Jquery so All js Can run -->
     <script type="text/javascript" src="js/jquery-1.12.3.min.js"></script>
 

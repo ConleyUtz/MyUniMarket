@@ -374,7 +374,7 @@
                         <div class="user-detail float-left">
                             <h4>Conley Utz</h4>
                             <div class="pro-rating float-left">
-                            </div> <a href="#">User Since: 2/5/2019</a></a>
+                            </div> <a href="#">User Since: 2/5/2019</a>
                         </div><!-- user detail /-->
                         <div class="clearfix"></div>
                         <br>
