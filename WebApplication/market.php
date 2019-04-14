@@ -58,8 +58,8 @@
                                 $listings .= '<div class="product list-product small-12 columns">
                                 <div class="medium-4 small-12 columns product-image">
                                     <a href="single-product.html">
-                                        <img src="../ImageFiles/ProductImages/Image1.jpg" alt="" />
-                                        <img src="../ImageFiles/ProductImages/Image1.jpg" alt="" />
+                                        <img src="../MockUp/Image1.jpg" alt="" />
+                                        <img src="../MockUp/Image1.jpg" alt="" />
                                     </a>
                                 </div><!-- Product Image /-->
                                 <div class="medium-8 small-12 columns">
@@ -104,8 +104,8 @@
                         $listings .= '<div class="product list-product small-12 columns">
                         <div class="medium-4 small-12 columns product-image">
                             <a href="single-product.html">
-                                <img src="../ImageFiles/ProductImages/Image1.jpg" alt="" />
-                                <img src="../ImageFiles/ProductImages/Image1.jpg" alt="" />
+                                <img src="../MockUp/Image1.jpg" alt="" />
+                                <img src="../MockUp/Image1.jpg" alt="" />
                             </a>
                         </div><!-- Product Image /-->
                         <div class="medium-8 small-12 columns">
