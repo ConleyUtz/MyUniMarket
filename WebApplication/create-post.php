@@ -46,6 +46,17 @@
         }else{
             $itemQuality = $_POST['itemQuality'];
         }
+        if(!is_uploaded_file($_FILES['fileToUpload']['tmp_name'])){
+            $error .= "Please upload a picture of your listing.<br>";
+        }else{
+            $target_dir = "uploads/";
+            $target_file = $target_dir.$_FILES['fileToUpload']['name'];
+            if(move_uploaded_file($_FILES['fileToUpload']['tmp_name'], $target_file)){
+                //Success
+            }else{
+                $error .= "There was some error uploading your file. Please try again.<br>";
+            }
+        }
         if($error != ""){
           $error = '<div class="signin-error" style="color:red;"><strong>Error:</strong><br>'.$error.'</div>';
         }else{
@@ -53,7 +64,7 @@
             $result = mysqli_query($dbConnection, $query);
             $row = mysqli_fetch_array($result);
             $userID = $row['userId'];
-            $query = "INSERT INTO `items` (`name`, `price`, `location`, `category`, `quality`, `description`, `userId`) VALUES ('".$itemName."', '".$itemPrice."', '".$location."', '".$itemCategory."', '".$itemQuality."', '".$itemDescription."', '".$userID."')";
+            $query = "INSERT INTO `items` (`name`, `price`, `location`, `category`, `quality`, `description`, `userId`, `image`) VALUES ('".$itemName."', '".$itemPrice."', '".$location."', '".$itemCategory."', '".$itemQuality."', '".$itemDescription."', '".$userID."', '".$target_file."')";
             mysqli_query($dbConnection, $query);
         }
     }
@@ -169,7 +180,7 @@
                     <div class="err">
                         <?php echo $error; ?>
                     </div>
-                    <form method="post">
+                    <form method="post" enctype="multipart/form-data">
                         <label>
                             Item For Sale
                             <input maxlength="100" type="text" id="nameItem" name="itemName" value="" placeholder="Enter Item Name" />
@@ -210,7 +221,7 @@
                             <textarea name="itemDescription" placeholder="Brief Description" id="descriptionItem" rows="4" maxlength="200"></textarea>
                         </label>
                         <label>
-                            Image Upload: [Upload Button Here]
+                            <input type="file" name="fileToUpload"/>
                         </label>
                         <br>
                         <input type="submit" id='postCreate' value="Create Post" class="button primary" />
