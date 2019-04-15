@@ -1,73 +1,32 @@
 <?php
-
-    //? DB Connection
     include 'DatabaseConnection.php';
-
-    //? Session start && variable
+    $dbConnection = DatabaseConnection::getInstance()->getConnection();
     session_start();
     $testerID = "";
     $ratingNum = 0;
     $ratingSum = 0;
     $listings = "";
     $totalRating = 0;
-
-    //? Check session
     if(!$_SESSION['email']){
-
         header('Location: signin.php'); 
-    }
-      else{
-
+    }else{
         $testerID = $_SESSION['email'];
     }
-
-      //? Database Connect
-    $dbConnection = DatabaseConnection::getInstance()->getConnection();
-
     $user = $_SESSION['profileName'];
-
-    $query = "SELECT * FROM users WHERE `username` = '".$user."'";
-
-    if($rslt = mysqli_query($dbConnection, $query)){
-
-        $row1 = mysqli_fetch_array($rslt);
-        $userID = $row1['userId'];
-    }
-
-    //TODO HAS TO CHANGE FOR PROFILE PAGES
-    $query = "SELECT * FROM users WHERE `userId` = '".$userID."'";
-
+    $query = "SELECT * FROM users WHERE `username` = '".$user."'";;
     if($result = mysqli_query($dbConnection, $query)){
-    
         $row = mysqli_fetch_array($result);
-    
-        //? Setting rating calculation variables
+        $userID = $row['userId'];
         if($row['ratingAmount'] != 0){
-    
             $ratingSum = $row['ratingTotal'];
             $ratingNum = $row['ratingAmount'];
         }
     }
-
-    //? Getting the whole table from MySQL database
     $query = "SELECT * FROM items WHERE `userId` = ".$userID;
-
     if($result = mysqli_query($dbConnection, $query)){
-
-        //? General loop
         $num = mysqli_num_rows($result);
         if ($num > 0) {
-
             while ($row = mysqli_fetch_assoc($result)) {
-
-                $query = "SELECT username FROM users WHERE `userId` = '".$row['userId']."'";
-
-                if($rslt = mysqli_query($dbConnection, $query)){
-
-                    $row1 = mysqli_fetch_array($rslt);
-                    $usr = $row1['username'];
-                }
-            
                 $listings .= '<div class="product list-product small-12 columns">
                 <div class="medium-4 small-12 columns product-image">
                     <a href="single-product.html">
@@ -88,11 +47,6 @@
                         <div class="prices">
                             <span class="price">'.$row['price'].'</span>
                             <div class="store float-right">
-                            <form method="post">
-                            By: <input type="submit" name="userProfile" value="'.$usr.'" class="button primary" id="userProf" />
-                            <input  style="display:none;" type="text" name="userName" value="'.$usr.'">
-                            <input  style="display:none;" type="text" name="itemID" value="'.$row['itemId'].'">
-                        </form>
                             </div>
                         </div>
 
@@ -105,11 +59,6 @@
                         </div><!-- product location /-->
 
                         <div class="cart-menu">
-                        <form method="post">
-                        Enter your email here: <input type="text" name="senderEmail">
-                        <input type="submit" name="contactUser" value="Send Contact Request" class="button primary" id="userProf" />
-                        <input  style="display:none;" type="text" name="userName" value="'.$usr.'">
-                    </form>
                         </div><!-- product buttons /-->
 
                     </div><!-- product meta /-->
@@ -118,23 +67,14 @@
             }
         }
     }
-
     if(isset($_POST['ratingSubmit'])){
-
-        //! Input field rating
         $newRating = $_POST['userRating'];
-
-        //? Appendding the new rating
         $ratingNum++;
         $ratingSum += $newRating;
-
-        //? Update the total rankings
         $query = "UPDATE users SET ratingTotal= ".$ratingSum.",ratingAmount= ".$ratingNum." WHERE `userId` = '".$userID."'";
-
         mysqli_query($dbConnection, $query);
         mysqli_close($dbConnection);
     }
-    
 ?>
 
 <!doctype html>
@@ -218,7 +158,7 @@
         <div class="header">
             <div class="row">
                 <div class="float-right">
-                    <a href="account.php" class="button primary" title="Account">Account</a>
+                    <a href="account-listings.php" class="button primary" title="Account">Account</a>
                     <input type="submit" value="Sign Out" id="logout" class="button primary" />
                 </div>
             </div>
@@ -264,7 +204,7 @@
                         </div>
                         <!-- user thumb /-->
                         <div class="user-detail float-left">
-                            <h4><?php echo strtoupper($user); ?>'s Page</h4>
+                            <h4><b><?php echo $user; ?>'s Page</b></h4></h4>
                             <div class="pro-rating float-left">
                                 Rating Number: <?php echo $ratingNum.'<br>' ?>
                                 Total Rating: <?php if($ratingNum != 0)
@@ -272,7 +212,7 @@
                                                     else
                                                         echo 0; ?>
                             </div>
-                            <a href="#" class="button primary" title="Account">Rate <?php echo strtoupper($user); ?></a>
+                            <a href="#" class="button primary" title="Account">Rate <?php echo $user; ?></a>
                             
                             <form method="post">
                                 <label>

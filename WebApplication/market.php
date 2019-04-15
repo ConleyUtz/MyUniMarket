@@ -45,11 +45,10 @@
             if ($num > 0) {
                 while ($row = mysqli_fetch_assoc($result)) {
                     $query = "SELECT username FROM users WHERE `userId` = '".$row['userId']."'";
-                    if($rslt = mysqli_query($dbConnection, $query)){
-                    $row1 = mysqli_fetch_array($rslt);
-                    $usr = $row1['username'];
+                    if($rslt = mysqli_query($dbConnection, $query)) {
+                        $row1 = mysqli_fetch_array($rslt);
+                        $usr = $row1['username'];
                     }
-                    //! PRICE FILTER MAYBE GOES HERE
 
                     if(isset($_GET["keywordSearch"]) && $_GET["keywordSearch"] != ''){
 
