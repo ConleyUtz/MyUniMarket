@@ -12,7 +12,7 @@
     }
     if(isset($_POST['userProfile'])){
         $_SESSION['profileName'] = $_POST['userName'];
-        header("Location: user-profile.php");
+        header("Location: user.php");
     }
     if(isset($_POST['contactUser'])) {
         $query = "SELECT email FROM users WHERE `username` = '" . $_POST['userName'] . "'";
