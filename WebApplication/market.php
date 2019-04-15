@@ -270,7 +270,7 @@
             </div>
         </div>
 
-        <script tpye="text/javascript">
+        <script type="text/javascript">
             logoutSuccess('logout');
         </script>
 
@@ -359,9 +359,7 @@
                     <div class="medium-9 small-12 columns store-content">
                         <br>
                         <div class="products-wrap">
-                            <!-- Mihir Shit-->
                             <?php echo $listings; ?>
-                                <!-- Mihir Shit -->
                         </div>
                         <!-- products wrap /-->
                     </div>
