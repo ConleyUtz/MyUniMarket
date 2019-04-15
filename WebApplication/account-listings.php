@@ -113,7 +113,7 @@
         <div class="header">
             <div class="row">
                 <div class="float-right">
-                    <a href="account.php" class="button primary" title="Account">Account</a>
+                    <a href="account-listings.php" class="button primary" title="Account">Account</a>
                     <input type="submit" value="Sign Out" id="logout" class="button primary" />
                 </div>
             </div>
@@ -145,7 +145,7 @@
                         <h2>Quick links</h2>
                         <div class="widget-content">
                             <ul class="vertical menu">
-                                <li><a href="account.php">My Listings</a></li>
+                                <li><a href="account-listings.php">My Listings</a></li>
                                 <li><a href="bookmarked-listings.php">Bookmarked Items</a></li>
                                 <li><a href="account-settings.php">Account Settings</a></li>
                             </ul>

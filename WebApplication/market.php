@@ -264,7 +264,7 @@
         <div class="header">
             <div class="row">
                 <div class="float-right">
-                    <a href="account.php" class="button primary" title="Account">Account</a>
+                    <a href="account-listings.php" class="button primary" title="Account">Account</a>
                     <a href="logout.php" id="logout" class="button primary" title="SIGN OUT">SIGN OUT</a>
                 </div>
             </div>
