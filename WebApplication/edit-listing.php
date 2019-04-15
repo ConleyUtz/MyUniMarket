@@ -163,7 +163,7 @@
         <div class="header">
             <div class="row">
                 <div class="float-right">
-                    <a href="account.php" class="button primary" title="Account">Account</a>
+                    <a href="account-listings.php" class="button primary" title="Account">Account</a>
                     <input type="submit" value="Sign Out" id="logout" class="button primary" />
                 </div>
             </div>
@@ -246,9 +246,6 @@
 
                 </div>
                 <!-- main search form /-->
-                <div class="medium-5 small-12 columns form-container">
-                    <img alt="" src="../ImageFiles/ProductImages/Image2.jpg" /> preview here
-                </div>
             </div>
 
         </div>
