@@ -18,9 +18,9 @@
         $query = "DELETE FROM items WHERE `userId`=".$userID." AND `name` = '".$_POST['listingName']."'";
         mysqli_query($dbConnection, $query);
     }
-    if(isset($_POST['editListing'])){
+    if(isset($_POST['edit-listing'])){
         $_SESSION['listingName'] = $_POST['listingName'];
-        header("Location: editListing.php");
+        header("Location: edit-listing.php");
     }
     if(isset($_POST['markAsSold'])){
         $query = "UPDATE items SET isSold= 1 WHERE `userId` = ".$userID." AND `name`= '".$_POST['listingName']."'";
@@ -146,7 +146,7 @@
                         <div class="widget-content">
                             <ul class="vertical menu">
                                 <li><a href="account.php">My Listings</a></li>
-                                <li><a href="account3.php">Bookmarked Items</a></li>
+                                <li><a href="bookmarked-listings.php">Bookmarked Items</a></li>
                                 <li><a href="account-settings.php">Account Settings</a></li>
                             </ul>
                         </div>
@@ -178,7 +178,7 @@
 
                         <!-- Store Content -->
                         <div class="products-wrap">
-                            <?php require 'myListingsDisplay.php';?>
+                            <?php require 'user-listing-display.php';?>
                                 <div class="clearfix"></div>
                         </div>
                         <!-- products wrap /-->
