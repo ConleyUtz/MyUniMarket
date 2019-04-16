@@ -11,9 +11,9 @@
         if ($num > 0) {
             while ($row = mysqli_fetch_assoc($result)) {
                 $query = "SELECT username FROM users WHERE `userId` = '".$row['userId']."'";
-                    if($result = mysqli_query($dbConnection, $query)){
-                        $row1 = mysqli_fetch_array($result);
-                        $user = $row1['username'];
+                    if($result2 = mysqli_query($dbConnection, $query)){
+                        $row2 = mysqli_fetch_array($result2);
+                        $user = $row2['username'];
                     }
                     echo '<div class="product list-product small-12 columns">
                     <div class="medium-4 small-12 columns product-image">
