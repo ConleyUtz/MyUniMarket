@@ -8,6 +8,8 @@
     }else{
         $testerID = $_SESSION['email'];
     }
+    $date = new DateTime();
+    $currentTime = $date->format('U');
     $itemName = "";
     $itemPrice = "";
     $itemDescription = "";
@@ -50,7 +52,7 @@
             $error .= "Please upload a picture of your listing.<br>";
         }else{
             $target_dir = "./uploads/";
-            $target_file = $target_dir.$_FILES['fileToUpload']['name'];
+            $target_file = $target_dir.$currentTime.$_FILES['fileToUpload']['name'];
             if(move_uploaded_file($_FILES['fileToUpload']['tmp_name'], $target_file)){
                 //Success
             }else{
