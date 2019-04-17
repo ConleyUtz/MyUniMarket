@@ -1,5 +1,6 @@
 <?php
     $userID = "";
+    $imagePath = "./uploads/defaultPic.jpg";
     $query = "SELECT userId FROM users WHERE `email` = '".$_SESSION['email']."'";
     if($result = mysqli_query($dbConnection, $query)){
       $row = mysqli_fetch_array($result);
@@ -15,16 +16,21 @@
                         $row2 = mysqli_fetch_array($result2);
                         $user = $row2['username'];
                     }
+                    if($row['image']){
+                        $imagePath = $row['image'];
+                    }else{
+                        $imagePath = "./uploads/defaultPic.jpg";
+                    }
                     echo '<div class="product list-product small-12 columns">
                     <div class="medium-4 small-12 columns product-image">
-                        <a href="single-product.html">
-                            <img src="../ImageFiles/ProductImages/Image1.jpg" alt="" />
-                            <img src="../ImageFiles/ProductImages/Image1.jpg" alt="" />
+                        <a>
+                            <img src="'.$imagePath.'" alt="" />
+                            <img src="'.$imagePath.'" alt="" />
                         </a>
                     </div><!-- Product Image /-->
                     <div class="medium-8 small-12 columns">
                         <div class="product-title">
-                            <a href="single-product.html">'.$row['name'].'</a>
+                            <a>'.$row['name'].'</a>
                         </div><!-- product title /-->
                         <div class="product-meta">
                             <div class="prices">

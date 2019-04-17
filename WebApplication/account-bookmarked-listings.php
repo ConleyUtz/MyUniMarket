@@ -6,6 +6,7 @@
     $testerID = "";
     $bookmarksArr = [];
     $listings = "";
+    $imagePath = "./uploads/defaultPic.jpg";
 
     if(!$_SESSION['email']){
 
@@ -32,7 +33,7 @@
     if(isset($_POST['userProfile'])){
         
         $_SESSION['profileName'] = $_POST['userName'];
-        header("Location: user.php");
+        header("Location: user-profile.php");
     }
 
     for($i=0; $i < sizeof($bookmarksArr); $i++){
@@ -50,17 +51,21 @@
                     $row2 = mysqli_fetch_array($rslt);
                     $usr = $row2['username'];
                 }
-    
+                if($row1['image']){
+                    $imagePath = $row1['image'];
+                }else{
+                    $imagePath = "./uploads/defaultPic.jpg";
+                }
             $listings .= '<div class="product list-product small-12 columns">
             <div class="medium-4 small-12 columns product-image">
-                <a href="single-product.html">
-                    <img src="../ImageFiles/ProductImages/Image1.jpg" alt="" />
-                    <img src="../ImageFiles/ProductImages/Image1.jpg" alt="" />
+                <a>
+                    <img src="'.$imagePath.'" alt="" />
+                    <img src="'.$imagePath.'" alt="" />
                 </a>
             </div><!-- Product Image /-->
             <div class="medium-8 small-12 columns">
                 <div class="product-title">
-                    <a href="single-product.html">'.$row1['name'].'</a>
+                    <a>'.$row1['name'].'</a>
                 </div><!-- product title /-->
                 <div class="medium-2 small-12 columns">
             </div>
@@ -187,7 +192,7 @@
             <div class="row">
                 <div class="logo float-left">
                     <?php
-                    echo  '<a href="market.php"><img src="../ImageFiles/MyUniMarket.png"  /></a>';
+                    echo  '<a href="market.php"><img src="../Mockup/MyUniMarket.png"  /></a>';
                     ?>
                 </div>
                 <!-- Logo /-->

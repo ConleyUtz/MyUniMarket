@@ -151,7 +151,7 @@
             <div class="row">
                 <div class="logo float-left">
                     <?php
-                    echo  '<a href="market.php"><img src="../ImageFiles/MyUniMarket.png"  /></a>';
+                    echo  '<a href="market.php"><img src="../MockUp/MyUniMarket.png"  /></a>';
                     ?>
                 </div>
                 <!-- Logo /-->
