@@ -39,27 +39,38 @@
             $query = "SELECT * FROM items WHERE `category` = 5 AND `isSold` = 0";
         }
     }
+    if(isset($_GET["bookmark"])){
+        $query = "SELECT bookmarks FROM users WHERE `email` = '".$testerID."'";
+        $bookmarksArr = [];
+        if($result = mysqli_query($dbConnection, $query)){
+            $row = mysqli_fetch_array($result);
+            if(!empty($row['bookmarks']))
+                $bookmarksArr = explode( ',' , $row['bookmarks']);
+        }
+        if(!in_array($_GET['bookmark'],$bookmarksArr))
+            array_push($bookmarksArr, $_GET['bookmark']);
+        $bookmarsString = implode(',' , $bookmarksArr);
+        $query = "UPDATE users SET bookmarks= '".$bookmarsString."' WHERE   `email` = '".$testerID."'";
+        mysqli_query($dbConnection, $query);
+        mysqli_close($dbConnection);
+    }
     if($query != ""){
         if($result = mysqli_query($dbConnection, $query)){
             $num = mysqli_num_rows($result);
             if ($num > 0) {
                 while ($row = mysqli_fetch_assoc($result)) {
                     $query = "SELECT username FROM users WHERE `userId` = '".$row['userId']."'";
-                    if($rslt = mysqli_query($dbConnection, $query)){
-                    $row1 = mysqli_fetch_array($rslt);
-                    $usr = $row1['username'];
+                    if($rslt = mysqli_query($dbConnection, $query)) {
+                        $row1 = mysqli_fetch_array($rslt);
+                        $usr = $row1['username'];
                     }
-                    //! PRICE FILTER MAYBE GOES HERE
-
                     if(isset($_GET["keywordSearch"]) && $_GET["keywordSearch"] != ''){
-
                         if(strpos(strtolower($row["name"]), strtolower($_GET["keywordSearch"])) !== false){
-
                                 $listings .= '<div class="product list-product small-12 columns">
                                 <div class="medium-4 small-12 columns product-image">
                                     <a href="single-product.html">
-                                        <img src="../ImageFiles/ProductImages/Image1.jpg" alt="" />
-                                        <img src="../ImageFiles/ProductImages/Image1.jpg" alt="" />
+                                        <img src="../MockUp/Image1.jpg" alt="" />
+                                        <img src="../MockUp/Image1.jpg" alt="" />
                                     </a>
                                 </div><!-- Product Image /-->
                                 <div class="medium-8 small-12 columns">
@@ -78,7 +89,6 @@
                                             <form method="post">
                                             By: <input type="submit" name="userProfile" value="'.$usr.'" class="button primary" id="userProf" />
                                             <input  style="display:none;" type="text" name="userName" value="'.$usr.'">
-                                            <input  style="display:none;" type="text" name="itemID" value="'.$row['itemId'].'">
                                         </form>
                                             </div>
                                         </div>
@@ -98,14 +108,57 @@
                                 </div>
                             </div><!-- Product /-->';
                         }
-                    }
-                    else{
+                    }else{
+                        if(isset($_GET['min']) && isset($_GET['max'])){
+                            if($_GET['min'] <= $row['price'] && $row['price'] <= $_GET['max']) {
+                                $listings .= '<div class="product list-product small-12 columns">
+                        <div class="medium-4 small-12 columns product-image">
+                            <a href="single-product.html">
+                                <img src="../MockUp/Image1.jpg" alt="" />
+                                <img src="../MockUp/Image1.jpg" alt="" />
+                            </a>
+                        </div><!-- Product Image /-->
+                        <div class="medium-8 small-12 columns">
+                            <div class="product-title">
+                                <a href="single-product.html">' . $row['name'] . '</a>
+                            </div><!-- product title /-->
+                            <div class="medium-2 small-12 columns">
+                            <ul class="menu">
+                            <li><a href="?bookmark=' . $row['itemId'] . '" title="Add to bookmarks"><i class="fa fa-bookmark-o fa-2x"></i></a></li>
+                            </ul>
+                        </div>
+                            <div class="product-meta">
+                                <div class="prices">
+                                    <span class="price">' . $row['price'] . '</span>
+                                    <div class="store float-right">
+                                    <form method="post">
+                                    By: <input type="submit" name="userProfile" value="' . $usr . '" class="button primary" id="userProf" />
+                                    <input  style="display:none;" type="text" name="userName" value="' . $usr . '">
+                                </form>
+                                    </div>
+                                </div>
 
+                                <div class="product-detail">
+                                    <p>' . $row['description'] . '</p>
+                                </div><!-- product detail /-->
+
+                                <div class="product-detail">
+                                    <p>Location: ' . $row['location'] . '</p>
+                                </div><!-- product location /-->
+
+                                <div class="cart-menu">
+                                </div><!-- product buttons /-->
+
+                            </div><!-- product meta /-->
+                        </div>
+                    </div><!-- Product /-->';
+                            }
+                        }else{
                         $listings .= '<div class="product list-product small-12 columns">
                         <div class="medium-4 small-12 columns product-image">
                             <a href="single-product.html">
-                                <img src="../ImageFiles/ProductImages/Image1.jpg" alt="" />
-                                <img src="../ImageFiles/ProductImages/Image1.jpg" alt="" />
+                                <img src="../MockUp/Image1.jpg" alt="" />
+                                <img src="../MockUp/Image1.jpg" alt="" />
                             </a>
                         </div><!-- Product Image /-->
                         <div class="medium-8 small-12 columns">
@@ -124,7 +177,6 @@
                                     <form method="post">
                                     By: <input type="submit" name="userProfile" value="'.$usr.'" class="button primary" id="userProf" />
                                     <input  style="display:none;" type="text" name="userName" value="'.$usr.'">
-                                    <input  style="display:none;" type="text" name="itemID" value="'.$row['itemId'].'">
                                 </form>
                                     </div>
                                 </div>
@@ -138,49 +190,16 @@
                                 </div><!-- product location /-->
 
                                 <div class="cart-menu">
-                                <form method="post">
-                                Enter your email here: <input type="text" name="senderEmail">
-                                <input type="submit" name="contactUser" value="Send Contact Request" class="button primary" id="userProf" />
-                                <input  style="display:none;" type="text" name="userName" value="'.$usr.'">
-                            </form>
                                 </div><!-- product buttons /-->
 
                             </div><!-- product meta /-->
                         </div>
                     </div><!-- Product /-->';
+                        }
                     }
                 }
             }
         }
-    }
-
-    //? Bookmarking
-    if(isset($_GET["bookmark"])){
-
-        //? Generate the query command/code
-        $query = "SELECT bookmarks FROM users WHERE `email` = '".$testerID."'";
-
-        $bookmarksArr = [];
-
-        if($result = mysqli_query($dbConnection, $query)){
-
-          $row = mysqli_fetch_array($result);
-        
-          if(!empty($row['bookmarks']))
-            $bookmarksArr = explode( ',' , $row['bookmarks']);
-            
-
-        }
-
-        if(!in_array($_GET['bookmark'],$bookmarksArr))
-        array_push($bookmarksArr, $_GET['bookmark']);
-
-        $bookmarsString = implode(',' , $bookmarksArr);
-
-        $query = "UPDATE users SET bookmarks= '".$bookmarsString."' WHERE   `email` = '".$testerID."'";
-
-        mysqli_query($dbConnection, $query);
-        mysqli_close($dbConnection);
     }
 ?>
 
@@ -264,13 +283,13 @@
         <div class="header">
             <div class="row">
                 <div class="float-right">
-                    <a href="account.php" class="button primary" title="Account">Account</a>
+                    <a href="account-listings.php" class="button primary" title="Account">Account</a>
                     <a href="logout.php" id="logout" class="button primary" title="SIGN OUT">SIGN OUT</a>
                 </div>
             </div>
         </div>
 
-        <script tpye="text/javascript">
+        <script type="text/javascript">
             logoutSuccess('logout');
         </script>
 
@@ -334,7 +353,7 @@
                             <!-- widget /-->
                         </form>
 
-                        <form method="get" action="price_filter_session.php">
+                        <form method="get">
                             <div class="widget shop-filter">
                                 <h2>Filters</h2>
                                 <div class="widget-content">
@@ -359,9 +378,7 @@
                     <div class="medium-9 small-12 columns store-content">
                         <br>
                         <div class="products-wrap">
-                            <!-- Mihir Shit-->
                             <?php echo $listings; ?>
-                                <!-- Mihir Shit -->
                         </div>
                         <!-- products wrap /-->
                     </div>

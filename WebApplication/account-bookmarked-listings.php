@@ -1,35 +1,122 @@
 <?php
+
     include 'DatabaseConnection.php';
-    $dbConnection = DatabaseConnection::getInstance()->getConnection();
+
     session_start();
     $testerID = "";
-    $userID = "";
+    $bookmarksArr = [];
+    $listings = "";
+
     if(!$_SESSION['email']){
+
         header('Location: signin.php'); 
-    }else{
+    }
+    else{
+
         $testerID = $_SESSION['email'];
     }
-    $query = "SELECT userId FROM users WHERE `email` = '".$_SESSION['email']."'";
+
+    //? Database Connect
+    $dbConnection = DatabaseConnection::getInstance()->getConnection();
+
+    $query = "SELECT bookmarks FROM users WHERE `isConfirmed` = 1 AND `email` = '".$testerID."'";
+
     if($result = mysqli_query($dbConnection, $query)){
+
         $row = mysqli_fetch_array($result);
-        $userID = $row['userId'];
+
+        if(!empty($row['bookmarks']))
+            $bookmarksArr = explode(',' , $row['bookmarks']);
     }
-    if(isset($_POST['deleteListing'])){
-        $query = "DELETE FROM items WHERE `userId`=".$userID." AND `name` = '".$_POST['listingName']."'";
+
+    if(isset($_POST['userProfile'])){
+        
+        $_SESSION['profileName'] = $_POST['userName'];
+        header("Location: user.php");
+    }
+
+    for($i=0; $i < sizeof($bookmarksArr); $i++){
+
+
+        $query = "SELECT * FROM items WHERE `itemId` = ".$bookmarksArr[$i]." AND `isSold` = 0";
+
+        if($result = mysqli_query($dbConnection, $query)){
+
+            $row1 = mysqli_fetch_array($result);
+
+            $query = "SELECT username FROM users WHERE `userId` = '".$row1['userId']."'";
+
+            if($rslt = mysqli_query($dbConnection, $query)){
+                    $row2 = mysqli_fetch_array($rslt);
+                    $usr = $row2['username'];
+                }
+    
+            $listings .= '<div class="product list-product small-12 columns">
+            <div class="medium-4 small-12 columns product-image">
+                <a href="single-product.html">
+                    <img src="../ImageFiles/ProductImages/Image1.jpg" alt="" />
+                    <img src="../ImageFiles/ProductImages/Image1.jpg" alt="" />
+                </a>
+            </div><!-- Product Image /-->
+            <div class="medium-8 small-12 columns">
+                <div class="product-title">
+                    <a href="single-product.html">'.$row1['name'].'</a>
+                </div><!-- product title /-->
+                <div class="medium-2 small-12 columns">
+            </div>
+                <div class="product-meta">
+                    <div class="prices">
+                        <span class="price">'.$row1['price'].'</span>
+                        <div class="store float-right">
+                        <form method="post">
+                        By: <input type="submit" name="userProfile" value="'.$usr.'" class="button primary" id="userProf" />
+                        <input  style="display:none;" type="text" name="userName" value="'.$usr.'">
+                        <input  style="display:none;" type="text" name="itemID" value="'.$row1['itemId'].'">
+                    </form>
+                        </div>
+                    </div>
+
+                    <div class="product-detail">
+                        <p>'.$row1['description'].'</p>
+                    </div><!-- product detail /-->
+
+                    <div class="product-detail">
+                        <p>Location: '.$row1['location'].'</p>
+                    </div><!-- product location /-->
+
+                    <div class="cart-menu">
+                    <form method="post">
+                        Enter your email here: <input type="text" name="senderEmail">
+                        <input type="submit" name="contactUser" value="Send Contact Request" class="button primary" id="userProf" />
+                        <input type="submit" name="removeBookmark" value="Remove Bookmark" class="button primary" id="userProf" />
+                        <input  style="display:none;" type="text" name="itemID" value="'.$bookmarksArr[$i].'">
+                    </form>
+
+                    </div><!-- product buttons /-->
+
+                </div><!-- product meta /-->
+            </div>
+        </div><!-- Product /-->'; 
+        }
+
+    }
+
+    if(isset($_POST['removeBookmark'])){
+
+        if (($key = array_search($_POST['itemID'], $bookmarksArr)) !== false) {
+            unset($bookmarksArr[$key]);
+        }
+
+        $bookmarsString = implode(',' , $bookmarksArr);
+
+        $query = "UPDATE users SET bookmarks= '".$bookmarsString."' WHERE `email` = '".$testerID."'";
+
         mysqli_query($dbConnection, $query);
+        mysqli_close($dbConnection);
+
+        header("Refresh:0");
     }
-    if(isset($_POST['editListing'])){
-        $_SESSION['listingName'] = $_POST['listingName'];
-        header("Location: editListing.php");
-    }
-    if(isset($_POST['markAsSold'])){
-        $query = "UPDATE items SET isSold= 1 WHERE `userId` = ".$userID." AND `name`= '".$_POST['listingName']."'";
-        mysqli_query($dbConnection, $query);
-    }
-    if(isset($_POST['unmark'])){
-        $query = "UPDATE items SET isSold= 0 WHERE `userId` = ".$userID." AND `name`= '".$_POST['listingName']."'";
-        mysqli_query($dbConnection, $query);
-    }
+    
 ?>
 
 <!doctype html>
@@ -113,7 +200,7 @@
         <div class="header">
             <div class="row">
                 <div class="float-right">
-                    <a href="account.php" class="button primary" title="Account">Account</a>
+                    <a href="account-listings.php" class="button primary" title="Account">Account</a>
                     <input type="submit" value="Sign Out" id="logout" class="button primary" />
                 </div>
             </div>
@@ -130,7 +217,7 @@
             <div class="title-section">
                 <div class="row">
                     <div class="small-12 columns">
-                        <h1>Account Page - Your Listings</h1>
+                        <h1>Account Page - Bookmarked Posts</h1>
                     </div>
                     <!-- title /-->
                 </div>
@@ -145,8 +232,8 @@
                         <h2>Quick links</h2>
                         <div class="widget-content">
                             <ul class="vertical menu">
-                                <li><a href="account.php">My Listings</a></li>
-                                <li><a href="account3.php">Bookmarked Items</a></li>
+                                <li><a href="account-listings.php">My Listings</a></li>
+                                <li><a href="account-bookmarked-listings.php">Bookmarked Items</a></li>
                                 <li><a href="account-settings.php">Account Settings</a></li>
                             </ul>
                         </div>
@@ -178,8 +265,8 @@
 
                         <!-- Store Content -->
                         <div class="products-wrap">
-                            <?php require 'myListingsDisplay.php';?>
-                                <div class="clearfix"></div>
+                            <?php echo $listings; ?>                                
+                            <div class="clearfix"></div>
                         </div>
                         <!-- products wrap /-->
                     </div>

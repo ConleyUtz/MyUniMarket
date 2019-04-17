@@ -46,6 +46,17 @@
         }else{
             $itemQuality = $_POST['itemQuality'];
         }
+        if(!is_uploaded_file($_FILES['fileToUpload']['tmp_name'])){
+            $error .= "Please upload a picture of your listing.<br>";
+        }else{
+            $target_dir = "uploads/";
+            $target_file = $target_dir.$_FILES['fileToUpload']['name'];
+            if(move_uploaded_file($_FILES['fileToUpload']['tmp_name'], $target_file)){
+                //Success
+            }else{
+                $error .= "There was some error uploading your file. Please try again.<br>";
+            }
+        }
         if($error != ""){
           $error = '<div class="signin-error" style="color:red;"><strong>Error:</strong><br>'.$error.'</div>';
         }else{
@@ -53,7 +64,7 @@
             $result = mysqli_query($dbConnection, $query);
             $row = mysqli_fetch_array($result);
             $userID = $row['userId'];
-            $query = "INSERT INTO `items` (`name`, `price`, `location`, `category`, `quality`, `description`, `userId`) VALUES ('".$itemName."', '".$itemPrice."', '".$location."', '".$itemCategory."', '".$itemQuality."', '".$itemDescription."', '".$userID."')";
+            $query = "INSERT INTO `items` (`name`, `price`, `location`, `category`, `quality`, `description`, `userId`, `image`) VALUES ('".$itemName."', '".$itemPrice."', '".$location."', '".$itemCategory."', '".$itemQuality."', '".$itemDescription."', '".$userID."', '".$target_file."')";
             mysqli_query($dbConnection, $query);
         }
     }
@@ -140,7 +151,7 @@
         <div class="header">
             <div class="row">
                 <div class="float-right">
-                    <a href="account.php" class="button primary" title="Account">Account</a>
+                    <a href="account-listings.php" class="button primary" title="Account">Account</a>
                     <input type="submit" value="Sign Out" id="logout" class="button primary" />
                 </div>
             </div>
@@ -169,7 +180,7 @@
                     <div class="err">
                         <?php echo $error; ?>
                     </div>
-                    <form method="post">
+                    <form method="post" enctype="multipart/form-data">
                         <label>
                             Item For Sale
                             <input maxlength="100" type="text" id="nameItem" name="itemName" value="" placeholder="Enter Item Name" />
@@ -186,23 +197,23 @@
                         <label>
                             Select Category
                             <select name="itemCategory">
-                                <option disabled value="0"> -- Select an category -- </option>
-                                <option value="1">Category 1</option>
+                                <option disabled value="0"> -- Select a category -- </option>
+                                <option selected value="1">Category 1</option>
                                 <option value="2">Category 2</option>
                                 <option value="3">Category 3</option>
                                 <option value="4">Category 4</option>
-                                <option selected value="5">Other</option>
+                                <option value="5">Other</option>
                             </select>
                         </label>
                         <label>
                             Quality
                             <select name="itemQuality">
                             <option disabled value="0"> -- Select a quality  -- </option>
-                                <option value="1">Used - Poor</option>
+                                <option selected value="1">Used - Poor</option>
                                 <option value="2">Used - Acceptable</option>
                                 <option value="3">Used - Good</option>
                                 <option value="4">Used - Like New</option>
-                                <option selected value="5">New</option>
+                                <option value="5">New</option>
                             </select>
                         </label>
                         <label>
@@ -210,7 +221,7 @@
                             <textarea name="itemDescription" placeholder="Brief Description" id="descriptionItem" rows="4" maxlength="200"></textarea>
                         </label>
                         <label>
-                            Image Upload: [Upload Button Here]
+                            <input type="file" name="fileToUpload"/>
                         </label>
                         <br>
                         <input type="submit" id='postCreate' value="Create Post" class="button primary" />
@@ -222,9 +233,6 @@
 
                 </div>
                 <!-- main search form /-->
-                <div class="medium-5 small-12 columns form-container">
-                    <img alt="" src="../ImageFiles/ProductImages/Image2.jpg" /> preview here
-                </div>
             </div>
 
         </div>

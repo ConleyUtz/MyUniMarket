@@ -62,7 +62,7 @@
         }   
         if(!$_POST['newitemCategory']){
 
-            $error .= "A Categotry is required.<br>";
+            $error .= "A category is required.<br>";
         }else{
             $newitemCategory = $_POST['newitemCategory'];
         }
@@ -75,14 +75,8 @@
         if($error != ""){
             $error = '<div class="signup-error" style="color:red;"><strong>Error:</strong><br>'.$error.'</div>';
         }else{
-                    $query = "UPDATE items SET name= '".$newitemName."' WHERE `userId` = ".$userID." AND `name`= '".$listingName."';";
-                    $query .= "UPDATE items SET price= ".$newitemPrice." WHERE `userId` = ".$userID." AND `name`= '".$listingName."';";
-                    $query .= "UPDATE items SET location='".$newlocation."' WHERE `userId` = ".$userID." AND `name`= '".$listingName."';";
-                    $query .= "UPDATE items SET category= ".$newitemCategory." WHERE `userId` = ".$userID." AND `name`= '".$listingName."';";
-                    $query .= "UPDATE items SET quality= ".$newitemQuality." WHERE `userId` = ".$userID." AND `name`= '".$listingName."';";
-                    $query .= "UPDATE items SET description='".$newitemDescription."' WHERE `userId` = ".$userID." AND `name`= '".$listingName."'";
-                    $query = "UPDATE items SET name= '".$newitemName."',price= ".$newitemPrice.",location='".$newlocation."',category= ".$newitemCategory.",quality= ".$newitemQuality.",description='".$newitemDescription."' WHERE `userId` = ".$userID." AND `name`= '".$listingName."'";
-                    mysqli_query($dbConnection, $query);
+            $query = "UPDATE items SET name= '".$newitemName."',price= ".$newitemPrice.",location='".$newlocation."',category= ".$newitemCategory.",quality= ".$newitemQuality.",description='".$newitemDescription."' WHERE `userId` = ".$userID." AND `name`= '".$listingName."'";
+            mysqli_query($dbConnection, $query);
         }
     }
 ?>
@@ -169,7 +163,7 @@
         <div class="header">
             <div class="row">
                 <div class="float-right">
-                    <a href="account.php" class="button primary" title="Account">Account</a>
+                    <a href="account-listings.php" class="button primary" title="Account">Account</a>
                     <input type="submit" value="Sign Out" id="logout" class="button primary" />
                 </div>
             </div>
@@ -215,22 +209,22 @@
                             Select Category
                             <select name="newitemCategory">
                                 <option disabled value="0"> -- Select an option -- </option>
-                                <option value="1">Category 1</option>
+                                <option selected value="1">Category 1</option>
                                 <option value="2">Category 2</option>
                                 <option value="3">Category 3</option>
                                 <option value="4">Category 4</option>
-                                <option selected value="5">Other</option>
+                                <option value="5">Other</option>
                             </select>
                         </label>
                         <label>
                             Quality
                             <select name="newitemQuality">
                                 <option disabled value="0"> -- Select a quality -- </option>
-                                <option value="1">Used - Poor</option>
+                                <option selected value="1">Used - Poor</option>
                                 <option value="2">Used - Acceptable</option>
                                 <option value="3">Used - Good</option>
                                 <option value="4">Used - Like New</option>
-                                <option selected value="5">New</option>
+                                <option value="5">New</option>
                             </select>
                         </label>
                         <label>
@@ -252,9 +246,6 @@
 
                 </div>
                 <!-- main search form /-->
-                <div class="medium-5 small-12 columns form-container">
-                    <img alt="" src="../ImageFiles/ProductImages/Image2.jpg" /> preview here
-                </div>
             </div>
 
         </div>
