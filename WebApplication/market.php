@@ -39,21 +39,6 @@
             $query = "SELECT * FROM items WHERE `category` = 5 AND `isSold` = 0";
         }
     }
-    if(isset($_GET["bookmark"])){
-        $query = "SELECT bookmarks FROM users WHERE `email` = '".$testerID."'";
-        $bookmarksArr = [];
-        if($result = mysqli_query($dbConnection, $query)){
-            $row = mysqli_fetch_array($result);
-            if(!empty($row['bookmarks']))
-                $bookmarksArr = explode( ',' , $row['bookmarks']);
-        }
-        if(!in_array($_GET['bookmark'],$bookmarksArr))
-            array_push($bookmarksArr, $_GET['bookmark']);
-        $bookmarsString = implode(',' , $bookmarksArr);
-        $query = "UPDATE users SET bookmarks= '".$bookmarsString."' WHERE   `email` = '".$testerID."'";
-        mysqli_query($dbConnection, $query);
-        mysqli_close($dbConnection);
-    }
     if($query != ""){
         if($result = mysqli_query($dbConnection, $query)){
             $num = mysqli_num_rows($result);
@@ -200,6 +185,20 @@
                 }
             }
         }
+    }
+    if(isset($_GET["bookmark"])){
+        $query = "SELECT bookmarks FROM users WHERE `email` = '".$testerID."'";
+        $bookmarksArr = [];
+        if($result = mysqli_query($dbConnection, $query)){
+            $row = mysqli_fetch_array($result);
+            if(!empty($row['bookmarks']))
+                $bookmarksArr = explode( ',' , $row['bookmarks']);
+        }
+        if(!in_array($_GET['bookmark'],$bookmarksArr))
+            array_push($bookmarksArr, $_GET['bookmark']);
+        $bookmarsString = implode(',' , $bookmarksArr);
+        $query = "UPDATE users SET bookmarks= '".$bookmarsString."' WHERE   `email` = '".$testerID."'";
+        mysqli_query($dbConnection, $query);
     }
 ?>
 
