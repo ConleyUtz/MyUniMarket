@@ -12,6 +12,14 @@
     }else{
         $testerID = $_SESSION['email'];
     }
+    if(isset($_POST['ratingSubmit'])){
+        $newRating = $_POST['userRating'];
+        $ratingNum++;
+        $ratingSum += $newRating;
+        $query = "UPDATE users SET ratingTotal= ".$ratingSum.",ratingAmount= ".$ratingNum." WHERE `userId` = '".$userID."'";
+        mysqli_query($dbConnection, $query);
+        mysqli_close($dbConnection);
+    }
     $user = $_SESSION['profileName'];
     $query = "SELECT * FROM users WHERE `username` = '".$user."'";;
     if($result = mysqli_query($dbConnection, $query)){
@@ -66,14 +74,6 @@
             </div><!-- Product /-->';
             }
         }
-    }
-    if(isset($_POST['ratingSubmit'])){
-        $newRating = $_POST['userRating'];
-        $ratingNum++;
-        $ratingSum += $newRating;
-        $query = "UPDATE users SET ratingTotal= ".$ratingSum.",ratingAmount= ".$ratingNum." WHERE `userId` = '".$userID."'";
-        mysqli_query($dbConnection, $query);
-        mysqli_close($dbConnection);
     }
 ?>
 

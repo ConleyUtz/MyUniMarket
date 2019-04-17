@@ -39,6 +39,21 @@
             $query = "SELECT * FROM items WHERE `category` = 5 AND `isSold` = 0";
         }
     }
+    if(isset($_GET["bookmark"])){
+        $query = "SELECT bookmarks FROM users WHERE `email` = '".$testerID."'";
+        $bookmarksArr = [];
+        if($result = mysqli_query($dbConnection, $query)){
+            $row = mysqli_fetch_array($result);
+            if(!empty($row['bookmarks']))
+                $bookmarksArr = explode( ',' , $row['bookmarks']);
+        }
+        if(!in_array($_GET['bookmark'],$bookmarksArr))
+            array_push($bookmarksArr, $_GET['bookmark']);
+        $bookmarsString = implode(',' , $bookmarksArr);
+        $query = "UPDATE users SET bookmarks= '".$bookmarsString."' WHERE   `email` = '".$testerID."'";
+        mysqli_query($dbConnection, $query);
+        mysqli_close($dbConnection);
+    }
     if($query != ""){
         if($result = mysqli_query($dbConnection, $query)){
             $num = mysqli_num_rows($result);
@@ -49,11 +64,8 @@
                         $row1 = mysqli_fetch_array($rslt);
                         $usr = $row1['username'];
                     }
-
                     if(isset($_GET["keywordSearch"]) && $_GET["keywordSearch"] != ''){
-
                         if(strpos(strtolower($row["name"]), strtolower($_GET["keywordSearch"])) !== false){
-
                                 $listings .= '<div class="product list-product small-12 columns">
                                 <div class="medium-4 small-12 columns product-image">
                                     <a href="single-product.html">
@@ -77,7 +89,6 @@
                                             <form method="post">
                                             By: <input type="submit" name="userProfile" value="'.$usr.'" class="button primary" id="userProf" />
                                             <input  style="display:none;" type="text" name="userName" value="'.$usr.'">
-                                            <input  style="display:none;" type="text" name="itemID" value="'.$row['itemId'].'">
                                         </form>
                                             </div>
                                         </div>
@@ -97,9 +108,7 @@
                                 </div>
                             </div><!-- Product /-->';
                         }
-                    }
-                    else{
-
+                    }else{
                         $listings .= '<div class="product list-product small-12 columns">
                         <div class="medium-4 small-12 columns product-image">
                             <a href="single-product.html">
@@ -123,7 +132,6 @@
                                     <form method="post">
                                     By: <input type="submit" name="userProfile" value="'.$usr.'" class="button primary" id="userProf" />
                                     <input  style="display:none;" type="text" name="userName" value="'.$usr.'">
-                                    <input  style="display:none;" type="text" name="itemID" value="'.$row['itemId'].'">
                                 </form>
                                     </div>
                                 </div>
@@ -137,11 +145,6 @@
                                 </div><!-- product location /-->
 
                                 <div class="cart-menu">
-                                <form method="post">
-                                Enter your email here: <input type="text" name="senderEmail">
-                                <input type="submit" name="contactUser" value="Send Contact Request" class="button primary" id="userProf" />
-                                <input  style="display:none;" type="text" name="userName" value="'.$usr.'">
-                            </form>
                                 </div><!-- product buttons /-->
 
                             </div><!-- product meta /-->
@@ -151,35 +154,6 @@
                 }
             }
         }
-    }
-
-    //? Bookmarking
-    if(isset($_GET["bookmark"])){
-
-        //? Generate the query command/code
-        $query = "SELECT bookmarks FROM users WHERE `email` = '".$testerID."'";
-
-        $bookmarksArr = [];
-
-        if($result = mysqli_query($dbConnection, $query)){
-
-          $row = mysqli_fetch_array($result);
-        
-          if(!empty($row['bookmarks']))
-            $bookmarksArr = explode( ',' , $row['bookmarks']);
-            
-
-        }
-
-        if(!in_array($_GET['bookmark'],$bookmarksArr))
-        array_push($bookmarksArr, $_GET['bookmark']);
-
-        $bookmarsString = implode(',' , $bookmarksArr);
-
-        $query = "UPDATE users SET bookmarks= '".$bookmarsString."' WHERE   `email` = '".$testerID."'";
-
-        mysqli_query($dbConnection, $query);
-        mysqli_close($dbConnection);
     }
 ?>
 
@@ -333,7 +307,7 @@
                             <!-- widget /-->
                         </form>
 
-                        <form method="get" action="price_filter_session.php">
+                        <form method="get">
                             <div class="widget shop-filter">
                                 <h2>Filters</h2>
                                 <div class="widget-content">
