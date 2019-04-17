@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 17, 2019 at 02:50 AM
+-- Generation Time: Apr 10, 2019 at 04:58 AM
 -- Server version: 10.1.37-MariaDB
 -- PHP Version: 7.3.1
 
@@ -37,21 +37,20 @@ CREATE TABLE `items` (
   `quality` int(11) NOT NULL,
   `description` text NOT NULL,
   `userId` int(11) NOT NULL,
-  `isSold` tinyint(1) NOT NULL DEFAULT '0',
-  `image` text NOT NULL
+  `isSold` tinyint(1) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `items`
 --
 
-INSERT INTO `items` (`itemId`, `name`, `price`, `location`, `category`, `quality`, `description`, `userId`, `isSold`, `image`) VALUES
-(1, '1', '1.00', '1', 1, 1, '1', 1, 0, ''),
-(2, 'Item2', '99.12', 'PMU', 3, 1, 'This is the description text.', 2, 0, ''),
-(4, '5', '5.00', '5', 4, 3, '5', 12, 1, ''),
-(5, 'test', '777.00', 'LWSN', 1, 0, 'testing', 12, 0, ''),
-(6, 'Other category item', '123.00', 'LWSN', 2, 0, 'test', 12, 0, ''),
-(7, '123', '123.00', '123', 5, 3, '4321', 12, 0, '');
+INSERT INTO `items` (`itemId`, `name`, `price`, `location`, `category`, `quality`, `description`, `userId`, `isSold`) VALUES
+(1, '1', '1.00', '1', 1, 1, '1', 1, 0),
+(2, 'Item2', '99.12', 'PMU', 3, 1, 'This is the description text.', 2, 0),
+(4, '5', '5.00', '5', 4, 3, '5', 12, 1),
+(5, 'test', '777.00', 'LWSN', 1, 0, 'testing', 12, 0),
+(6, 'Other category item', '123.00', 'LWSN', 2, 0, 'test', 12, 0),
+(7, '123', '123.00', '123', 5, 3, '4321', 12, 0);
 
 -- --------------------------------------------------------
 
@@ -75,8 +74,8 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`userId`, `email`, `username`, `password`, `isConfirmed`, `bookmarks`, `ratingTotal`, `ratingAmount`) VALUES
-(1, 'user1@purdue.edu', 'user1', '$2y$10$6YDgveHu1FjX5Xek81h6Ue4b1GMGQFTrbHdZCUNAGKBAusJ45x2sq', 1, '', 0, 0),
-(2, 'user2@purdue.edu', 'user2', '$2y$10$zwXYhSqEZQqbyfO/3dqFR.KcDoSxdNRMMsV3OP4zWfG.RPLXxROBi', 0, '', 49, 11),
+(1, 'user1@purdue.edu', 'user1', '$2y$10$6YDgveHu1FjX5Xek81h6Ue4b1GMGQFTrbHdZCUNAGKBAusJ45x2sq', 1, '7,2', 0, 0),
+(2, 'user2@purdue.edu', 'user2', '$2y$10$zwXYhSqEZQqbyfO/3dqFR.KcDoSxdNRMMsV3OP4zWfG.RPLXxROBi', 0, '', 0, 0),
 (12, 'user3@purdue.edu', 'gkhmalad', '$2y$10$wcvrUhXD1.sATj0HeN7cEep7k.p0w8tiP/k4.CD2.QY2.bXc9YGh2', 1, '', 0, 0);
 
 --
