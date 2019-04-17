@@ -3,6 +3,7 @@
     session_start();
     $testerID = "";
     $listings = "";
+    $imagePath = "./uploads/defaultPic.jpg";
     $query = "SELECT * FROM items WHERE `isSold` = 0";
     $dbConnection = DatabaseConnection::getInstance()->getConnection();
     if(!$_SESSION['email']){
@@ -49,18 +50,23 @@
                         $row1 = mysqli_fetch_array($rslt);
                         $usr = $row1['username'];
                     }
+                    if($row['image']){
+                        $imagePath = $row['image'];
+                    }else{
+                        $imagePath = "./uploads/defaultPic.jpg";
+                    }
                     if(isset($_GET["keywordSearch"]) && $_GET["keywordSearch"] != ''){
                         if(strpos(strtolower($row["name"]), strtolower($_GET["keywordSearch"])) !== false){
                                 $listings .= '<div class="product list-product small-12 columns">
                                 <div class="medium-4 small-12 columns product-image">
-                                    <a href="single-product.html">
-                                        <img src="../MockUp/Image1.jpg" alt="" />
-                                        <img src="../MockUp/Image1.jpg" alt="" />
+                                    <a>
+                                        <img src="<'.$imagePath.'" alt="" />
+                                        <img src="'.$imagePath.'" alt="" />
                                     </a>
                                 </div><!-- Product Image /-->
                                 <div class="medium-8 small-12 columns">
                                     <div class="product-title">
-                                        <a href="single-product.html">'.$row['name'].'</a>
+                                        <a>'.$row['name'].'</a>
                                     </div><!-- product title /-->
                                     <div class="medium-2 small-12 columns">
                                     <ul class="menu">
@@ -98,14 +104,14 @@
                             if($_GET['min'] <= $row['price'] && $row['price'] <= $_GET['max']) {
                                 $listings .= '<div class="product list-product small-12 columns">
                         <div class="medium-4 small-12 columns product-image">
-                            <a href="single-product.html">
-                                <img src="../MockUp/Image1.jpg" alt="" />
-                                <img src="../MockUp/Image1.jpg" alt="" />
+                            <a>
+                                <img src="'.$imagePath.'" alt="" />
+                                <img src="'.$imagePath.'" alt="" />
                             </a>
                         </div><!-- Product Image /-->
                         <div class="medium-8 small-12 columns">
                             <div class="product-title">
-                                <a href="single-product.html">' . $row['name'] . '</a>
+                                <a>' . $row['name'] . '</a>
                             </div><!-- product title /-->
                             <div class="medium-2 small-12 columns">
                             <ul class="menu">
@@ -141,14 +147,14 @@
                         }else{
                         $listings .= '<div class="product list-product small-12 columns">
                         <div class="medium-4 small-12 columns product-image">
-                            <a href="single-product.html">
-                                <img src="../MockUp/Image1.jpg" alt="" />
-                                <img src="../MockUp/Image1.jpg" alt="" />
+                            <a>
+                                <img src="'.$imagePath.'" alt="" />
+                                <img src="'.$imagePath.'" alt="" />
                             </a>
                         </div><!-- Product Image /-->
                         <div class="medium-8 small-12 columns">
                             <div class="product-title">
-                                <a href="single-product.html">'.$row['name'].'</a>
+                                <a>'.$row['name'].'</a>
                             </div><!-- product title /-->
                             <div class="medium-2 small-12 columns">
                             <ul class="menu">

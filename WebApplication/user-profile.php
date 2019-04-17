@@ -6,6 +6,7 @@
     $ratingNum = 0;
     $ratingSum = 0;
     $listings = "";
+    $imagePath = "./uploads/defaultPic.jpg";
     $totalRating = 0;
     if(!$_SESSION['email']){
         header('Location: signin.php'); 
@@ -35,16 +36,21 @@
         $num = mysqli_num_rows($result);
         if ($num > 0) {
             while ($row = mysqli_fetch_assoc($result)) {
+                if($row['image']){
+                    $imagePath = $row['image'];
+                }else{
+                    $imagePath = "./uploads/defaultPic.jpg";
+                }
                 $listings .= '<div class="product list-product small-12 columns">
                 <div class="medium-4 small-12 columns product-image">
-                    <a href="single-product.html">
-                        <img src="../ImageFiles/ProductImages/Image1.jpg" alt="" />
-                        <img src="../ImageFiles/ProductImages/Image1.jpg" alt="" />
+                    <a>
+                        <img src="'.$imagePath.'" alt="" />
+                        <img src="'.$imagePath.'" alt="" />
                     </a>
                 </div><!-- Product Image /-->
                 <div class="medium-8 small-12 columns">
                     <div class="product-title">
-                        <a href="single-product.html">'.$row['name'].'</a>
+                        <a>'.$row['name'].'</a>
                     </div><!-- product title /-->
                     <div class="medium-2 small-12 columns">
                     <ul class="menu">
