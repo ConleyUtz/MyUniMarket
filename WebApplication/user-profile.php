@@ -14,7 +14,7 @@
         $testerID = $_SESSION['email'];
     }
     $user = $_SESSION['profileName'];
-    $query = "SELECT * FROM users WHERE `username` = '".$user."'";;
+    $query = "SELECT * FROM users WHERE `username` = '".$user."'";
     if($result = mysqli_query($dbConnection, $query)){
         $row = mysqli_fetch_array($result);
         $userID = $row['userId'];
@@ -29,7 +29,6 @@
         $ratingSum += $newRating;
         $query = "UPDATE users SET ratingTotal= ".$ratingSum.",ratingAmount= ".$ratingNum." WHERE `userId` = '".$userID."'";
         mysqli_query($dbConnection, $query);
-        mysqli_close($dbConnection);
     }
     $query = "SELECT * FROM items WHERE `userId` = ".$userID;
     if($result = mysqli_query($dbConnection, $query)){
@@ -91,6 +90,7 @@
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <script src="./js/logoutSuccess.js" type="text/javascript"></script>
+    <script src="./js/ratings.js" type="text/javascript"></script>
 
     <title>MyUniMarket - User</title>
 
@@ -193,10 +193,10 @@
             <div class="row">
                 <div class="medium-3 small-12 columns sidebar">
                     <div class="widget">
-                        <h2>Insert Text Here</h2>
+                        <h2></h2>
                         <div class="widget-content">
-                            <strong>Bold Text Here</strong>
-                            <p>Regular Text Here</p>
+                            <strong>Here is a profile page</strong>
+                            <p>You may rate a user and see their posts. You can also allow bookmark their posts to save it for later!</p>
                         </div>
                         <!-- widget content /-->
                     </div>
@@ -218,8 +218,8 @@
                                                     else
                                                         echo 0; ?>
                             </div>
-                            <a href="#" class="button primary" title="Account">Rate <?php echo $user; ?></a>
-                            
+                            <a href="#" class="button primary" title="Account" id ="rate">Rate <?php echo $user; ?></a>
+                            <div id = "rateBlock" style="display:none;"> 
                             <form method="post">
                                 <label>
                                     Select Rating
@@ -232,11 +232,18 @@
                                 <option selected value="5">5</option>
                                     </select>
                                 </label>
-                                <input type="submit" name='ratingSubmit' class="button primary">
+                                <input type="submit" name='ratingSubmit'  class="button primary">
                             </form>
+
+                            </div>
                             
 
                         </div>
+                        <script type="text/javascript">
+
+                            ratings("rate","rateBlock");
+
+                        </script>
                         <!-- user detail /-->
                         <div class="clearfix"></div>
                         <br>
