@@ -68,6 +68,7 @@
             $userID = $row['userId'];
             $query = "INSERT INTO `items` (`name`, `price`, `location`, `category`, `quality`, `description`, `userId`, `image`) VALUES ('".$itemName."', '".$itemPrice."', '".$location."', '".$itemCategory."', '".$itemQuality."', '".$itemDescription."', '".$userID."', '".$target_file."')";
             mysqli_query($dbConnection, $query);
+            header('Location: ./market.php');
         }
     }
 ?>
