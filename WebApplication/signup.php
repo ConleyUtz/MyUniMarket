@@ -43,10 +43,12 @@
         if($error != ""){
           $error = '<div class="signup-error" style="color:red;"><strong>Error:</strong><br>'.$error.'</div>';
         }else{
-            $error = '<div class="signup-success" style="color:green;"><p>Sign Up Success!</p></div>';
+            //$error = '<div class="signup-success" style="color:green;"><p>Sign Up Success!</p></div>';
             $password_hash = password_hash($password, PASSWORD_DEFAULT);
             $query = "INSERT INTO `users` (`email`, `password`, `username`) VALUES ('".$email."', '".$password_hash."', '".$username."')";
             mysqli_query($dbConnection, $query);
+            $msg = "Sign Up Success!";
+            echo "<script type='text/javascript'>alert('$msg');</script>";
             $link = "http://localhost/MyUniMarket/WebApplication/verify-email.php?user=".$email;
             $mail = new PHPMailer;
             $mail->isSMTP();
