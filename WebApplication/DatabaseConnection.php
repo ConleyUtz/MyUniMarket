@@ -6,9 +6,9 @@ class DatabaseConnection{
     private $connection;
 
     private $host = 'us-cdbr-iron-east-02.cleardb.net';
-    private $username = 'b1cf8caae175e0';
-    private $password = '0029ea8e';
-    private $database = 'heroku_9c10539a92cf659';
+    private $username = 'bafea7c0751e41';
+    private $password = '0087ce97';
+    private $database = 'heroku_e2ec126516fc265';
 
     private function __construct(){
         $this->connection = mysqli_connect($this->host, $this->username, $this->password, $this->database);
