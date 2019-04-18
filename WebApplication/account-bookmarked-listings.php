@@ -197,7 +197,7 @@
         <div class="top-info-bar">
             <div class="row">
                 <div class="logo float-left">
-                    <img alt="" src="../MockUp/MyUniMarket.png" href="./market.php"/>
+                    <a href="./market.php"><img alt="" src="../MockUp/MyUniMarket.png"/></a>
                 </div>
                 <!-- Logo /-->
 
