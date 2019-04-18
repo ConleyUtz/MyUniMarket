@@ -193,10 +193,10 @@
             <div class="row">
                 <div class="medium-3 small-12 columns sidebar">
                     <div class="widget">
-                        <h2>Insert Text Here</h2>
+                        <h2></h2>
                         <div class="widget-content">
-                            <strong>Bold Text Here</strong>
-                            <p>Regular Text Here</p>
+                            <strong>Here is a profile page</strong>
+                            <p>You may rate a user and see their posts. You can also allow bookmark their posts to save it for later!</p>
                         </div>
                         <!-- widget content /-->
                     </div>
