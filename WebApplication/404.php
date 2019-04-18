@@ -12,6 +12,8 @@
     <meta name="keywords" content="">
     <meta name="description" content="">
 
+    <link rel="icon" type="image/x-icon" href="../MockUp/favicon.ico" />
+
     <!-- important for responsiveness remove to make your site non responsive. -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -64,7 +66,7 @@
         <div class="top-info-bar">
             <div class="row">
                 <div class="logo float-left">
-                    <img alt="" src="../ImageFiles/MyUniMarket.png" />
+                    <img alt="" src="../MockUp/MyUniMarket.png" />
                 </div>
                 <!-- Logo /-->
             </div>

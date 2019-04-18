@@ -5,10 +5,10 @@ class DatabaseConnection{
     private static $instance = null;
     private $connection;
 
-    private $host = 'us-cdbr-iron-east-02.cleardb.net';
-    private $username = 'bafea7c0751e41';
-    private $password = '0087ce97';
-    private $database = 'heroku_e2ec126516fc265';
+    private $host = 'localhost';
+    private $username = 'root';
+    private $password = '';
+    private $database = 'my_uni_market';
 
     private function __construct(){
         $this->connection = mysqli_connect($this->host, $this->username, $this->password, $this->database);
