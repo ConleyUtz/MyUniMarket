@@ -39,6 +39,13 @@
         if($_POST['email'] && filter_var($_POST['email'],FILTER_VALIDATE_EMAIL) == false){
           $error .= "The email address is invalid.<br>";
           $email = "";
+        }else if ($_POST['email'] && filter_var($_POST['email'],FILTER_VALIDATE_EMAIL) == true){
+            $query = "SELECT * FROM users WHERE `email` = '".$_POST['email']."'";
+            if($rslt = mysqli_query($dbConnection, $query)) {
+                if (mysqli_num_rows($rslt)) {
+                    $error .= "An account with the same email address already exists. <br>";
+                 }
+            }
         }
         if($error != ""){
           $error = '<div class="signup-error" style="color:red;"><strong>Error:</strong><br>'.$error.'</div>';
