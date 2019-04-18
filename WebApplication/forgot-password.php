@@ -156,9 +156,11 @@
                         <h2>Instructions for Password Recovery</h2>
 
                         <div class="widget-content">
-
-                            <strong>Bold Text Here</strong>
-                            <p>Regular Text Here</p>
+                            <ul>
+                                <li> Provide your registered purdue email address.</li>
+                                <li> A validation email will be sent to your purdue email and you will be redirected to a page where you can change your password.</li>
+                                <li> You will be able to login using your new password. </li>
+                            </ul>
                         </div>
                         <!-- widget content /-->
                     </div>
@@ -199,19 +201,6 @@
 
         </div>
         <!-- content-container /-->
-
-        <!-- Call to Action box -->
-        <div class="call-to-action">
-            <div class="row">
-                <div class="medium-5 small-12 columns">
-                    <h4> InsertTextHere</h4>
-                </div>
-                <div class="medium-7 small-12 columns signup-form">
-                </div>
-            </div>
-            <!-- row -->
-        </div>
-        <!-- Call to Action End -->
 
         <!-- Footer -->
         <div class="footer">
