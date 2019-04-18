@@ -55,6 +55,7 @@
             mysqli_query($dbConnection, $query);
             $msg = "Sign Up Success! Check your email for validation.";
             echo "<script type='text/javascript'>alert('$msg');</script>";
+            header('Location: signin.php');
             $link = "http://localhost/MyUniMarket/WebApplication/verify-email.php?user=".$email;
             $mail = new PHPMailer;
             $mail->isSMTP();
