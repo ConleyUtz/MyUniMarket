@@ -77,6 +77,7 @@
         }else{
             $query = "UPDATE items SET name= '".$newitemName."',price= ".$newitemPrice.",location='".$newlocation."',category= ".$newitemCategory.",quality= ".$newitemQuality.",description='".$newitemDescription."' WHERE `userId` = ".$userID." AND `name`= '".$listingName."'";
             mysqli_query($dbConnection, $query);
+            header('Location: ./account-listings.php');
         }
     }
 ?>
