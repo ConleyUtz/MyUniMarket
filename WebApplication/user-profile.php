@@ -13,16 +13,8 @@
     }else{
         $testerID = $_SESSION['email'];
     }
-    if(isset($_POST['ratingSubmit'])){
-        $newRating = $_POST['userRating'];
-        $ratingNum++;
-        $ratingSum += $newRating;
-        $query = "UPDATE users SET ratingTotal= ".$ratingSum.",ratingAmount= ".$ratingNum." WHERE `userId` = '".$userID."'";
-        mysqli_query($dbConnection, $query);
-        mysqli_close($dbConnection);
-    }
     $user = $_SESSION['profileName'];
-    $query = "SELECT * FROM users WHERE `username` = '".$user."'";;
+    $query = "SELECT * FROM users WHERE `username` = '".$user."'";
     if($result = mysqli_query($dbConnection, $query)){
         $row = mysqli_fetch_array($result);
         $userID = $row['userId'];
@@ -30,6 +22,13 @@
             $ratingSum = $row['ratingTotal'];
             $ratingNum = $row['ratingAmount'];
         }
+    }
+    if(isset($_POST['ratingSubmit'])){
+        $newRating = $_POST['userRating'];
+        $ratingNum++;
+        $ratingSum += $newRating;
+        $query = "UPDATE users SET ratingTotal= ".$ratingSum.",ratingAmount= ".$ratingNum." WHERE `userId` = '".$userID."'";
+        mysqli_query($dbConnection, $query);
     }
     $query = "SELECT * FROM items WHERE `userId` = ".$userID;
     if($result = mysqli_query($dbConnection, $query)){
@@ -194,10 +193,10 @@
             <div class="row">
                 <div class="medium-3 small-12 columns sidebar">
                     <div class="widget">
-                        <h2>Insert Text Here</h2>
+                        <h2></h2>
                         <div class="widget-content">
-                            <strong>Bold Text Here</strong>
-                            <p>Regular Text Here</p>
+                            <strong>Here is a profile page</strong>
+                            <p>You may rate a user and see their posts. You can also allow bookmark their posts to save it for later!</p>
                         </div>
                         <!-- widget content /-->
                     </div>

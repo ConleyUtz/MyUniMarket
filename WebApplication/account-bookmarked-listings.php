@@ -191,13 +191,17 @@
         <div class="top-info-bar">
             <div class="row">
                 <div class="logo float-left">
-                    <?php
-                    echo  '<a href="market.php"><img src="../Mockup/MyUniMarket.png"  /></a>';
-                    ?>
+                    <img alt="" src="../MockUp/MyUniMarket.png" />
                 </div>
                 <!-- Logo /-->
+
+                <div class="medium-6 small-12 columns hide-for-small-only">
+
+                </div>
+                <!-- Right Ends /-->
+
             </div>
-            <!-- Right Ends /-->
+            <!-- row /-->
         </div>
         <!-- top Bar Ends here /-->
 

@@ -105,7 +105,7 @@
         <div class="top-info-bar">
             <div class="row">
                 <div class="logo float-left">
-                    <img alt="" src="../Mockup/MyUniMarket.png" />
+                    <img alt="" src="../MockUp/MyUniMarket.png" />
                 </div>
                 <!-- Logo /-->
 
