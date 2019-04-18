@@ -14,7 +14,7 @@
         $testerID = $_SESSION['email'];
     }
     $user = $_SESSION['profileName'];
-    $query = "SELECT * FROM users WHERE `username` = '".$user."'";;
+    $query = "SELECT * FROM users WHERE `username` = '".$user."'";
     if($result = mysqli_query($dbConnection, $query)){
         $row = mysqli_fetch_array($result);
         $userID = $row['userId'];
