@@ -29,7 +29,6 @@
         $ratingSum += $newRating;
         $query = "UPDATE users SET ratingTotal= ".$ratingSum.",ratingAmount= ".$ratingNum." WHERE `userId` = '".$userID."'";
         mysqli_query($dbConnection, $query);
-        mysqli_close($dbConnection);
     }
     $query = "SELECT * FROM items WHERE `userId` = ".$userID;
     if($result = mysqli_query($dbConnection, $query)){
