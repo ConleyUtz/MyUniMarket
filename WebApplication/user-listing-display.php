@@ -36,7 +36,7 @@
                             <div class="prices">
                                 <span class="price">'.$row['price'].'</span>
                                 <div class="store float-right">
-                                    By: <a href="store-front.html">'.$user.'</a>
+                                    By: <a>'.$user.'</a>
                                 </div>
                             </div>
                         </div>

@@ -55,137 +55,139 @@
                     }else{
                         $imagePath = "./uploads/defaultPic.jpg";
                     }
-                    if(isset($_GET["keywordSearch"]) && $_GET["keywordSearch"] != ''){
-                        if(strpos(strtolower($row["name"]), strtolower($_GET["keywordSearch"])) !== false){
-                                $listings .= '<div class="product list-product small-12 columns">
-                                <div class="medium-4 small-12 columns product-image">
-                                    <a>
-                                        <img src="<'.$imagePath.'" alt="" />
-                                        <img src="'.$imagePath.'" alt="" />
-                                    </a>
-                                </div><!-- Product Image /-->
-                                <div class="medium-8 small-12 columns">
-                                    <div class="product-title">
-                                        <a>'.$row['name'].'</a>
-                                    </div><!-- product title /-->
-                                    <div class="medium-2 small-12 columns">
-                                    <ul class="menu">
-                                    <li><a href="?bookmark='.$row['itemId'].'" title="Add to bookmarks"><i class="fa fa-bookmark-o fa-2x"></i></a></li>
-                                    </ul>
-                                </div>
-                                    <div class="product-meta">
-                                        <div class="prices">
-                                            <span class="price">'.$row['price'].'</span>
-                                            <div class="store float-right">
-                                            <form method="post">
-                                            By: <input type="submit" name="userProfile" value="'.$usr.'" class="button primary" id="userProf" />
-                                            <input  style="display:none;" type="text" name="userName" value="'.$usr.'">
-                                        </form>
-                                            </div>
-                                        </div>
-
-                                        <div class="product-detail">
-                                            <p>'.$row['description'].'</p>
-                                        </div><!-- product detail /-->
-
-                                        <div class="product-detail">
-                                            <p>Location: '.$row['location'].'</p>
-                                        </div><!-- product location /-->
-
-                                        <div class="cart-menu">
-                                        </div><!-- product buttons /-->
-
-                                    </div><!-- product meta /-->
-                                </div>
-                            </div><!-- Product /-->';
-                        }
-                    }else{
-                        if(isset($_GET['min']) && isset($_GET['max'])){
-                            if($_GET['min'] <= $row['price'] && $row['price'] <= $_GET['max']) {
-                                $listings .= '<div class="product list-product small-12 columns">
-                        <div class="medium-4 small-12 columns product-image">
-                            <a>
-                                <img src="'.$imagePath.'" alt="" />
-                                <img src="'.$imagePath.'" alt="" />
-                            </a>
-                        </div><!-- Product Image /-->
-                        <div class="medium-8 small-12 columns">
-                            <div class="product-title">
-                                <a>' . $row['name'] . '</a>
-                            </div><!-- product title /-->
-                            <div class="medium-2 small-12 columns">
-                            <ul class="menu">
-                            <li><a href="?bookmark=' . $row['itemId'] . '" title="Add to bookmarks"><i class="fa fa-bookmark-o fa-2x"></i></a></li>
-                            </ul>
-                        </div>
-                            <div class="product-meta">
-                                <div class="prices">
-                                    <span class="price">' . $row['price'] . '</span>
-                                    <div class="store float-right">
-                                    <form method="post">
-                                    By: <input type="submit" name="userProfile" value="' . $usr . '" class="button primary" id="userProf" />
-                                    <input  style="display:none;" type="text" name="userName" value="' . $usr . '">
-                                </form>
+                    if(mysqli_num_rows($rslt) != 0){
+                        if(isset($_GET["keywordSearch"]) && $_GET["keywordSearch"] != ''){
+                            if(strpos(strtolower($row["name"]), strtolower($_GET["keywordSearch"])) !== false){
+                                    $listings .= '<div class="product list-product small-12 columns">
+                                    <div class="medium-4 small-12 columns product-image">
+                                        <a>
+                                            <img src="<'.$imagePath.'" alt="" />
+                                            <img src="'.$imagePath.'" alt="" />
+                                        </a>
+                                    </div><!-- Product Image /-->
+                                    <div class="medium-8 small-12 columns">
+                                        <div class="product-title">
+                                            <a>'.$row['name'].'</a>
+                                        </div><!-- product title /-->
+                                        <div class="medium-2 small-12 columns">
+                                        <ul class="menu">
+                                        <li><a href="?bookmark='.$row['itemId'].'" title="Add to bookmarks"><i class="fa fa-bookmark-o fa-2x"></i></a></li>
+                                        </ul>
                                     </div>
-                                </div>
+                                        <div class="product-meta">
+                                            <div class="prices">
+                                                <span class="price">'.$row['price'].'</span>
+                                                <div class="store float-right">
+                                                <form method="post">
+                                                By: <input type="submit" name="userProfile" value="'.$usr.'" class="button primary" id="userProf" />
+                                                <input  style="display:none;" type="text" name="userName" value="'.$usr.'">
+                                            </form>
+                                                </div>
+                                            </div>
 
-                                <div class="product-detail">
-                                    <p>' . $row['description'] . '</p>
-                                </div><!-- product detail /-->
+                                            <div class="product-detail">
+                                                <p>'.$row['description'].'</p>
+                                            </div><!-- product detail /-->
 
-                                <div class="product-detail">
-                                    <p>Location: ' . $row['location'] . '</p>
-                                </div><!-- product location /-->
+                                            <div class="product-detail">
+                                                <p>Location: '.$row['location'].'</p>
+                                            </div><!-- product location /-->
 
-                                <div class="cart-menu">
-                                </div><!-- product buttons /-->
+                                            <div class="cart-menu">
+                                            </div><!-- product buttons /-->
 
-                            </div><!-- product meta /-->
-                        </div>
-                    </div><!-- Product /-->';
+                                        </div><!-- product meta /-->
+                                    </div>
+                                </div><!-- Product /-->';
                             }
                         }else{
-                        $listings .= '<div class="product list-product small-12 columns">
-                        <div class="medium-4 small-12 columns product-image">
-                            <a>
-                                <img src="'.$imagePath.'" alt="" />
-                                <img src="'.$imagePath.'" alt="" />
-                            </a>
-                        </div><!-- Product Image /-->
-                        <div class="medium-8 small-12 columns">
-                            <div class="product-title">
-                                <a>'.$row['name'].'</a>
-                            </div><!-- product title /-->
-                            <div class="medium-2 small-12 columns">
-                            <ul class="menu">
-                            <li><a href="?bookmark='.$row['itemId'].'" title="Add to bookmarks"><i class="fa fa-bookmark-o fa-2x"></i></a></li>
-                            </ul>
-                        </div>
-                            <div class="product-meta">
-                                <div class="prices">
-                                    <span class="price">'.$row['price'].'</span>
-                                    <div class="store float-right">
-                                    <form method="post">
-                                    By: <input type="submit" name="userProfile" value="'.$usr.'" class="button primary" id="userProf" />
-                                    <input  style="display:none;" type="text" name="userName" value="'.$usr.'">
-                                </form>
+                            if(isset($_GET['min']) && isset($_GET['max'])){
+                                if($_GET['min'] <= $row['price'] && $row['price'] <= $_GET['max']) {
+                                    $listings .= '<div class="product list-product small-12 columns">
+                            <div class="medium-4 small-12 columns product-image">
+                                <a>
+                                    <img src="'.$imagePath.'" alt="" />
+                                    <img src="'.$imagePath.'" alt="" />
+                                </a>
+                            </div><!-- Product Image /-->
+                            <div class="medium-8 small-12 columns">
+                                <div class="product-title">
+                                    <a>' . $row['name'] . '</a>
+                                </div><!-- product title /-->
+                                <div class="medium-2 small-12 columns">
+                                <ul class="menu">
+                                <li><a href="?bookmark=' . $row['itemId'] . '" title="Add to bookmarks"><i class="fa fa-bookmark-o fa-2x"></i></a></li>
+                                </ul>
+                            </div>
+                                <div class="product-meta">
+                                    <div class="prices">
+                                        <span class="price">' . $row['price'] . '</span>
+                                        <div class="store float-right">
+                                        <form method="post">
+                                        By: <input type="submit" name="userProfile" value="' . $usr . '" class="button primary" id="userProf" />
+                                        <input  style="display:none;" type="text" name="userName" value="' . $usr . '">
+                                    </form>
+                                        </div>
                                     </div>
-                                </div>
 
-                                <div class="product-detail">
-                                    <p>'.$row['description'].'</p>
-                                </div><!-- product detail /-->
+                                    <div class="product-detail">
+                                        <p>' . $row['description'] . '</p>
+                                    </div><!-- product detail /-->
 
-                                <div class="product-detail">
-                                    <p>Location: '.$row['location'].'</p>
-                                </div><!-- product location /-->
+                                    <div class="product-detail">
+                                        <p>Location: ' . $row['location'] . '</p>
+                                    </div><!-- product location /-->
 
-                                <div class="cart-menu">
-                                </div><!-- product buttons /-->
+                                    <div class="cart-menu">
+                                    </div><!-- product buttons /-->
 
-                            </div><!-- product meta /-->
-                        </div>
-                    </div><!-- Product /-->';
+                                </div><!-- product meta /-->
+                            </div>
+                        </div><!-- Product /-->';
+                                }
+                            }else{
+                            $listings .= '<div class="product list-product small-12 columns">
+                            <div class="medium-4 small-12 columns product-image">
+                                <a>
+                                    <img src="'.$imagePath.'" alt="" />
+                                    <img src="'.$imagePath.'" alt="" />
+                                </a>
+                            </div><!-- Product Image /-->
+                            <div class="medium-8 small-12 columns">
+                                <div class="product-title">
+                                    <a>'.$row['name'].'</a>
+                                </div><!-- product title /-->
+                                <div class="medium-2 small-12 columns">
+                                <ul class="menu">
+                                <li><a href="?bookmark='.$row['itemId'].'" title="Add to bookmarks"><i class="fa fa-bookmark-o fa-2x"></i></a></li>
+                                </ul>
+                            </div>
+                                <div class="product-meta">
+                                    <div class="prices">
+                                        <span class="price">'.$row['price'].'</span>
+                                        <div class="store float-right">
+                                        <form method="post">
+                                        By: <input type="submit" name="userProfile" value="'.$usr.'" class="button primary" id="userProf" />
+                                        <input  style="display:none;" type="text" name="userName" value="'.$usr.'">
+                                    </form>
+                                        </div>
+                                    </div>
+
+                                    <div class="product-detail">
+                                        <p>'.$row['description'].'</p>
+                                    </div><!-- product detail /-->
+
+                                    <div class="product-detail">
+                                        <p>Location: '.$row['location'].'</p>
+                                    </div><!-- product location /-->
+
+                                    <div class="cart-menu">
+                                    </div><!-- product buttons /-->
+
+                                </div><!-- product meta /-->
+                            </div>
+                        </div><!-- Product /-->';
+                            }
                         }
                     }
                 }

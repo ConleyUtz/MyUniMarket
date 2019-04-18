@@ -236,7 +236,7 @@
                     <div class="general-info dashboard-module">
 
                         <div class="float-left user-thumb">
-                            <img alt="" src="images/help/user_thumb.jpg" />
+                            <img src="../MockUp/user-icon.png">
                         </div><!-- user thumb /-->
 
 

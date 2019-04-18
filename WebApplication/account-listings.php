@@ -168,7 +168,7 @@
                 <div class="medium-9 small-12 columns">
                     <div class="general-info dashboard-module">
                         <div class="float-left user-thumb">
-                            <img alt="" src="images/help/user_thumb.jpg" />
+                            <img src="../MockUp/user-icon.png">
                         </div>
                         <!-- user thumb /-->
                         <div class="user-detail float-left">
@@ -179,7 +179,7 @@
                                                         echo round($ratingSum/$ratingNum,2);
                                                     else
                                                         echo 0; ?>
-                                                        <br>
+                                <br>
                             </div>
                             <br>
                         </div>

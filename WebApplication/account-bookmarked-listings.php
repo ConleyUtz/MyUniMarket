@@ -50,14 +50,15 @@
             $query = "SELECT username FROM users WHERE `userId` = '".$row1['userId']."'";
 
             if($rslt = mysqli_query($dbConnection, $query)){
-                    $row2 = mysqli_fetch_array($rslt);
-                    $usr = $row2['username'];
-                }
-                if($row1['image']){
-                    $imagePath = $row1['image'];
-                }else{
-                    $imagePath = "./uploads/defaultPic.jpg";
-                }
+                $row2 = mysqli_fetch_array($rslt);
+                $usr = $row2['username'];
+            }
+            if($row1['image']){
+                $imagePath = $row1['image'];
+            }else{
+                $imagePath = "./uploads/defaultPic.jpg";
+            }
+            if(mysqli_num_rows($rslt) != 0){
             $listings .= '<div class="product list-product small-12 columns">
             <div class="medium-4 small-12 columns product-image">
                 <a>
@@ -104,6 +105,7 @@
                 </div><!-- product meta /-->
             </div>
         </div><!-- Product /-->'; 
+            }
         }
 
     }
@@ -258,7 +260,7 @@
                 <div class="medium-9 small-12 columns">
                     <div class="general-info dashboard-module">
                         <div class="float-left user-thumb">
-                            <img alt="" src="images/help/user_thumb.jpg" />
+                            <img src="../MockUp/user-icon.png">
                         </div>
                         <!-- user thumb /-->
                         <div class="user-detail float-left">
