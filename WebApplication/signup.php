@@ -53,8 +53,6 @@
             $password_hash = password_hash($password, PASSWORD_DEFAULT);
             $query = "INSERT INTO `users` (`email`, `password`, `username`) VALUES ('".$email."', '".$password_hash."', '".$username."')";
             mysqli_query($dbConnection, $query);
-            $msg = "Sign Up Success! Check your email for validation.";
-            echo "<script type='text/javascript'>alert('$msg');</script>";
             header('Location: signin.php');
             $link = "http://localhost/MyUniMarket/WebApplication/verify-email.php?user=".$email;
             $mail = new PHPMailer;
