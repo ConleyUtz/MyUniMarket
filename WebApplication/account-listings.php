@@ -4,15 +4,23 @@
     session_start();
     $testerID = "";
     $userID = "";
+    $ratingNum = 0;
+    $ratingSum = 0;
+    $uname = "";
     if(!$_SESSION['email']){
         header('Location: signin.php'); 
     }else{
         $testerID = $_SESSION['email'];
     }
-    $query = "SELECT userId FROM users WHERE `email` = '".$_SESSION['email']."'";
+    $query = "SELECT * FROM users WHERE `email` = '".$_SESSION['email']."'";
     if($result = mysqli_query($dbConnection, $query)){
         $row = mysqli_fetch_array($result);
         $userID = $row['userId'];
+        $uname = $row['username'];
+        if($row['ratingAmount'] != 0){
+            $ratingSum = $row['ratingTotal'];
+            $ratingNum = $row['ratingAmount'];
+        }
     }
     if(isset($_POST['deleteListing'])){
         $query = "DELETE FROM items WHERE `userId`=".$userID." AND `name` = '".$_POST['listingName']."'";
@@ -164,10 +172,16 @@
                         </div>
                         <!-- user thumb /-->
                         <div class="user-detail float-left">
-                            <h4>Conley Utz</h4>
+                            <h4><?php echo strtoupper($uname)?></h4>
                             <div class="pro-rating float-left">
+                                Rating Number: <?php echo $ratingNum.'<br>' ?>
+                                Total Rating: <?php if($ratingNum != 0)
+                                                        echo round($ratingSum/$ratingNum,2);
+                                                    else
+                                                        echo 0; ?>
+                                                        <br>
                             </div>
-                            <a href="#">User Since: 2/5/2019</a>
+                            <br>
                         </div>
                         <!-- user detail /-->
                         <div class="clearfix"></div>

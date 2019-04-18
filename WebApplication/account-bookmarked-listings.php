@@ -7,6 +7,7 @@
     $bookmarksArr = [];
     $listings = "";
     $imagePath = "./uploads/defaultPic.jpg";
+    $uname = "";
 
     if(!$_SESSION['email']){
 
@@ -20,11 +21,12 @@
     //? Database Connect
     $dbConnection = DatabaseConnection::getInstance()->getConnection();
 
-    $query = "SELECT bookmarks FROM users WHERE `isConfirmed` = 1 AND `email` = '".$testerID."'";
+    $query = "SELECT * FROM users WHERE `isConfirmed` = 1 AND `email` = '".$testerID."'";
 
     if($result = mysqli_query($dbConnection, $query)){
 
         $row = mysqli_fetch_array($result);
+        $uname = $row['username'];
 
         if(!empty($row['bookmarks']))
             $bookmarksArr = explode(',' , $row['bookmarks']);
@@ -260,10 +262,9 @@
                         </div>
                         <!-- user thumb /-->
                         <div class="user-detail float-left">
-                            <h4>Conley Utz</h4>
+                            <h4><?php echo strtoupper($uname)?></h4>
                             <div class="pro-rating float-left">
                             </div>
-                            <a href="#">User Since: 2/5/2019</a>
                         </div>
                         <!-- user detail /-->
                         <div class="clearfix"></div>

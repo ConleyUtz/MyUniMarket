@@ -16,6 +16,12 @@
     $currentUsername = "";
     $currentPassword = "";
     $error = "";
+    $uname = "";
+    $query = "SELECT * FROM users WHERE `email` = '".$_SESSION['email']."'";
+    if($result = mysqli_query($dbConnection, $query)){
+        $row = mysqli_fetch_array($result);
+        $uname = $row['username'];
+    }
     if ($_POST){
         if(isset($_POST['changePassword'])){
             if(!$_POST['oldPassword']){
@@ -236,9 +242,9 @@
 
 
                         <div class="user-detail float-left">
-                            <h4>Conley Utz</h4>
+                            <h4><?php echo strtoupper($uname)?></h4>
                             <div class="pro-rating float-left">
-                            </div> <a href="#">User Since: 2/5/2019</a>
+                            </div>
                         </div><!-- user detail /-->
                         <div class="clearfix"></div>
                         <br>
