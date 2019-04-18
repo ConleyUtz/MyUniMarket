@@ -232,9 +232,7 @@
                         </label>
                         <label>
                             Description
-                            <textarea name="newitemDescription" placeholder="Brief Description" id="descriptionItem" rows="4" maxlength="200">
-                                <?php echo $itemDescription ?>
-                            </textarea>
+                            <textarea name="newitemDescription" placeholder="Brief Description" id="descriptionItem" rows="4" maxlength="200"><?php echo $itemDescription ?></textarea>
                         </label>
                         <label>
                             Image Upload: [Upload Button Here]
