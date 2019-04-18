@@ -45,23 +45,24 @@
             $num = mysqli_num_rows($result);
             if ($num > 0) {
                 while ($row = mysqli_fetch_assoc($result)) {
-                    $query = "SELECT username FROM users WHERE `userId` = '".$row['userId']."'";
-                    if($rslt = mysqli_query($dbConnection, $query)) {
-                        $row1 = mysqli_fetch_array($rslt);
-                        $usr = $row1['username'];
-                    }
                     if($row['image']){
                         $imagePath = $row['image'];
                     }else{
                         $imagePath = "./uploads/defaultPic.jpg";
                     }
+                    $query = "SELECT username FROM users WHERE `userId` = '".$row['userId']."'";
+                    if($rslt = mysqli_query($dbConnection, $query)) {
+                        $row1 = mysqli_fetch_array($rslt);
+                        $usr = $row1['username'];
+                    }
                     if(mysqli_num_rows($rslt) != 0){
                         if(isset($_GET["keywordSearch"]) && $_GET["keywordSearch"] != ''){
                             if(strpos(strtolower($row["name"]), strtolower($_GET["keywordSearch"])) !== false){
+
                                     $listings .= '<div class="product list-product small-12 columns">
                                     <div class="medium-4 small-12 columns product-image">
                                         <a>
-                                            <img src="<'.$imagePath.'" alt="" />
+                                            <img src="'.$imagePath.'" alt="" />
                                             <img src="'.$imagePath.'" alt="" />
                                         </a>
                                     </div><!-- Product Image /-->
@@ -103,6 +104,7 @@
                         }else{
                             if(isset($_GET['min']) && isset($_GET['max'])){
                                 if($_GET['min'] <= $row['price'] && $row['price'] <= $_GET['max']) {
+
                                     $listings .= '<div class="product list-product small-12 columns">
                             <div class="medium-4 small-12 columns product-image">
                                 <a>
