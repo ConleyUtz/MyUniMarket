@@ -91,6 +91,7 @@
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <script src="./js/logoutSuccess.js" type="text/javascript"></script>
+    <script src="./js/ratings.js" type="text/javascript"></script>
 
     <title>MyUniMarket - User</title>
 
@@ -218,8 +219,8 @@
                                                     else
                                                         echo 0; ?>
                             </div>
-                            <a href="#" class="button primary" title="Account">Rate <?php echo $user; ?></a>
-                            
+                            <a href="#" class="button primary" title="Account" id ="rate">Rate <?php echo $user; ?></a>
+                            <div id = "rateBlock" style="display:none;"> 
                             <form method="post">
                                 <label>
                                     Select Rating
@@ -232,11 +233,18 @@
                                 <option selected value="5">5</option>
                                     </select>
                                 </label>
-                                <input type="submit" name='ratingSubmit' class="button primary">
+                                <input type="submit" name='ratingSubmit'  class="button primary">
                             </form>
+
+                            </div>
                             
 
                         </div>
+                        <script type="text/javascript">
+
+                            ratings("rate","rateBlock");
+
+                        </script>
                         <!-- user detail /-->
                         <div class="clearfix"></div>
                         <br>
