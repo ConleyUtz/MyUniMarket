@@ -345,10 +345,10 @@
                                 <h2>Categories</h2>
                                 <div class="widget-content">
                                     <ul class="menu vertical">
-                                        <li><a href="?name=cat1">Category 1</a></li>
-                                        <li><a href="?name=cat2">Category 2</a></li>
-                                        <li><a href="?name=cat3">Category 3</a></li>
-                                        <li><a href="?name=cat4">Category 4</a></li>
+                                        <li><a href="?name=cat1">Books</a></li>
+                                        <li><a href="?name=cat2">Technology</a></li>
+                                        <li><a href="?name=cat3">Supplies</a></li>
+                                        <li><a href="?name=cat4">Entertainment</a></li>
                                         <li><a href="?name=cat5">Other</a></li>
                                     </ul>
                                     <a href="market.php">

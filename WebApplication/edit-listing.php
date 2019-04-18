@@ -211,22 +211,22 @@
                             Select Category
                             <select name="newitemCategory">
                                 <option disabled value="0"> -- Select an option -- </option>
-                                <option selected value="1">Category 1</option>
-                                <option value="2">Category 2</option>
-                                <option value="3">Category 3</option>
-                                <option value="4">Category 4</option>
-                                <option value="5">Other</option>
+                                <option value="1">Books</option>
+                                <option value="2">Technology</option>
+                                <option value="3">Supplies/option>
+                                <option value="4">Entertainment</option>
+                                <option selected value="5">Other</option>
                             </select>
                         </label>
                         <label>
                             Quality
                             <select name="newitemQuality">
                                 <option disabled value="0"> -- Select a quality -- </option>
-                                <option selected value="1">Used - Poor</option>
+                                <option value="1">Used - Poor</option>
                                 <option value="2">Used - Acceptable</option>
                                 <option value="3">Used - Good</option>
                                 <option value="4">Used - Like New</option>
-                                <option value="5">New</option>
+                                <option selected value="5">New</option>
                             </select>
                         </label>
                         <label>
