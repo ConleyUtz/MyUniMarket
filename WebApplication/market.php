@@ -8,6 +8,7 @@
     $query = "SELECT * FROM items WHERE `isSold` = 0";
     $dbConnection = DatabaseConnection::getInstance()->getConnection();
     $destEmail = "";
+    $bookmarkTag = "";
     if(!$_SESSION['email']){
         header('Location: signin.php'); 
     }else{
@@ -63,6 +64,12 @@
                         $usr = $row1['username'];
                         $destEmail = $row1['email'];
                     }
+                    if($destEmail == $_SESSION['email']){
+                        $bookmarkTag = "";
+                    }
+                    else{
+                        $bookmarkTag = '<li><a href="?bookmark='.$row['itemId'].'" title="Add to bookmarks"><i class="fa fa-bookmark-o fa-2x"></i></a></li>"';
+                    }
                     if(mysqli_num_rows($rslt) != 0){
                         if(isset($_GET["keywordSearch"]) && $_GET["keywordSearch"] != ''){
                             if(strpos(strtolower($row["name"]), strtolower($_GET["keywordSearch"])) !== false){
@@ -79,8 +86,7 @@
                                             <a>'.$row['name'].'</a>
                                         </div><!-- product title /-->
                                         <div class="medium-2 small-12 columns">
-                                        <ul class="menu">
-                                        <li><a href="?bookmark='.$row['itemId'].'" title="Add to bookmarks"><i class="fa fa-bookmark-o fa-2x"></i></a></li>
+                                        <ul class="menu">'.$bookmarkTag.'
                                         </ul>
                                     </div>
                                         <div class="product-meta">
@@ -131,8 +137,7 @@
                                     <a>' . $row['name'] . '</a>
                                 </div><!-- product title /-->
                                 <div class="medium-2 small-12 columns">
-                                <ul class="menu">
-                                <li><a href="?bookmark=' . $row['itemId'] . '" title="Add to bookmarks"><i class="fa fa-bookmark-o fa-2x"></i></a></li>
+                                <ul class="menu">'.$bookmarkTag.'
                                 </ul>
                             </div>
                                 <div class="product-meta">
@@ -180,8 +185,7 @@
                                     <a>'.$row['name'].'</a>
                                 </div><!-- product title /-->
                                 <div class="medium-2 small-12 columns">
-                                <ul class="menu">
-                                <li><a href="?bookmark='.$row['itemId'].'" title="Add to bookmarks"><i class="fa fa-bookmark-o fa-2x"></i></a></li>
+                                <ul class="menu">'.$bookmarkTag.'
                                 </ul>
                             </div>
                                 <div class="product-meta">
