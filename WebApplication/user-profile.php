@@ -8,6 +8,7 @@
     $listings = "";
     $imagePath = "./uploads/defaultPic.jpg";
     $totalRating = 0;
+    $destEmail = "";
     if(!$_SESSION['email']){
         header('Location: signin.php'); 
     }else{
@@ -18,6 +19,7 @@
     if($result = mysqli_query($dbConnection, $query)){
         $row = mysqli_fetch_array($result);
         $userID = $row['userId'];
+        $destEmail = $row['email'];
         if($row['ratingAmount'] != 0){
             $ratingSum = $row['ratingTotal'];
             $ratingNum = $row['ratingAmount'];
@@ -29,6 +31,10 @@
         $ratingSum += $newRating;
         $query = "UPDATE users SET ratingTotal= ".$ratingSum.",ratingAmount= ".$ratingNum." WHERE `userId` = '".$userID."'";
         mysqli_query($dbConnection, $query);
+    }
+    if(isset($_POST['sendRequest'])){
+
+        //TODO
     }
     $query = "SELECT * FROM items WHERE `userId` = ".$userID;
     if($result = mysqli_query($dbConnection, $query)){
@@ -70,6 +76,12 @@
                         <div class="product-detail">
                             <p>Location: '.$row['location'].'</p>
                         </div><!-- product location /-->
+
+                        <form method="post">
+                        <textarea name="emailBody" placeholder="Please enter the message you want to send." rows="4" maxlength="200"></textarea>
+                            <input type="submit" name="sendRequest" class="button primary" value="Send Contact Request">
+                            <input  style="display:none;" type="text" name="userEmail" value="'.$destEmail.'">
+                        </form>
 
                         <div class="cart-menu">
                         </div><!-- product buttons /-->

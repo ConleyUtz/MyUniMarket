@@ -6,6 +6,7 @@
     $imagePath = "./uploads/defaultPic.jpg";
     $query = "SELECT * FROM items WHERE `isSold` = 0";
     $dbConnection = DatabaseConnection::getInstance()->getConnection();
+    $destEmail = "";
     if(!$_SESSION['email']){
         header('Location: signin.php'); 
     }else{
@@ -15,13 +16,9 @@
         $_SESSION['profileName'] = $_POST['userName'];
         header("Location: user-profile.php");
     }
-    if(isset($_POST['contactUser'])) {
-        $query = "SELECT email FROM users WHERE `username` = '" . $_POST['userName'] . "'";
-        if ($result = mysqli_query($dbConnection, $query)) {
-            $row = mysqli_fetch_array($result);
-            $_SESSION['toEmail'] = $row['email'];
-            header("Location: send_email.php");
-        }
+    if(isset($_POST['sendRequest'])){
+
+        //TODO
     }
     if(isset($_GET["name"])){
         if($_GET["name"] == "cat1"){
@@ -50,10 +47,11 @@
                     }else{
                         $imagePath = "./uploads/defaultPic.jpg";
                     }
-                    $query = "SELECT username FROM users WHERE `userId` = '".$row['userId']."'";
+                    $query = "SELECT * FROM users WHERE `userId` = '".$row['userId']."'";
                     if($rslt = mysqli_query($dbConnection, $query)) {
                         $row1 = mysqli_fetch_array($rslt);
                         $usr = $row1['username'];
+                        $destEmail = $row1['email'];
                     }
                     if(mysqli_num_rows($rslt) != 0){
                         if(isset($_GET["keywordSearch"]) && $_GET["keywordSearch"] != ''){
@@ -93,6 +91,12 @@
                                             <div class="product-detail">
                                                 <p>Location: '.$row['location'].'</p>
                                             </div><!-- product location /-->
+
+                                            <form method="post">
+                                                s<textarea name="emailBody" placeholder="Please enter the message you want to send." rows="4" maxlength="200"></textarea>
+                                                <input type="submit" name="sendRequest" class="button primary" value="Send Contact Request">
+                                                <input  style="display:none;" type="text" name="userEmail" value="'.$destEmail.'">
+                                            </form>
 
                                             <div class="cart-menu">
                                             </div><!-- product buttons /-->
@@ -140,6 +144,12 @@
                                         <p>Location: ' . $row['location'] . '</p>
                                     </div><!-- product location /-->
 
+                                    <form method="post">
+                                        <textarea name="emailBody" placeholder="Please enter the message you want to send." rows="4" maxlength="200"></textarea>
+                                        <input type="submit" name="sendRequest" class="button primary" value="Send Contact Request">
+                                        <input  style="display:none;" type="text" name="userEmail" value="'.$destEmail.'">
+                                    </form>
+
                                     <div class="cart-menu">
                                     </div><!-- product buttons /-->
 
@@ -168,7 +178,7 @@
                                     <div class="prices">
                                         <span class="price">'.$row['price'].'</span>
                                         <div class="store float-right">
-                                        <form method="post">
+                                    <form method="post">
                                         By: <input type="submit" name="userProfile" value="'.$usr.'" class="button primary" id="userProf" />
                                         <input  style="display:none;" type="text" name="userName" value="'.$usr.'">
                                     </form>
@@ -182,6 +192,12 @@
                                     <div class="product-detail">
                                         <p>Location: '.$row['location'].'</p>
                                     </div><!-- product location /-->
+
+                                    <form method="post">
+                                        <textarea name="emailBody" placeholder="Please enter the message you want to send." rows="4" maxlength="200"></textarea>
+                                        <input type="submit" name="sendRequest" class="button primary" value="Send Contact Request">
+                                        <input  style="display:none;" type="text" name="userEmail" value="'.$destEmail.'">
+                                    </form>
 
                                     <div class="cart-menu">
                                     </div><!-- product buttons /-->

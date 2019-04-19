@@ -1,57 +1,45 @@
 <?php
-
     include 'DatabaseConnection.php';
-
     session_start();
     $testerID = "";
     $bookmarksArr = [];
     $listings = "";
     $imagePath = "./uploads/defaultPic.jpg";
     $uname = "";
-
+    $destEmail = "";
     if(!$_SESSION['email']){
-
         header('Location: signin.php'); 
     }
     else{
-
         $testerID = $_SESSION['email'];
     }
+    if(isset($_POST['sendRequest'])){
 
+        //TODO
+    }
     //? Database Connect
     $dbConnection = DatabaseConnection::getInstance()->getConnection();
-
     $query = "SELECT * FROM users WHERE `isConfirmed` = 1 AND `email` = '".$testerID."'";
-
     if($result = mysqli_query($dbConnection, $query)){
-
         $row = mysqli_fetch_array($result);
         $uname = $row['username'];
-
         if(!empty($row['bookmarks']))
             $bookmarksArr = explode(',' , $row['bookmarks']);
     }
-
     if(isset($_POST['userProfile'])){
         
         $_SESSION['profileName'] = $_POST['userName'];
         header("Location: user-profile.php");
     }
-
     for($i=0; $i < sizeof($bookmarksArr); $i++){
-
-
         $query = "SELECT * FROM items WHERE `itemId` = ".$bookmarksArr[$i]." AND `isSold` = 0";
-
         if($result = mysqli_query($dbConnection, $query)){
-
             $row1 = mysqli_fetch_array($result);
-
-            $query = "SELECT username FROM users WHERE `userId` = '".$row1['userId']."'";
-
+            $query = "SELECT * FROM users WHERE `userId` = '".$row1['userId']."'";
             if($rslt = mysqli_query($dbConnection, $query)){
                 $row2 = mysqli_fetch_array($rslt);
                 $usr = $row2['username'];
+                $destEmail = $row2['email'];
             }
             if($row1['image']){
                 $imagePath = $row1['image'];
@@ -94,10 +82,10 @@
 
                     <div class="cart-menu">
                     <form method="post">
-                        Enter your email here: <input type="text" name="senderEmail">
-                        <input type="submit" name="contactUser" value="Send Contact Request" class="button primary" id="userProf" />
+                        <textarea name="emailBody" placeholder="Please enter the message you want to send." rows="4" maxlength="200"></textarea>
+                        <input type="submit" name="sendRequest" class="button primary" value="Send Contact Request">
+                        <input  style="display:none;" type="text" name="userEmail" value="'.$destEmail.'">
                         <input type="submit" name="removeBookmark" value="Remove Bookmark" class="button primary" id="userProf" />
-                        <input  style="display:none;" type="text" name="itemID" value="'.$bookmarksArr[$i].'">
                     </form>
 
                     </div><!-- product buttons /-->
