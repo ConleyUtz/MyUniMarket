@@ -120,7 +120,7 @@
     <meta name="keywords" content="">
     <meta name="description" content="">
 
-    <link rel="icon" type="image/x-icon" href="../MockUp/favicon.ico" />
+    <link rel="icon" type="image/png" href="../MockUp/favicon.png" />
 
     <!-- important for responsiveness remove to make your site non responsive. -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
