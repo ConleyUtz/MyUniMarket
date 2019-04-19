@@ -35,6 +35,9 @@
     if(isset($_POST['sendRequest'])){
 
         //TODO
+        //* $destEmail is the email to which you should send the message
+        //* $_POST['emailBody'] is the message you should send
+        //* $_SESSION['email'] is the email of current user
     }
     $query = "SELECT * FROM items WHERE `userId` = ".$userID;
     if($result = mysqli_query($dbConnection, $query)){
