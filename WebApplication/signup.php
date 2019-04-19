@@ -17,10 +17,6 @@
           $error .= "An email address is required.<br>";
         }else{
             $email = $_POST['email'];
-            $arr = explode('@',$email);
-            if($arr[1] != "purdue.edu"){
-                $error .= "The email must be a purdue email! <br>";
-            }
         }
         if(!$_POST['password']){
           $error .= "The password is required.<br>";
@@ -52,38 +48,16 @@
             $password_hash = password_hash($password, PASSWORD_DEFAULT);
             $query = "INSERT INTO `users` (`email`, `password`, `username`) VALUES ('".$email."', '".$password_hash."', '".$username."')";
             mysqli_query($dbConnection, $query);
-            // $link = "http://localhost/MyUniMarket/WebApplication/verify-email.php?user=".$email;
-            // $mail = new PHPMailer;
-            // $mail->isSMTP();
-            // $mail->SMTPDebug = 0;
-            // $mail->Host = 'smtp-mail.outlook.com';
-            // $mail->Port = 587;
-            // $mail->SMTPAuth = true;
-            // $mail->Username = 'myunimarket@outlook.com';
-            // $mail->Password = 'WebApplication@123';
-            // $mail->setFrom('myunimarket@outlook.com', 'MyUniMarket');
-            // $mail->addAddress($email, 'User');
-            // $mail->Subject = 'Verify your email - MyUniMarket';
-            // $mail->Body = "Please confirm your email address for MyUniMarket by clicking on this: ".$link;
-            // if (!$mail->send()){
-            //     //echo 'Mailer Error: '.$mail->ErrorInfo;
-            // }else{
-            //     //echo 'Message sent!';
-            // }
-            $from = new SendGrid\Email(null, "test@example.com");
-            $subject = "Hello World from the SendGrid PHP Library!";
+            $link = "https://myunimarket.herokuapp.com/WebApplication/verify-email.php?user=".$email;
+            $from = new SendGrid\Email(null, "myunimarket@outlook.com");
+            $subject = "Verify your email - MyUniMarket";
             $to = new SendGrid\Email(null, $email);
-            $content = new SendGrid\Content("text/plain", "Hello, Email!");
+            $content = new SendGrid\Content("text/html", "<p>Please confirm your email for MyUniMarket by clicking on this: ".$link."<p>");
             $mail = new SendGrid\Mail($from, $subject, $to, $content);
-
             $apiKey = getenv('SENDGRID_API_KEY');
             $sg = new \SendGrid($apiKey);
-
             $response = $sg->client->mail()->send()->post($mail);
-            echo $response->statusCode();
-            echo $response->headers();
-            echo $response->body();
-            //!header('Location: signin.php');
+            header('Location: signin.php');
         }
     }
 ?>
