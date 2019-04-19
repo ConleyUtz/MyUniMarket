@@ -41,6 +41,7 @@
     <!-- important for compatibility charset -->
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <script src="./js/forgotPassword.js" type="text/javascript"></script>
 
     <title>MyUniMarket - Recovery</title>
 
@@ -141,8 +142,8 @@
 
                         <div class="widget-content">
                             <ul>
-                                <li> Provide your registered purdue email address.</li>
-                                <li> A validation email will be sent to your purdue email and you will be redirected to a page where you can change your password.</li>
+                                <li> Provide your registered email address.</li>
+                                <li> A validation email will be sent to your email (check your spam folder) and you will be redirected to a page where you can change your password.</li>
                                 <li> You will be able to login using your new password. </li>
                             </ul>
                         </div>
@@ -167,9 +168,12 @@
                             <input name="emailInput" type="text" value="" placeholder="Your Email Address ..." />
                         </label>
 
-                        <input type="submit" value="Recover Password" class="button primary" />
+                        <input type="submit" value="Recover Password" id ="pass" class="button primary" />
 
                     </form>
+                    <script type="text/javascript">
+                        forgotPassword('pass');
+                    </script>
                     <div>
                         Don't have an account?
                     </div>
