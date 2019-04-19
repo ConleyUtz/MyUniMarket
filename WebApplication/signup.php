@@ -70,7 +70,7 @@
             // }else{
             //     //echo 'Message sent!';
             // }
-            $from = new SendGrid\Email(null, "myunimarket@outlook.com");
+            $from = new SendGrid\Email(null, "test@example.com");
             $subject = "Hello World from the SendGrid PHP Library!";
             $to = new SendGrid\Email(null, $email);
             $content = new SendGrid\Content("text/plain", "Hello, Email!");
@@ -80,7 +80,10 @@
             $sg = new \SendGrid($apiKey);
 
             $response = $sg->client->mail()->send()->post($mail);
-            header('Location: signin.php');
+            echo $response->statusCode();
+            echo $response->headers();
+            echo $response->body();
+            //!header('Location: signin.php');
         }
     }
 ?>
