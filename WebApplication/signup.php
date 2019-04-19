@@ -1,7 +1,6 @@
 <?php
     include 'DatabaseConnection.php';
     $dbConnection = DatabaseConnection::getInstance()->getConnection();
-    use PHPMailer\PHPMailer\PHPMailer;
     require '../vendor/autoload.php';
     $error = "";
     $password = "";
