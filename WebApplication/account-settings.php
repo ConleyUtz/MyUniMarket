@@ -293,7 +293,7 @@
 
                                 <label>
                                     Confirm New Username
-                                    <input type="text" name="confirmNewUsername" value="" placeholder="Confimr new username ..." />
+                                    <input type="text" name="confirmNewUsername" value="" placeholder="Confirm new username ..." />
                                 </label>
                                 <input type="submit" name="changeUsername" value="Confirm" class="button primary" />
                             </form>
