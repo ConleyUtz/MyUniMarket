@@ -97,6 +97,7 @@
                         <input type="submit" name="sendRequest" class="button primary" value="Send Contact Request">
                         <input  style="display:none;" type="text" name="userEmail" value="'.$destEmail.'">
                         <input type="submit" name="removeBookmark" value="Remove Bookmark" class="button primary" id="userProf" />
+                        <input  style="display:none;" type="text" name="itemID" value="'.$row1['itemId'].'">
                     </form>
 
                     </div><!-- product buttons /-->
@@ -108,23 +109,15 @@
         }
 
     }
-
     if(isset($_POST['removeBookmark'])){
-
         if (($key = array_search($_POST['itemID'], $bookmarksArr)) !== false) {
             unset($bookmarksArr[$key]);
         }
-
         $bookmarsString = implode(',' , $bookmarksArr);
-
         $query = "UPDATE users SET bookmarks= '".$bookmarsString."' WHERE `email` = '".$testerID."'";
-
         mysqli_query($dbConnection, $query);
-        mysqli_close($dbConnection);
-
         header("Refresh:0");
     }
-    
 ?>
 
 <!doctype html>

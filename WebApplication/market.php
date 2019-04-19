@@ -8,6 +8,8 @@
     $query = "SELECT * FROM items WHERE `isSold` = 0";
     $dbConnection = DatabaseConnection::getInstance()->getConnection();
     $destEmail = "";
+    $bookmarkTag = "";
+    $byTag = "";
     if(!$_SESSION['email']){
         header('Location: signin.php'); 
     }else{
@@ -63,6 +65,14 @@
                         $usr = $row1['username'];
                         $destEmail = $row1['email'];
                     }
+                    if($destEmail == $_SESSION['email']){
+                        $bookmarkTag = "";
+                        $byTag = '<a>'.$usr.'</a>';
+                    }
+                    else{
+                        $bookmarkTag = '<li><a href="?bookmark='.$row['itemId'].'" title="Add to bookmarks"><i class="fa fa-bookmark-o fa-2x"></i></a></li>"';
+                        $byTag = '<input type="submit" name="userProfile" value="'.$usr.'" class="button primary" id="userProf" />';
+                    }
                     if(mysqli_num_rows($rslt) != 0){
                         if(isset($_GET["keywordSearch"]) && $_GET["keywordSearch"] != ''){
                             if(strpos(strtolower($row["name"]), strtolower($_GET["keywordSearch"])) !== false){
@@ -79,8 +89,7 @@
                                             <a>'.$row['name'].'</a>
                                         </div><!-- product title /-->
                                         <div class="medium-2 small-12 columns">
-                                        <ul class="menu">
-                                        <li><a href="?bookmark='.$row['itemId'].'" title="Add to bookmarks"><i class="fa fa-bookmark-o fa-2x"></i></a></li>
+                                        <ul class="menu">'.$bookmarkTag.'
                                         </ul>
                                     </div>
                                         <div class="product-meta">
@@ -88,7 +97,7 @@
                                                 <span class="price">'.$row['price'].'</span>
                                                 <div class="store float-right">
                                                 <form method="post">
-                                                By: <input type="submit" name="userProfile" value="'.$usr.'" class="button primary" id="userProf" />
+                                                By: '.$byTag.'
                                                 <input  style="display:none;" type="text" name="userName" value="'.$usr.'">
                                             </form>
                                                 </div>
@@ -131,8 +140,7 @@
                                     <a>' . $row['name'] . '</a>
                                 </div><!-- product title /-->
                                 <div class="medium-2 small-12 columns">
-                                <ul class="menu">
-                                <li><a href="?bookmark=' . $row['itemId'] . '" title="Add to bookmarks"><i class="fa fa-bookmark-o fa-2x"></i></a></li>
+                                <ul class="menu">'.$bookmarkTag.'
                                 </ul>
                             </div>
                                 <div class="product-meta">
@@ -140,7 +148,7 @@
                                         <span class="price">' . $row['price'] . '</span>
                                         <div class="store float-right">
                                         <form method="post">
-                                        By: <input type="submit" name="userProfile" value="' . $usr . '" class="button primary" id="userProf" />
+                                        By: '.$byTag.'
                                         <input  style="display:none;" type="text" name="userName" value="' . $usr . '">
                                     </form>
                                         </div>
@@ -180,8 +188,7 @@
                                     <a>'.$row['name'].'</a>
                                 </div><!-- product title /-->
                                 <div class="medium-2 small-12 columns">
-                                <ul class="menu">
-                                <li><a href="?bookmark='.$row['itemId'].'" title="Add to bookmarks"><i class="fa fa-bookmark-o fa-2x"></i></a></li>
+                                <ul class="menu">'.$bookmarkTag.'
                                 </ul>
                             </div>
                                 <div class="product-meta">
@@ -189,7 +196,7 @@
                                         <span class="price">'.$row['price'].'</span>
                                         <div class="store float-right">
                                     <form method="post">
-                                        By: <input type="submit" name="userProfile" value="'.$usr.'" class="button primary" id="userProf" />
+                                        By: '.$byTag.'
                                         <input  style="display:none;" type="text" name="userName" value="'.$usr.'">
                                     </form>
                                         </div>
