@@ -23,7 +23,7 @@
         }else{
             $password_hash = password_hash($newPass, PASSWORD_DEFAULT);
             $query = "UPDATE `users` SET password='".$password_hash."' WHERE email='".$email."'";
-            if(mysqli_query($link, $query)){
+            if(mysqli_query($dbConnection, $query)){
                 header("Location: signin.php");
             }
         }

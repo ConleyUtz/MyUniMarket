@@ -8,41 +8,26 @@
           $error .= "Please enter an email address.<br>";
         }else{
             $email = $_POST['emailInput'];
-            $arr = explode('@',$email);
-            if($arr[1] != "purdue.edu"){
-                $error .= "The email must be a purdue email! <br>";
-            }else{
-                if($result = mysqli_query($dbConnection, "SELECT password FROM users WHERE `email` = '".$email."' AND `isConfirmed` = true")){
-                    if(mysqli_num_rows($result) == 0){
-                        $error .= "A user with the following email does not exist. <br>";
-                    }
-                }else{
+            if($result = mysqli_query($dbConnection, "SELECT password FROM users WHERE `email` = '".$email."' AND `isConfirmed` = true")){
+                if(mysqli_num_rows($result) == 0){
                     $error .= "A user with the following email does not exist. <br>";
                 }
             }
         }
-        if($error != ""){
+       if($error != ""){
           $error = '<div class="signup-error" style="color:red;"><strong>Error:</strong><br>'.$error.'</div>';
         }else{
-            $link = "http://localhost/MyUniMarket/WebApplication/recover-password.php?user=".$email;
-            $mail = new PHPMailer;
-            $mail->isSMTP();
-            $mail->SMTPDebug = 0;
-            $mail->Host = 'smtp-mail.outlook.com';
-            $mail->Port = 587;
-            $mail->SMTPAuth = true;
-            $mail->Username = 'myunimarket@outlook.com';
-            $mail->Password = 'WebApplication@123';
-            $mail->setFrom('myunimarket@outlook.com', 'MyUniMarket');
-            $mail->addAddress($email, 'User');
-            $mail->Subject = 'Verify your email - MyUniMarket';
+            $link = "https://myunimarket.herokuapp.com/WebApplication/recover-password.php?user=".$email;
             $mail->Body = "Please confirm your email address for MyUniMarket for password recovery by clicking on this: ".$link;
-            if (!$mail->send()) {
-                //echo 'Mailer Error: ' . $mail->ErrorInfo;
-            } else {
-                //echo 'Message sent!';
-                $error = '<div class="signup-success" style="color:green;"><p>Email sent!</p></div>';
-            }
+            $from = new SendGrid\Email(null, "myunimarket@outlook.com");
+            $subject = "Verify your email - MyUniMarket";
+            $to = new SendGrid\Email(null, $email);
+            $content = new SendGrid\Content("text/html", "<p>Please confirm your email address for MyUniMarket for password recovery by clicking on this: ".$link."<p>");
+            $mail = new SendGrid\Mail($from, $subject, $to, $content);
+            $apiKey = getenv('SENDGRID_API_KEY');
+            $sg = new \SendGrid($apiKey);
+            $response = $sg->client->mail()->send()->post($mail);
+            header("Location: signin.php");
         }
     }
 ?>
