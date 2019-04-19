@@ -72,7 +72,7 @@
             // }
             $from = new SendGrid\Email(null, "test@example.com");
             $subject = "Hello World from the SendGrid PHP Library!";
-            $to = new SendGrid\Email(null, "giorgi.khmaladze.official@gmail.com");
+            $to = new SendGrid\Email(null, $email);
             $content = new SendGrid\Content("text/plain", "Hello, Email!");
             $mail = new SendGrid\Mail($from, $subject, $to, $content);
 
