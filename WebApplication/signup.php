@@ -1,7 +1,7 @@
 <?php
     include 'DatabaseConnection.php';
     $dbConnection = DatabaseConnection::getInstance()->getConnection();
-    require 'vendor/autoload.php';
+    require '../vendor/autoload.php';
     $error = "";
     $password = "";
     $confirmedPassword = "";
