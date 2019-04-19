@@ -52,25 +52,35 @@
             $password_hash = password_hash($password, PASSWORD_DEFAULT);
             $query = "INSERT INTO `users` (`email`, `password`, `username`) VALUES ('".$email."', '".$password_hash."', '".$username."')";
             mysqli_query($dbConnection, $query);
+            // $link = "http://localhost/MyUniMarket/WebApplication/verify-email.php?user=".$email;
+            // $mail = new PHPMailer;
+            // $mail->isSMTP();
+            // $mail->SMTPDebug = 0;
+            // $mail->Host = 'smtp-mail.outlook.com';
+            // $mail->Port = 587;
+            // $mail->SMTPAuth = true;
+            // $mail->Username = 'myunimarket@outlook.com';
+            // $mail->Password = 'WebApplication@123';
+            // $mail->setFrom('myunimarket@outlook.com', 'MyUniMarket');
+            // $mail->addAddress($email, 'User');
+            // $mail->Subject = 'Verify your email - MyUniMarket';
+            // $mail->Body = "Please confirm your email address for MyUniMarket by clicking on this: ".$link;
+            // if (!$mail->send()){
+            //     //echo 'Mailer Error: '.$mail->ErrorInfo;
+            // }else{
+            //     //echo 'Message sent!';
+            // }
+            $from = new SendGrid\Email(null, "myunimarket@outlook.com");
+            $subject = "Hello World from the SendGrid PHP Library!";
+            $to = new SendGrid\Email(null, $email);
+            $content = new SendGrid\Content("text/plain", "Hello, Email!");
+            $mail = new SendGrid\Mail($from, $subject, $to, $content);
+
+            $apiKey = getenv('SENDGRID_API_KEY');
+            $sg = new \SendGrid($apiKey);
+
+            $response = $sg->client->mail()->send()->post($mail);
             header('Location: signin.php');
-            $link = "http://localhost/MyUniMarket/WebApplication/verify-email.php?user=".$email;
-            $mail = new PHPMailer;
-            $mail->isSMTP();
-            $mail->SMTPDebug = 0;
-            $mail->Host = 'smtp-mail.outlook.com';
-            $mail->Port = 587;
-            $mail->SMTPAuth = true;
-            $mail->Username = 'myunimarket@outlook.com';
-            $mail->Password = 'WebApplication@123';
-            $mail->setFrom('myunimarket@outlook.com', 'MyUniMarket');
-            $mail->addAddress($email, 'User');
-            $mail->Subject = 'Verify your email - MyUniMarket';
-            $mail->Body = "Please confirm your email address for MyUniMarket by clicking on this: ".$link;
-            if (!$mail->send()){
-                //echo 'Mailer Error: '.$mail->ErrorInfo;
-            }else{
-                //echo 'Message sent!';
-            }
         }
     }
 ?>
