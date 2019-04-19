@@ -1,6 +1,7 @@
 <?php
     include 'DatabaseConnection.php';
     session_start();
+    require '../vendor/autoload.php';
     $testerID = "";
     $listings = "";
     $imagePath = "./uploads/defaultPic.jpg";
@@ -17,11 +18,17 @@
         header("Location: user-profile.php");
     }
     if(isset($_POST['sendRequest'])){
-
-        //TODO
         //* $destEmail is the email to which you should send the message
         //* $_POST['emailBody'] is the message you should send
         //* $_SESSION['email'] is the email of current user
+        $from = new SendGrid\Email(null, "myunimarket@outlook.com");
+        $subject = "New message from ".$_SESSION['email'];
+        $to = new SendGrid\Email(null, $_POST['userEmail']);
+        $content = new SendGrid\Content("text/plain", $_POST['emailBody']);          
+        $mail = new SendGrid\Mail($from, $subject, $to, $content);
+        $apiKey = getenv('SENDGRID_API_KEY');
+        $sg = new \SendGrid($apiKey);
+        $response = $sg->client->mail()->send()->post($mail);
     }
     if(isset($_GET["name"])){
         if($_GET["name"] == "cat1"){

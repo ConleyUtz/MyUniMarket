@@ -1,6 +1,7 @@
 <?php
     include 'DatabaseConnection.php';
     $dbConnection = DatabaseConnection::getInstance()->getConnection();
+    require '../vendor/autoload.php';
     session_start();
     $testerID = "";
     $ratingNum = 0;
@@ -33,11 +34,17 @@
         mysqli_query($dbConnection, $query);
     }
     if(isset($_POST['sendRequest'])){
-
-        //TODO
         //* $destEmail is the email to which you should send the message
         //* $_POST['emailBody'] is the message you should send
         //* $_SESSION['email'] is the email of current user
+        $from = new SendGrid\Email(null, "myunimarket@outlook.com");
+        $subject = "New message from ".$_SESSION['email'];
+        $to = new SendGrid\Email(null, $_POST['userEmail']);
+        $content = new SendGrid\Content("text/html", $_POST['emailBody']);          
+        $mail = new SendGrid\Mail($from, $subject, $to, $content);
+        $apiKey = getenv('SENDGRID_API_KEY');
+        $sg = new \SendGrid($apiKey);
+        $response = $sg->client->mail()->send()->post($mail);
     }
     $query = "SELECT * FROM items WHERE `userId` = ".$userID;
     if($result = mysqli_query($dbConnection, $query)){
