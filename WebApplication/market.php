@@ -70,14 +70,14 @@
                         $byTag = '<a>'.$usr.'</a>';
                     }
                     else{
-                        $bookmarkTag = '<li><a href="?bookmark='.$row['itemId'].'" title="Add to bookmarks"><i class="fa fa-bookmark-o fa-2x"></i></a></li>"';
+                        $bookmarkTag = '<li><a href="?bookmark='.$row['itemId'].'" title="Add to bookmarks"><i class="fa fa-bookmark-o fa-2x"></i></a></li>';
                         $byTag = '<input type="submit" name="userProfile" value="'.$usr.'" class="button primary" id="userProf" />';
                     }
                     if(mysqli_num_rows($rslt) != 0){
                         if(isset($_GET["keywordSearch"]) && $_GET["keywordSearch"] != ''){
                             if(strpos(strtolower($row["name"]), strtolower($_GET["keywordSearch"])) !== false){
 
-                                    $listings .= '<div class="product list-product small-12 columns">
+                                    $listings = '<div class="product list-product small-12 columns">
                                     <div class="medium-4 small-12 columns product-image">
                                         <a>
                                             <img src="'.$imagePath.'" alt="" />
@@ -122,13 +122,13 @@
 
                                         </div><!-- product meta /-->
                                     </div>
-                                </div><!-- Product /-->';
+                                </div><!-- Product /-->'.$listings;
                             }
                         }else{
                             if(isset($_GET['min']) && isset($_GET['max'])){
                                 if($_GET['min'] <= $row['price'] && $row['price'] <= $_GET['max']) {
 
-                                    $listings .= '<div class="product list-product small-12 columns">
+                                    $listings = '<div class="product list-product small-12 columns">
                             <div class="medium-4 small-12 columns product-image">
                                 <a>
                                     <img src="'.$imagePath.'" alt="" />
@@ -173,10 +173,10 @@
 
                                 </div><!-- product meta /-->
                             </div>
-                        </div><!-- Product /-->';
+                        </div><!-- Product /-->'.$listings;
                                 }
                             }else{
-                            $listings .= '<div class="product list-product small-12 columns">
+                            $listings = '<div class="product list-product small-12 columns">
                             <div class="medium-4 small-12 columns product-image">
                                 <a>
                                     <img src="'.$imagePath.'" alt="" />
@@ -221,7 +221,7 @@
 
                                 </div><!-- product meta /-->
                             </div>
-                        </div><!-- Product /-->';
+                        </div><!-- Product /-->'.$listings;
                             }
                         }
                     }
